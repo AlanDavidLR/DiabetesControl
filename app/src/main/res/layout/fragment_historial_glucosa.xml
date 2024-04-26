@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.diabetescontrol.ui.historialglucosa.HistorialGlucosaViewModel" />
+    </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondoazul"
+        tools:context=".ui.fragments.HistorialGlucosaFragment">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:id="@+id/layoutTitolsAlarmes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/titolTextAlarma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Historial Diabetes"
+                    android:textColor="@color/white"
+                    android:textSize="36dp"
+                    android:textStyle="bold" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/dataFiltre"
+                        android:layout_width="0dp"
+                        android:textColor="@color/white"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.6"
+                        android:text="@string/fechatoma" />
+
+                    <EditText
+                        android:id="@+id/diaFiltreInici"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="5.2"
+                        android:autofillHints=""
+                        android:textColorHint="@color/colorTextoHint"
+                        android:ems="10"
+                        android:hint="@string/fechat"
+                        android:inputType="none" />
+
+                    <ImageButton
+                        android:id="@+id/eliminarFiltreIni"
+                        android:layout_width="10dp"
+                        android:layout_height="35dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_weight="1"
+                        android:background="#2262"
+                        android:src="@drawable/ic_borrar"
+                        android:foreground="?android:attr/selectableItemBackground"/>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/dataFiltreFi"
+                        android:layout_width="0dp"
+                        android:textColor="@color/white"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.6"
+                        android:text="@string/horatoma" />
+
+                    <EditText
+                        android:id="@+id/diaFiltreFi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="5.2"
+                        android:autofillHints=""
+                        android:textColorHint="@color/colorTextoHint"
+                        android:ems="10"
+                        android:hint="@string/horat"
+                        android:inputType="none" />
+
+
+                    <ImageButton
+                        android:id="@+id/eliminarFiltreFi"
+                        android:layout_width="10dp"
+                        android:layout_height="35dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_weight="1"
+                        android:background="#2262"
+                        android:src="@drawable/ic_borrar"
+                        android:foreground="?android:attr/selectableItemBackground"/>
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutHistoricControl"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true">
+
+
+                    <Button
+                        android:id="@+id/tornarMenu"
+                        android:layout_width="5sp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="@string/cosultar"
+                        app:backgroundTint="#569845" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+</layout>

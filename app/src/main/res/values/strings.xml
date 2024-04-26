@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">DiabetesControl</string>
+
+    <string name="title_activity_principal_detail_host">principalDetailHostActivity</string>
+    <string name="title_principal_list">Items</string>
+    <string name="title_principal_detail">principal Detail</string>
+    <string name="title_activity_navegacion">Navegacion</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <!-- Elementos Agendar cita -->
+    <string name="date">Fecha</string>
+    <string name="time">Hora</string>
+    <!-- Error agendando cita -->
+    <string name="error_type">Debes seleccionar una sesión</string>
+    <string name="error_date">Debes seleccionar una fecha</string>
+    <string name="error_time">Debes seleccionar una hora</string>
+    <string name="confirm_date">¿Guardar cita?</string>
+    <string name="select_schedule_date">Selecciona una cita</string>
+    <string name="empty_dates">Aún no haz reservado cita :(</string>
+    <string name="update_date">Cambiar fecha de cita</string>
+    <string name="cancel_date">Cancelar cita</string>
+    <string name="try_again">Intentar de nuevo</string>
+    <string name="date_schedule_date">Fecha que se realizó la cita</string>
+    <string name="schedule_date">Recordad cita</string>
+    <string name="tipo_consulta">Tipo de consulta</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="large_text">  </string>
+    <string name="fechatoma">Fecha de toma</string>
+    <string name="fechat">Escribe la fecha de la toma de glucosa</string>
+    <string name="filtrar">Filtrar Resultados</string>
+    <string name="cosultar">Cosultar</string>
+    <string name="horatoma">Hora de toma</string>
+    <string name="horat">Escribe la hora de la toma de glucosa</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="body_mass_index_bmi">Indice de Masa Corporal imc</string>
+    <string name="weight">Peso :</string>
+    <string name="height">Altura :</string>
+    <string name="in_meters">En Metros</string>
+    <string name="calculate_bmi">calcular imc</string>
+    <string name="Empty_fields">Tu mensaje de campo vacío aquí</string>
+    <string name="zero_values">Tu mensaje para valores cero aquí</string>
+    <string name="under_weight">Tu mensaje para bajo peso aquí</string>
+    <string name="normal_weight">Tu mensaje para peso normal aquí</string>
+    <string name="overweight">Tu mensaje para sobrepeso aquí</string>
+    <string name="type_1_obesity">Tu mensaje para obesidad tipo 1 aquí</string>
+    <string name="type_2_obesity">Tu mensaje para obesidad tipo 2 aquí</string>
+    <string name="type_3_obesity">Tu mensaje para obesidad tipo 3 aquí</string>
+
+
+    <string name="delete_data">eliminar datos</string>
+    <string name="bmi">IMC :</string>
+    <string name="description">Descripción :</string>
+    <string name="in_kilograms">En Kilogramos</string>
+    <string name="weight_index">Registro de peso</string>
+    <string name="imagebascula">Cuida tu peso</string>
+    <string name="save_button">Guardar peso</string>
+    <string name="recordatorio_de_citas_m_dicas">Recordatorio de Citas Médicas</string>
+    <string name="crear_alarma">Crear Alarma</string>
+    <string name="ingresa_la_hora_de_tu_proxima_cita">Ingresa la hora de tu proxima cita</string>
+    <string name="ingresa_la_fecha_de_tu_proxima_cita">Ingresa la fecha de tu proxima cita</string>
+    <string name="fecha_de_peso">Fecha de peso</string>
+    <string name="nivel_de_glucosa">Nivel de Glucosa</string>
+    <string name="tipo_de_toma_de_glucosa">Tipo de Toma de glucosa</string>
+    <string name="hora">Hora</string>
+    <string name="registro_de_glucosa">Registro de glucosa</string>
+    <string name="registro_glucosa">Registro Glucosa</string>
+    <string name="registro_peso">Registro Peso</string>
+    <string name="registro_de_nuevo_usuario">Registro de Nuevo Usuario</string>
+    <string name="inicio_de_sesi_n">Inicio de sesión</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+</resources>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.diabetescontrol.ui.home.HomeViewModel" />
+    </data>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondoazul"
+    android:padding="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0dp">
+        <!-- ImageView en la parte superior izquierda -->
+
+        <!-- Bienvenido TextView en la parte superior centro -->
+
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="79dp"
+            android:layout_height="83dp"
+            android:elevation="10dp"
+            android:src="@drawable/logo"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/bienvenidoTextView"
+
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <!-- Imagen de usuario en el centro -->
+
+        <TextView
+            android:id="@+id/bienvenidoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:elevation="10dp"
+            android:text="Bienvenido"
+            android:textColor="#ffff"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.261"
+            app:layout_constraintStart_toEndOf="@id/logoImageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!-- Rectángulo con el texto "Inicio de sesión correcto Alan David" -->
+
+        <!-- Guía para alinear correctamente -->
+
+
+        <TextView
+            android:id="@+id/inicioSesionTextView"
+            android:layout_width="306dp"
+            android:layout_height="88dp"
+
+            android:padding="16dp"
+            android:text="Inicio de sesión correcto:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="95dp" />
+
+
+        <LinearLayout
+            android:id="@+id/informativeImagesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bienvenidoTextView">
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Regresar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/destacadoLayout" />
+
+        <LinearLayout
+            android:id="@+id/destacadoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="557dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
+                android:text="Lo más destacado"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:id="@+id/destacadoRecuadro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView3"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="16dp"
+                android:layout_marginTop="16dp"
+                android:background="#F5F5F5"
+                android:padding="16dp">
+
+                <!-- TextView para el título "Lo más destacado" -->
+
+
+                <!-- RecyclerView para mostrar las noticias -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/newsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="97dp" />
+
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="110dp"
+            android:layout_height="95dp"
+            app:srcCompat="@drawable/ejercicio"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="287dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="110dp"
+            android:layout_height="95dp"
+            app:srcCompat="@drawable/alimetos"
+            tools:layout_editor_absoluteX="160dp"
+            tools:layout_editor_absoluteY="287dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+
+            android:layout_height="wrap_content"
+            android:text="Conoce las mejores maneras de cuidarte con estas recomendaciones"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="216dp" />
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="372dp"
+            android:layout_height="151dp"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="404dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="110dp"
+            android:layout_height="95dp"
+            app:srcCompat="@drawable/pie"
+            tools:layout_editor_absoluteX="296dp"
+            tools:layout_editor_absoluteY="287dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+</layout>

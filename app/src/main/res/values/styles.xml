@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">#FFFFFF</item> <!-- Color del texto -->
+       <!-- Fondo personalizado -->
+        <item name="android:textStyle">bold</item> <!-- Estilo del texto -->
+        <item name="android:padding">12dp</item> <!-- Espacio interno -->
+        <item name="android:gravity">center</item> <!-- Alineación del texto -->
+
+    </style>
+    <!-- Button style -->
+    <style name="button">
+        <item name="cornerRadius">20dp</item>
+    </style>
+    <!-- Base layout color -->
+    <style name="linear_layout_vertical">
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="linear_layout_horizontal">
+        <item name="android:gravity">center</item>
+        <item name="backgroundColor">@color/snow</item>
+    </style>
+    <style name="dialog" parent="Theme.AppCompat.Light.Dialog.MinWidth">
+        <item name="colorPrimary">@color/snow</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+</resources>
