@@ -19,12 +19,12 @@
     <string name="date">Fecha</string>
     <string name="time">Hora</string>
     <!-- Error agendando cita -->
-    <string name="error_type">Debes seleccionar una sesión</string>
+    <string name="error_type">Debes seleccionar un tipo de consulta</string>
     <string name="error_date">Debes seleccionar una fecha</string>
     <string name="error_time">Debes seleccionar una hora</string>
     <string name="confirm_date">¿Guardar cita?</string>
-    <string name="select_schedule_date">Selecciona una cita</string>
-    <string name="empty_dates">Aún no haz reservado cita :(</string>
+    <string name="select_schedule_date">Selecciona una consulta</string>
+    <string name="empty_dates">Aún no haz Seleccionado hora de consulta :(</string>
     <string name="update_date">Cambiar fecha de cita</string>
     <string name="cancel_date">Cancelar cita</string>
     <string name="try_again">Intentar de nuevo</string>
@@ -46,14 +46,14 @@
     <string name="height">Altura :</string>
     <string name="in_meters">En Metros</string>
     <string name="calculate_bmi">calcular imc</string>
-    <string name="Empty_fields">Tu mensaje de campo vacío aquí</string>
-    <string name="zero_values">Tu mensaje para valores cero aquí</string>
-    <string name="under_weight">Tu mensaje para bajo peso aquí</string>
-    <string name="normal_weight">Tu mensaje para peso normal aquí</string>
-    <string name="overweight">Tu mensaje para sobrepeso aquí</string>
-    <string name="type_1_obesity">Tu mensaje para obesidad tipo 1 aquí</string>
-    <string name="type_2_obesity">Tu mensaje para obesidad tipo 2 aquí</string>
-    <string name="type_3_obesity">Tu mensaje para obesidad tipo 3 aquí</string>
+    <string name="Empty_fields">Los campos  no pueden estar vacios</string>
+    <string name="zero_values">Los valores no pueden ser cero</string>
+    <string name="under_weight">El IMC es muy bajo</string>
+    <string name="normal_weight">Tu IMC esta dentro de los normal </string>
+    <string name="overweight">Tu IMC indica sobrepeso</string>
+    <string name="type_1_obesity">Tu IMC indica obesidad tipo 1</string>
+    <string name="type_2_obesity">Tu IMC indica obesidad tipo 2</string>
+    <string name="type_3_obesity">Tu IMC indica obesidad tipo 3</string>
 
 
     <string name="delete_data">eliminar datos</string>
@@ -90,4 +90,6 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="conoce_las_mejores_maneras_de_cuidarte_con_estas_recomendaciones">Conoce las mejores maneras de cuidarte con estas recomendaciones</string>
 </resources>

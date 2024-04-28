@@ -9,4 +9,22 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+    <array name="medications_shape_array">
+        <item>pomada</item>
+        <item>capsula(s)</item>
+        <item>unguento(s)</item>
+        <item>crema(s)</item>
+        <item>emulsion</item>
+        <item>gel</item>
+        <item>Isulina</item>
+        <item>inhalado</item>
+        <item>taleta(s)</item>
+        <item>Inyectado intramuscular</item>
+        <item>unit(s)</item>
+        <item>solucion</item>
+        <item>spray(s)</item>
+        <item>suspension</item>
+        <item>Supositorio</item>
+    </array>
+
 </resources>

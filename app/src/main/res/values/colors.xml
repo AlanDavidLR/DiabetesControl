@@ -17,4 +17,9 @@
     <color name="snow">#FEF5FA</color>
     <color name="colorAccent">@color/cyber_grape</color>
     <color name="colorTextoHint">#8E8D8D</color>
+    <color name="color_light_grey">#4d4d4d</color>
+    <drawable name="touchFeedback">#CFD8DC</drawable>
+    <color name="colorPrimary">#2196f3</color>
+    <color name="colorPrimaryDark">#1976d2</color>
+
 </resources>

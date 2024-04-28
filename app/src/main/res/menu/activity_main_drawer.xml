@@ -24,5 +24,9 @@
             android:id="@+id/registroPeso2"
             android:icon="@drawable/bascula"
             android:title="@string/registro_peso" />
+        <item
+            android:id="@+id/registroTomaMedicamentos"
+            android:icon="@drawable/bascula"
+            android:title="Registro de Toma de Medicamentos" />
     </group>
 </menu>
