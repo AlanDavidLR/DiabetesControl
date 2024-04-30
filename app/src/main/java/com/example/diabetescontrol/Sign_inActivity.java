@@ -62,7 +62,7 @@ public class Sign_inActivity extends AppCompatActivity {
                 }
 
                 // Convertir el número de seguro social a entero
-                int nss = Integer.parseInt(nssString);
+                long nss = Long.parseLong(nssString);
 
                 // Insertar los datos en la base de datos a través de PHP
                 new InsertarDatosTask().execute(nombre, apellido, String.valueOf(nss), email, contrasena);
