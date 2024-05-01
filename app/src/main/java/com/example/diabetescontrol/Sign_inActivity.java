@@ -2,11 +2,13 @@ package com.example.diabetescontrol;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.textfield.TextInputLayout;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +16,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import com.google.android.material.textfield.TextInputLayout;
+import android.content.Intent;
+
 
 public class Sign_inActivity extends AppCompatActivity {
 
@@ -49,9 +52,41 @@ public class Sign_inActivity extends AppCompatActivity {
                 String contrasena = textFieldPassword.getEditText().getText().toString().trim();
                 String confirmarContrasena = textFieldConfirmPassword.getEditText().getText().toString().trim();
 
-                // Validar que los campos no estén vacíos
-                if (nombre.isEmpty() || apellido.isEmpty() || nssString.isEmpty() || email.isEmpty() || contrasena.isEmpty() || confirmarContrasena.isEmpty()) {
-                    Toast.makeText(Sign_inActivity.this, "Todos los campos son requeridos", Toast.LENGTH_SHORT).show();
+                // Verificar que no haya campos vacíos
+                if (TextUtils.isEmpty(nombre) || TextUtils.isEmpty(apellido) || TextUtils.isEmpty(nssString)
+                        || TextUtils.isEmpty(email) || TextUtils.isEmpty(contrasena) || TextUtils.isEmpty(confirmarContrasena)) {
+                    Toast.makeText(Sign_inActivity.this, "No puede dejar ningún campo vacío", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Verificar campos vacíos individuales
+                if (TextUtils.isEmpty(nombre)) {
+                    Toast.makeText(Sign_inActivity.this, "El campo Nombre no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(apellido)) {
+                    Toast.makeText(Sign_inActivity.this, "El campo Apellido no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(nssString)) {
+                    Toast.makeText(Sign_inActivity.this, "El campo NSS no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(Sign_inActivity.this, "El campo Email no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(contrasena)) {
+                    Toast.makeText(Sign_inActivity.this, "El campo Contraseña no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(confirmarContrasena)) {
+                    Toast.makeText(Sign_inActivity.this, "El campo Confirmar Contraseña no puede estar vacío", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -129,14 +164,18 @@ public class Sign_inActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String response) {
             super.onPostExecute(response);
-
             if (response != null) {
                 // Muestra un mensaje dependiendo de la respuesta del servidor
-                if (response.equals("success")) {
-                    Toast.makeText(Sign_inActivity.this, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show();
-                    // Aquí puedes redirigir al usuario a otra actividad si lo deseas
-                } else {
+                if (response.equals("Success")) {
                     Toast.makeText(Sign_inActivity.this, "Error al crear la cuenta", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(Sign_inActivity.this, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show();
+                    // Redirige al usuario a LoginActivity
+                    Intent intent = new Intent(Sign_inActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish(); // Termina la actividad actual para que el usuario no pueda volver atrás
+
                 }
             } else {
                 Toast.makeText(Sign_inActivity.this, "Error al crear la cuenta", Toast.LENGTH_SHORT).show();
@@ -144,4 +183,3 @@ public class Sign_inActivity extends AppCompatActivity {
         }
     }
 }
-
