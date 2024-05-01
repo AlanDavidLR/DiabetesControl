@@ -37,15 +37,15 @@ public class RegistroPeso extends Fragment {
         lblDescription = view.findViewById(R.id.lblDescription);
     }
 
-    // Method to make the BMI, with its respective exception
-    public void calculate(View view) {
+    // Método para calcular el IMC, con su respectiva excepción
+    public void calculate() {
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         StringBuilder text = new StringBuilder();
 
-        if (lblWeightValue.getText().toString().isEmpty() && lblHeightValue.getText().toString().isEmpty()) {
+        if (lblWeightValue.getText().toString().isEmpty() || lblHeightValue.getText().toString().isEmpty()) {
             text.append(getString(R.string.Empty_fields));
             alert.setMessage(text);
-            alert.setPositiveButton("close", null);
+            alert.setPositiveButton("cerrar", null);
             alert.show();
         } else {
             double weight = Double.parseDouble(lblWeightValue.getText().toString());
@@ -64,7 +64,7 @@ public class RegistroPeso extends Fragment {
         }
     }
 
-    // Method that describes the result obtained from the bmi calculation
+
     public void description(double resultBMI) {
         if (resultBMI > 0 && resultBMI < 18.5)
             lblDescription.setText(getString(R.string.description) + " " + getString(R.string.under_weight));
@@ -80,7 +80,7 @@ public class RegistroPeso extends Fragment {
             lblDescription.setText(getString(R.string.description) + " " + getString(R.string.type_3_obesity));
     }
 
-    // Method to clean the text fields
+
     public void clear(View v) {
         lblWeightValue.setText("");
         lblHeightValue.setText("");

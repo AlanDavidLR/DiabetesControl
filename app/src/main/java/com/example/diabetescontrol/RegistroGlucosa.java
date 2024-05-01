@@ -4,60 +4,118 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.fragment.app.Fragment;
+import android.app.TimePickerDialog;
+import android.app.DatePickerDialog;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+import android.widget.DatePicker;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RegistroGlucosa#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Calendar;
+
 public class RegistroGlucosa extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private EditText horaControl;
+    private EditText diaControl;
+    private Spinner spinnerType;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
     public RegistroGlucosa() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RegistroGlucosa.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RegistroGlucosa newInstance(String param1, String param2) {
-        RegistroGlucosa fragment = new RegistroGlucosa();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registro_glucosa, container, false);
+        View root = inflater.inflate(R.layout.fragment_registro_glucosa, container, false);
+
+        // Referencias a los elementos de la interfaz
+        horaControl = root.findViewById(R.id.horaControl);
+        diaControl = root.findViewById(R.id.diaControl);
+        spinnerType = root.findViewById(R.id.spinnerType);
+
+        // Configurar Spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
+                R.array.tipos_toma_glucosa, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerType.setAdapter(adapter);
+
+        // Configurar clic en EditText para seleccionar hora
+        horaControl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                mHour = c.get(Calendar.HOUR_OF_DAY);
+                mMinute = c.get(Calendar.MINUTE);
+
+                // Mostrar diálogo de selección de hora
+                TimePickerDialog timePickerDialog = new TimePickerDialog(requireContext(),
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                horaControl.setText(hourOfDay + ":" + minute);
+                            }
+                        }, mHour, mMinute, false);
+                timePickerDialog.show();
+            }
+        });
+
+        // Configurar clic en EditText para seleccionar fecha
+        diaControl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                // Mostrar diálogo de selección de fecha
+                DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                diaControl.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+
+        // Configurar clic en botón Guardar
+        Button btnGuardar = root.findViewById(R.id.modificarControl);
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guardarControl();
+            }
+        });
+
+        // Configurar clic en botón Cancelar
+        Button btnCancelar = root.findViewById(R.id.cancelarGuardarControl);
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelarGuardarControl();
+            }
+        });
+
+        return root;
+    }
+
+    private void guardarControl() {
+        // Aquí puedes implementar la lógica para guardar el registro de glucosa
+        Toast.makeText(requireContext(), "Registro guardado", Toast.LENGTH_SHORT).show();
+    }
+
+    private void cancelarGuardarControl() {
+        // Aquí puedes implementar la lógica para cancelar el registro de glucosa
+        Toast.makeText(requireContext(), "Registro cancelado", Toast.LENGTH_SHORT).show();
     }
 }

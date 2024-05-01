@@ -25,5 +25,11 @@
         <item>suspension</item>
         <item>Supositorio</item>
     </array>
+    <array name="tipos_toma_glucosa">
+        <item>Ayunas</item>
+        <item>Después del desayuno</item>
+        <item>Después de la comida</item>
+        <item>Después de la cena</item>
+    </array>
 
 </resources>
