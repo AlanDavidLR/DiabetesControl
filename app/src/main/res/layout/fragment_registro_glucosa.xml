@@ -203,6 +203,26 @@
                     android:layout_height="380dp"
                     android:src="@drawable/post_mimisqui_tips_gluco" />
 
+
+                <LinearLayout
+                    android:id="@+id/chartContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:orientation="vertical">
+
+                    <!-- Aquí puedes agregar otros elementos si lo deseas -->
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_weight="1" />
+
+                    <!-- Aquí puedes agregar otros elementos si lo deseas -->
+
+                </LinearLayout>
+
+
             </LinearLayout>
 
 

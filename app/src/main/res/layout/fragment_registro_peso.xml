@@ -223,21 +223,20 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/btnCalculate"
-                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:id="@+id/btnCalcular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClick="calculate"
+                        android:onClick="calcular"
                         android:text="@string/calculate_bmi" />
+
 
                     <Button
                         android:id="@+id/btnClearData"
-                        style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClick="clear"
+                        android:onClick="limpiar"
                         android:text="@string/delete_data" />
                 </LinearLayout>
 

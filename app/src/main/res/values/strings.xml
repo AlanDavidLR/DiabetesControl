@@ -54,6 +54,11 @@
     <string name="type_1_obesity">Tu IMC indica obesidad tipo 1</string>
     <string name="type_2_obesity">Tu IMC indica obesidad tipo 2</string>
     <string name="type_3_obesity">Tu IMC indica obesidad tipo 3</string>
+    <string name="bmi_result_format">El resultado de tu IMC es este: %.2f</string>
+
+
+
+
 
 
     <string name="delete_data">eliminar datos</string>

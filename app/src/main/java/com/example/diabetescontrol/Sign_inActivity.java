@@ -1,5 +1,7 @@
+
 package com.example.diabetescontrol;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -7,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import java.io.BufferedReader;
@@ -16,8 +19,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import android.content.Intent;
-
+import java.util.regex.Pattern;
 
 public class Sign_inActivity extends AppCompatActivity {
 
@@ -44,65 +46,110 @@ public class Sign_inActivity extends AppCompatActivity {
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Obtener los valores de los campos de texto
-                String nombre = textFieldNombre.getEditText().getText().toString().trim();
-                String apellido = textFieldApellido.getEditText().getText().toString().trim();
-                String nssString = textFieldNSS.getEditText().getText().toString().trim();
-                String email = textFieldEmail.getEditText().getText().toString().trim();
-                String contrasena = textFieldPassword.getEditText().getText().toString().trim();
-                String confirmarContrasena = textFieldConfirmPassword.getEditText().getText().toString().trim();
+                // Validar los campos antes de crear la cuenta
+                if (validateFields()) {
+                    // Obtener los valores de los campos de texto
+                    String nombre = textFieldNombre.getEditText().getText().toString().trim();
+                    String apellido = textFieldApellido.getEditText().getText().toString().trim();
+                    long nss = Long.parseLong(textFieldNSS.getEditText().getText().toString().trim());
+                    String email = textFieldEmail.getEditText().getText().toString().trim();
+                    String contrasena = textFieldPassword.getEditText().getText().toString().trim();
 
-                // Verificar que no haya campos vacíos
-                if (TextUtils.isEmpty(nombre) || TextUtils.isEmpty(apellido) || TextUtils.isEmpty(nssString)
-                        || TextUtils.isEmpty(email) || TextUtils.isEmpty(contrasena) || TextUtils.isEmpty(confirmarContrasena)) {
-                    Toast.makeText(Sign_inActivity.this, "No puede dejar ningún campo vacío", Toast.LENGTH_SHORT).show();
-                    return;
+                    // Insertar los datos en la base de datos a través de PHP
+                    new InsertarDatosTask().execute(nombre, apellido, String.valueOf(nss), email, contrasena);
                 }
-
-                // Verificar campos vacíos individuales
-                if (TextUtils.isEmpty(nombre)) {
-                    Toast.makeText(Sign_inActivity.this, "El campo Nombre no puede estar vacío", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (TextUtils.isEmpty(apellido)) {
-                    Toast.makeText(Sign_inActivity.this, "El campo Apellido no puede estar vacío", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (TextUtils.isEmpty(nssString)) {
-                    Toast.makeText(Sign_inActivity.this, "El campo NSS no puede estar vacío", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Sign_inActivity.this, "El campo Email no puede estar vacío", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (TextUtils.isEmpty(contrasena)) {
-                    Toast.makeText(Sign_inActivity.this, "El campo Contraseña no puede estar vacío", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (TextUtils.isEmpty(confirmarContrasena)) {
-                    Toast.makeText(Sign_inActivity.this, "El campo Confirmar Contraseña no puede estar vacío", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Validar que las contraseñas coincidan
-                if (!contrasena.equals(confirmarContrasena)) {
-                    Toast.makeText(Sign_inActivity.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Convertir el número de seguro social a entero
-                long nss = Long.parseLong(nssString);
-
-                // Insertar los datos en la base de datos a través de PHP
-                new InsertarDatosTask().execute(nombre, apellido, String.valueOf(nss), email, contrasena);
             }
         });
+    }
+
+    // Función para validar todos los campos antes de crear la cuenta
+    private boolean validateFields() {
+        return validateNombre() && validateApellido() && validateNSS() && validateEmail() && validatePassword() && validateConfirmPassword();
+    }
+
+    // Función para validar el nombre
+    private boolean validateNombre() {
+        String nombre = textFieldNombre.getEditText().getText().toString().trim();
+        if (TextUtils.isEmpty(nombre)) {
+            textFieldNombre.setError("El campo Nombre no puede estar vacío");
+            return false;
+        } else {
+            textFieldNombre.setError(null);
+            return true;
+        }
+    }
+
+    // Función para validar el apellido
+    private boolean validateApellido() {
+        String apellido = textFieldApellido.getEditText().getText().toString().trim();
+        if (TextUtils.isEmpty(apellido)) {
+            textFieldApellido.setError("El campo Apellido no puede estar vacío");
+            return false;
+        } else {
+            textFieldApellido.setError(null);
+            return true;
+        }
+    }
+
+    // Función para validar el número de seguro social
+    private boolean validateNSS() {
+        String nssString = textFieldNSS.getEditText().getText().toString().trim();
+        if (TextUtils.isEmpty(nssString)) {
+            textFieldNSS.setError("El campo NSS no puede estar vacío");
+            return false;
+        } else if (!Pattern.matches("\\d{11}", nssString)) {
+            textFieldNSS.setError("El NSS debe contener 11 dígitos");
+            return false;
+        } else {
+            textFieldNSS.setError(null);
+            return true;
+        }
+    }
+
+    // Función para validar el correo electrónico
+    private boolean validateEmail() {
+        String email = textFieldEmail.getEditText().getText().toString().trim();
+        if (TextUtils.isEmpty(email)) {
+            textFieldEmail.setError("El campo Email no puede estar vacío");
+            return false;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            textFieldEmail.setError("Correo no válido, debe tener estructura de correo electrónico");
+            return false;
+        } else {
+            textFieldEmail.setError(null);
+            return true;
+        }
+    }
+
+    // Función para validar la contraseña
+    private boolean validatePassword() {
+        String password = textFieldPassword.getEditText().getText().toString().trim();
+        if (TextUtils.isEmpty(password)) {
+            textFieldPassword.setError("El campo Contraseña no puede estar vacío");
+            return false;
+        } else if (password.length() < 8) {
+            textFieldPassword.setError("La contraseña debe tener al menos 8 caracteres");
+            return false;
+        } else if (!Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", password)) {
+            textFieldPassword.setError("La contraseña debe contener al menos un número, una letra mayúscula, una letra minúscula y un carácter especial");
+            return false;
+        } else {
+            textFieldPassword.setError(null);
+            return true;
+        }
+    }
+
+    // Función para validar la confirmación de la contraseña
+    private boolean validateConfirmPassword() {
+        String password = textFieldPassword.getEditText().getText().toString().trim();
+        String confirmPassword = textFieldConfirmPassword.getEditText().getText().toString().trim();
+        if (!password.equals(confirmPassword)) {
+            textFieldConfirmPassword.setError("Las contraseñas no coinciden");
+            return false;
+        } else {
+            textFieldConfirmPassword.setError(null);
+            return true;
+        }
     }
 
     // AsyncTask para enviar los datos al servidor PHP en un hilo secundario
@@ -166,7 +213,7 @@ public class Sign_inActivity extends AppCompatActivity {
             super.onPostExecute(response);
             if (response != null) {
                 // Muestra un mensaje dependiendo de la respuesta del servidor
-                if (response.equals("Success")) {
+                if (response.equals("Conexión exitosaSuccess")) {
                     Toast.makeText(Sign_inActivity.this, "Error al crear la cuenta", Toast.LENGTH_SHORT).show();
 
                 } else {
@@ -183,3 +230,4 @@ public class Sign_inActivity extends AppCompatActivity {
         }
     }
 }
+
