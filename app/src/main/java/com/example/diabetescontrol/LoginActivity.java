@@ -27,6 +27,8 @@ import java.io.IOException;
 import androidx.biometric.BiometricManager;
 import androidx.annotation.NonNull;
 import android.content.SharedPreferences;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 import java.util.Calendar;
 import java.util.regex.Pattern;
@@ -208,6 +210,8 @@ public class LoginActivity extends AppCompatActivity {
             String password = params[1];
             String urlServidor = "http://10.0.2.2:8080/conexiondevelop/login.php";
             try {
+                Log.d("LoginActivity", "Email: " + email);
+                Log.d("LoginActivity", "Contraseña: " + password);
                 URL url = new URL(urlServidor);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -253,20 +257,16 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String response) {
             super.onPostExecute(response);
             if (response != null) {
-                Log.d("LoginActivity", "Respuesta del servidor en onPostExecute: " + response);
-
-                if (response.equals("Conexión exitosaSuccess")) {
-                    Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-
-                    // Dividir la respuesta del servidor en campos
-                    String[] campos = response.split(",");
-                    if (campos.length >= 6) { // Verificar que haya al menos 6 campos
-                        // Obtener los datos del usuario
-                        String idUsuario = campos[1];
-                        String nombreUsuario = campos[2];
-                        String apellidosUsuario = campos[3];
-                        String numeroSeguroSocialUsuario = campos[4];
-                        String emailUsuario = campos[5];
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+                    if (success) {
+                        // Acceder a los datos del usuario del objeto JSON
+                        String idUsuario = jsonResponse.getString("id_usuario");
+                        String nombreUsuario = jsonResponse.getString("nombre_usuario");
+                        String apellidosUsuario = jsonResponse.getString("apellidos_usuario");
+                        String numeroSeguroSocialUsuario = jsonResponse.getString("numeroSeguroSocial_usuario");
+                        String emailUsuario = jsonResponse.getString("email_usuario");
 
                         // Guardar los datos del usuario en SharedPreferences
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -277,20 +277,30 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("numeroSeguroSocialUsuario", numeroSeguroSocialUsuario);
                         editor.putString("emailUsuario", emailUsuario);
                         editor.apply();
-                    } else {
-                        Log.d("LoginActivity", "La respuesta del servidor no tiene la estructura esperada.");
-                    }
 
-                    Intent intent = new Intent(LoginActivity.this, Navegacion.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Inicio de sesión fallido. Por favor, verifica tus credenciales.", Toast.LENGTH_SHORT).show();
+                        // Mostrar mensaje de inicio de sesión exitoso
+                        Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+
+                        // Iniciar la actividad Navegacion
+                        Intent intent = new Intent(LoginActivity.this, Navegacion.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        // Mostrar mensaje de inicio de sesión fallido
+                        Toast.makeText(LoginActivity.this, "Inicio de sesión fallido. Por favor, verifica tus credenciales.", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("LoginActivity", "Error al procesar la respuesta del servidor: " + e.getMessage());
+                    // Mostrar mensaje de error al procesar la respuesta del servidor
+                    Toast.makeText(LoginActivity.this, "Error al procesar la respuesta del servidor", Toast.LENGTH_SHORT).show();
                 }
             } else {
+                // Mostrar mensaje de error al conectarse al servidor
                 Toast.makeText(LoginActivity.this, "Error al conectarse al servidor", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
 

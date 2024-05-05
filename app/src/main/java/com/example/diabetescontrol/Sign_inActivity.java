@@ -213,7 +213,7 @@ public class Sign_inActivity extends AppCompatActivity {
             super.onPostExecute(response);
             if (response != null) {
                 // Muestra un mensaje dependiendo de la respuesta del servidor
-                if (response.equals("Conexión exitosaSuccess")) {
+                if (response.equals("Success")) {
                     Toast.makeText(Sign_inActivity.this, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show();
                     // Redirige al usuario a LoginActivity
                     Intent intent = new Intent(Sign_inActivity.this, LoginActivity.class);
