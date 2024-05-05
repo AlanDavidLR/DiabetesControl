@@ -26,6 +26,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import androidx.biometric.BiometricManager;
 import androidx.annotation.NonNull;
+import android.content.SharedPreferences;
 
 import java.util.Calendar;
 import java.util.regex.Pattern;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,18 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        // Initialize SharedPreferences
+        sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+
+        // Rest of your onCreate() method code...
+
+        binding.btnIngresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validateAndLogin();
+            }
+        });
 
         Button registrarButton = findViewById(R.id.btnRegistrar);
         registrarButton.setOnClickListener(new View.OnClickListener() {
@@ -216,9 +230,21 @@ public class LoginActivity extends AppCompatActivity {
                 // Log para verificar la respuesta del servidor
                 Log.d("LoginActivity", "Respuesta del servidor: " + response.toString());
 
+                // Log para mostrar la información recibida de los campos id, nombre, apellido y numerosegurosocial
+                String[] campos = response.toString().split(",");
+                if (campos.length >= 4) {
+                    Log.d("LoginActivity", "ID: " + campos[0]);
+                    Log.d("LoginActivity", "Nombre: " + campos[1]);
+                    Log.d("LoginActivity", "Apellido: " + campos[2]);
+                    Log.d("LoginActivity", "Número de Seguro Social: " + campos[3]);
+                } else {
+                    Log.d("LoginActivity", "La respuesta del servidor no tiene la estructura esperada.");
+                }
+
                 return response.toString();
             } catch (IOException e) {
                 e.printStackTrace();
+                Log.e("LoginActivity", "Error al conectarse al servidor: " + e.getMessage());
                 return null;
             }
         }
@@ -231,6 +257,30 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (response.equals("Conexión exitosaSuccess")) {
                     Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+
+                    // Dividir la respuesta del servidor en campos
+                    String[] campos = response.split(",");
+                    if (campos.length >= 6) { // Verificar que haya al menos 6 campos
+                        // Obtener los datos del usuario
+                        String idUsuario = campos[1];
+                        String nombreUsuario = campos[2];
+                        String apellidosUsuario = campos[3];
+                        String numeroSeguroSocialUsuario = campos[4];
+                        String emailUsuario = campos[5];
+
+                        // Guardar los datos del usuario en SharedPreferences
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("isLoggedIn", true);
+                        editor.putString("idUsuario", idUsuario);
+                        editor.putString("nombreUsuario", nombreUsuario);
+                        editor.putString("apellidosUsuario", apellidosUsuario);
+                        editor.putString("numeroSeguroSocialUsuario", numeroSeguroSocialUsuario);
+                        editor.putString("emailUsuario", emailUsuario);
+                        editor.apply();
+                    } else {
+                        Log.d("LoginActivity", "La respuesta del servidor no tiene la estructura esperada.");
+                    }
+
                     Intent intent = new Intent(LoginActivity.this, Navegacion.class);
                     startActivity(intent);
                     finish();
@@ -242,4 +292,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }

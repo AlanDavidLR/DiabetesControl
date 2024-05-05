@@ -214,14 +214,14 @@ public class Sign_inActivity extends AppCompatActivity {
             if (response != null) {
                 // Muestra un mensaje dependiendo de la respuesta del servidor
                 if (response.equals("Conexión exitosaSuccess")) {
-                    Toast.makeText(Sign_inActivity.this, "Error al crear la cuenta", Toast.LENGTH_SHORT).show();
-
-                } else {
                     Toast.makeText(Sign_inActivity.this, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show();
                     // Redirige al usuario a LoginActivity
                     Intent intent = new Intent(Sign_inActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish(); // Termina la actividad actual para que el usuario no pueda volver atrás
+                } else {
+                    Toast.makeText(Sign_inActivity.this, "Error al crear la cuenta", Toast.LENGTH_SHORT).show();
+
 
                 }
             } else {

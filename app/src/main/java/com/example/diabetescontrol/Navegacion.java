@@ -1,8 +1,11 @@
 package com.example.diabetescontrol;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log; // Agregado para los logs
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -19,11 +22,11 @@ public class Navegacion extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityNavegacionBinding binding;
+    private static final String TAG = "NavegacionActivity"; // Tag para los logs
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityNavegacionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -38,6 +41,7 @@ public class Navegacion extends AppCompatActivity {
         });
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -47,6 +51,14 @@ public class Navegacion extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navegacion);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // Set the email in the header TextView
+        SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        String userEmail = sharedPreferences.getString("userEmail", "");
+        Log.d(TAG, "User email from SharedPreferences: " + userEmail); // Registro del email obtenido
+        View headerView = navigationView.getHeaderView(0);
+        TextView textViewEmail = headerView.findViewById(R.id.textView);
+        textViewEmail.setText(userEmail);
     }
 
     @Override
@@ -63,3 +75,4 @@ public class Navegacion extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 }
+
