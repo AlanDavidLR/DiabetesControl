@@ -54,7 +54,7 @@ public class Navegacion extends AppCompatActivity {
 
         // Set the email in the header TextView
         SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-        String userEmail = sharedPreferences.getString("userEmail", "");
+        String userEmail = sharedPreferences.getString("emailUsuario", "");
         Log.d(TAG, "User email from SharedPreferences: " + userEmail); // Registro del email obtenido
         View headerView = navigationView.getHeaderView(0);
         TextView textViewEmail = headerView.findViewById(R.id.textView);
@@ -75,4 +75,3 @@ public class Navegacion extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 }
-

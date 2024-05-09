@@ -262,7 +262,7 @@ public class LoginActivity extends AppCompatActivity {
                     boolean success = jsonResponse.getBoolean("success");
                     if (success) {
                         // Acceder a los datos del usuario del objeto JSON
-                        String idUsuario = jsonResponse.getString("id_usuario");
+                        long idUsuario = jsonResponse.getLong("id_usuario");
                         String nombreUsuario = jsonResponse.getString("nombre_usuario");
                         String apellidosUsuario = jsonResponse.getString("apellidos_usuario");
                         String numeroSeguroSocialUsuario = jsonResponse.getString("numeroSeguroSocial_usuario");
@@ -271,7 +271,7 @@ public class LoginActivity extends AppCompatActivity {
                         // Guardar los datos del usuario en SharedPreferences
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("isLoggedIn", true);
-                        editor.putString("idUsuario", idUsuario);
+                        editor.putLong("idUsuario", idUsuario);
                         editor.putString("nombreUsuario", nombreUsuario);
                         editor.putString("apellidosUsuario", apellidosUsuario);
                         editor.putString("numeroSeguroSocialUsuario", numeroSeguroSocialUsuario);

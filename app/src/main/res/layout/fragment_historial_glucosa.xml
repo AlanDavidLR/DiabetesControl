@@ -28,7 +28,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:id="@+id/titolTextAlarma"
+                    android:id="@+id/titolTextHistorial"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Historial Diabetes"
@@ -37,6 +37,14 @@
                     android:textStyle="bold" />
 
 
+                <TextView
+                    android:id="@+id/textistr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selecciona el rago de fechas para consultar tus tomas de glucosa"
+                    android:textColor="?android:attr/textColorLinkInverse"
+                    android:textSize="16dp"
+                    android:textStyle="italic" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -44,28 +52,28 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/dataFiltre"
+                        android:id="@+id/fechai"
                         android:layout_width="0dp"
                         android:textColor="@color/white"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.6"
-                        android:text="@string/fechatoma" />
+                        android:text="Fecha Iicio" />
 
                     <EditText
-                        android:id="@+id/diaFiltreInici"
+                        android:id="@+id/fechatoma"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="5dp"
                         android:layout_weight="5.2"
                         android:autofillHints=""
-                        android:textColorHint="@color/colorTextoHint"
+                        android:textColorHint="#E4EF7C"
                         android:ems="10"
-                        android:hint="@string/fechat"
+                        android:hint="Selecciona fecha inicial"
                         android:inputType="none" />
 
                     <ImageButton
-                        android:id="@+id/eliminarFiltreIni"
+                        android:id="@+id/eliminar"
                         android:layout_width="10dp"
                         android:layout_height="35dp"
                         android:layout_marginEnd="40dp"
@@ -85,24 +93,24 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/dataFiltreFi"
+                        android:id="@+id/fechaf"
                         android:layout_width="0dp"
                         android:textColor="@color/white"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.6"
-                        android:text="@string/horatoma" />
+                        android:text="Fecha final" />
 
                     <EditText
-                        android:id="@+id/diaFiltreFi"
+                        android:id="@+id/horatoma"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="5dp"
                         android:layout_weight="5.2"
                         android:autofillHints=""
-                        android:textColorHint="@color/colorTextoHint"
+                        android:textColorHint="#E4EF7C"
                         android:ems="10"
-                        android:hint="@string/horat"
+                        android:hint="Selecciona fecha final"
                         android:inputType="none" />
 
 
@@ -130,7 +138,7 @@
 
 
                     <Button
-                        android:id="@+id/tornarMenu"
+                        android:id="@+id/cosulaglucosa"
                         android:layout_width="5sp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"

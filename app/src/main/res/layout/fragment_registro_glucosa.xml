@@ -31,11 +31,17 @@
                     android:textSize="35sp"
                     android:textColor="@color/white"
                     android:text="@string/registro_de_glucosa" />
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:src="@drawable/post_mimisqui_tips_gluco" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -55,8 +61,9 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="6"
                         android:autofillHints=""
+                        android:textColorHint="#E4EF7C"
                         android:ems="10"
-                        android:hint="selecciona"
+                        android:hint="selecciona la hora"
                         android:inputType="none" />
                 </LinearLayout>
 
@@ -82,8 +89,9 @@
                         android:layout_marginStart="5dp"
                         android:layout_weight="6"
                         android:autofillHints=""
+                        android:textColorHint="#E4EF7C"
                         android:ems="10"
-                        android:hint="selecciona"
+                        android:hint="selecciona la fecha"
                         android:inputType="none" />
 
                 </LinearLayout>
@@ -153,6 +161,7 @@
                             android:layout_marginStart="5dp"
                             android:layout_weight="6"
                             android:autofillHints=""
+                            android:textColorHint="#E4EF7C"
                             android:ems="10"
                             android:hint="0"
                             android:inputType="number"
@@ -197,11 +206,7 @@
                         android:text="Cancelar"/>
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="380dp"
-                    android:src="@drawable/post_mimisqui_tips_gluco" />
+
 
 
                 <LinearLayout
@@ -210,7 +215,6 @@
                     android:layout_height="300dp"
                     android:orientation="vertical">
 
-                    <!-- Aquí puedes agregar otros elementos si lo deseas -->
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/lineChart"
@@ -218,7 +222,6 @@
                         android:layout_height="300dp"
                         android:layout_weight="1" />
 
-                    <!-- Aquí puedes agregar otros elementos si lo deseas -->
 
                 </LinearLayout>
 

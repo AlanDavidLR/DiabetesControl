@@ -56,8 +56,8 @@
     <string name="type_3_obesity">Tu IMC indica obesidad tipo 3</string>
     <string name="bmi_result_format">El resultado de tu IMC es este: %.2f</string>
 
-
-
+    <string name="channel_name">Nombre_del_canal</string>
+    <string name="channel_description">Descripción_del_canal</string>
 
 
 
