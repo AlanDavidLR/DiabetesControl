@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/fondoazul">
 
     <LinearLayout
@@ -42,11 +42,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:gravity="center"
-                        android:textColor="#fff"
                         android:text="@string/weight_index"
                         android:textAlignment="center"
                         android:textAllCaps="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="#fff"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -92,14 +92,11 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:hint="@string/in_kilograms"
-                        android:textColorHint="#E4EF7C"
                         android:importantForAutofill="no"
                         android:inputType="numberDecimal"
                         android:minHeight="48dp"
+                        android:textColorHint="#E4EF7C"
                         tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck" />
-
-
-
 
 
                 </LinearLayout>
@@ -107,9 +104,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#F6F6F6"
+                    android:layout_marginTop="0dp"
                     android:text="@string/date"
-                    android:layout_marginTop="0dp"/>
+                    android:textColor="#F6F6F6" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textFieldFecha"
@@ -117,20 +114,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textColorHint="#E4EF7C"
-                    android:hint="@string/fecha_de_peso">
+                    android:hint="@string/fecha_de_peso"
+                    android:textColorHint="#E4EF7C">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/fechaInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#C54D4D"
-                        android:inputType="date"
                         android:focusable="false"
-                        />
+                        android:inputType="date" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
 
 
                 <LinearLayout
@@ -144,14 +139,13 @@
                         style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginTop="10dp"
+                        android:layout_weight="1"
                         android:onClick="guard"
                         android:text="@string/save_button" />
 
 
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -170,8 +164,8 @@
                         android:text="@string/body_mass_index_bmi"
                         android:textAlignment="center"
                         android:textAllCaps="true"
-                        android:textColor="#fff"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="#fff"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -189,8 +183,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/weight"
-                        android:textColor="#1FE1C4"
                         android:textAlignment="center"
+                        android:textColor="#1FE1C4"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -202,9 +196,9 @@
                         android:ems="10"
                         android:hint="@string/in_kilograms"
                         android:importantForAutofill="no"
-                        android:textColorHint="#E4EF7C"
                         android:inputType="numberDecimal"
                         android:minHeight="48dp"
+                        android:textColorHint="#E4EF7C"
                         tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck" />
                 </LinearLayout>
 
@@ -221,8 +215,8 @@
                         android:layout_weight="1"
                         android:text="@string/height"
                         android:textAlignment="center"
-                        android:textSize="24sp"
                         android:textColor="#1FE1C4"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -233,8 +227,8 @@
                         android:ems="10"
                         android:hint="@string/in_meters"
                         android:importantForAutofill="no"
-                        android:textColorHint="#E4EF7C"
                         android:inputType="numberDecimal"
+                        android:textColorHint="#E4EF7C"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck" />
                 </LinearLayout>
 
@@ -276,8 +270,8 @@
                         android:text="@string/bmi"
                         android:textAlignment="center"
                         android:textAllCaps="true"
-                        android:textSize="20sp"
                         android:textColor="#fff"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -287,16 +281,129 @@
                         android:layout_marginBottom="30dp"
                         android:layout_weight="1"
                         android:text="@string/description"
-                        android:textColor="#fff"
                         android:textAlignment="center"
                         android:textAllCaps="true"
+                        android:textColor="#fff"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
 
+                <LinearLayout
+                    android:id="@+id/chartContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:orientation="vertical">
 
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_weight="1" />
+
+
+                    <TextView
+                        android:id="@+id/textistr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Selecciona el rago de fechas para consultar tus tomas de glucosa"
+                        android:textColor="?android:attr/textColorLinkInverse"
+                        android:textSize="16dp"
+                        android:textStyle="italic" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/fechai"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.6"
+                        android:text="Fecha Iicio"
+                        android:textColor="@color/white" />
+
+                    <EditText
+                        android:id="@+id/fechaini"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="5.2"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:hint="Selecciona fecha inicial"
+                        android:inputType="none"
+                        android:textColorHint="#E4EF7C" />
+
+                    <ImageButton
+                        android:id="@+id/eliminar"
+                        android:layout_width="10dp"
+                        android:layout_height="35dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_weight="1"
+                        android:background="#2262"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:src="@drawable/ic_borrar" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/fechaf"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.6"
+                        android:text="Fecha final"
+                        android:textColor="@color/white" />
+
+                    <EditText
+                        android:id="@+id/fechafin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="5.2"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:hint="Selecciona fecha final"
+                        android:inputType="none"
+                        android:textColorHint="#E4EF7C" />
+
+
+                    <ImageButton
+                        android:id="@+id/eliminarFiltro"
+                        android:layout_width="10dp"
+                        android:layout_height="35dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_weight="1"
+                        android:background="#2262"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:src="@drawable/ic_borrar" />
+
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/btnConsulta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="consulta"
+                    android:text="Consulta tus rangos de peso" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
