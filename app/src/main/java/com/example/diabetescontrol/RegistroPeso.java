@@ -13,9 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 import android.content.Context;
-
+import com.github.mikephil.charting.charts.LineChart;
 import androidx.fragment.app.Fragment;
-
+import java.util.ArrayList;
+import com.github.mikephil.charting.data.Entry;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,12 +25,24 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Calendar;
+import com.github.mikephil.charting.data.LineDataSet;
+import android.graphics.Color;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.components.Description;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
+
 
 public class RegistroPeso extends Fragment {
 
     private EditText weightInput, heightInput, fechaInput, weightInputPeso;
     private TextView resultText, descriptionText;
     private EditText fechaini, fechafin; // Agrega estos EditText
+    private LineChart lineChart;
 
     private SharedPreferences sharedPreferences;
 
@@ -38,6 +51,7 @@ public class RegistroPeso extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_registro_peso, container, false);
         initViews(view);
+        lineChart = view.findViewById(R.id.lineChart);
 
         Button calculateButton = view.findViewById(R.id.btnCalcular);
         Button clearButton = view.findViewById(R.id.btnClearData);
@@ -347,19 +361,68 @@ public class RegistroPeso extends Fragment {
             }
         }
 
+
+
+
+
         @Override
         protected void onPostExecute(String response) {
             super.onPostExecute(response);
             // Aquí procesas la respuesta y actualizas la gráfica con los datos recibidos
             if (response != null) {
-                // Parsea la respuesta y actualiza la gráfica
-                // response contiene los datos devueltos por el servidor
+                ArrayList<Entry> entries = RegistroPeso.parsearDatos(response);
+                setupChart(entries);
             } else {
                 Toast.makeText(getActivity(), "Error al consultar los registros de peso", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
+    private static ArrayList<Entry> parsearDatos(String response) {
+        ArrayList<Entry> entries = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(response);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String pesoString = jsonObject.getString("peso");
+                float pesoFloat = Float.parseFloat(pesoString);
+                entries.add(new Entry(i, pesoFloat));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return entries;
+    }
+
+    private void setupChart(ArrayList<Entry> entries) {
+        if (lineChart != null) {
+            LineDataSet dataSet = new LineDataSet(entries, "Peso");
+            dataSet.setColor(Color.BLUE);
+            dataSet.setValueTextColor(Color.RED);
+
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(dataSet);
+
+            LineData lineData = new LineData(dataSets);
+
+            XAxis xAxis = lineChart.getXAxis();
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+            YAxis leftAxis = lineChart.getAxisLeft();
+            leftAxis.setTextColor(Color.BLACK);
+            leftAxis.setDrawGridLines(true);
+
+            Description description = new Description();
+            description.setText("Fecha");
+            lineChart.setDescription(description);
+
+            lineChart.setData(lineData);
+            lineChart.invalidate();
+        } else {
+            Log.e("RegistroPeso", "LineChart es nulo. No se puede configurar el gráfico.");
+        }
+    }
 
 
 }

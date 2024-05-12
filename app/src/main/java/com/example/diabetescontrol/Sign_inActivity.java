@@ -229,5 +229,9 @@ public class Sign_inActivity extends AppCompatActivity {
             }
         }
     }
+    public void goToLoginActivity(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 }
 

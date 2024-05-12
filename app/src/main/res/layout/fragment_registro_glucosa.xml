@@ -51,7 +51,7 @@
                         android:textSize="20sp"
                         android:textColor="@color/white"
                         android:layout_weight="2"
-                        android:text="@string/hora" />
+                        android:text="Hora de toma" />
 
                     <EditText
                         android:id="@+id/horaControl"
@@ -71,6 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="25dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -171,6 +172,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
+                            android:textColor="@color/white"
                             android:text="Mg/dL" />
 
                         <TextView
@@ -220,6 +222,7 @@
                         android:id="@+id/lineChart"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
+                        android:background="@color/white"
                         android:layout_weight="1" />
 
 

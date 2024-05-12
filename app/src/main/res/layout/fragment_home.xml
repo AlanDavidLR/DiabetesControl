@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="320dp"
-                android:text="Da click en el siguiente video"
+                android:text="Aprende un poco más de la diabetes,da click en el siguiente video"
                 android:textColor="@color/teal_200"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -128,12 +128,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center"
+                    android:text="Noticias reelevantes relacinadas a la diabetes"
+                    android:textSize="18sp"
+                    android:typeface="serif"
+                    android:textColor="#95CC55"
+                    android:textStyle="bold"
+                     />
+
                 <!-- FrameLayout con RecyclerView -->
                 <FrameLayout
                     android:id="@+id/destacadoRecuadro"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="16dp">
+
+
+
+
 
                     <WebView
                         android:id="@+id/webView"

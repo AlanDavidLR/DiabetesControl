@@ -47,7 +47,7 @@
                         android:textAllCaps="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="#fff"
-                        android:textSize="20sp"
+                        android:textSize="30sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -169,12 +169,20 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
+                <TextView
+                    android:id="@+id/textimc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Consulta tu Indice de Masa Corporal para saber si estas en tu peso adecuado"
+                    android:textColor="?android:attr/textColorLinkInverse"
+                    android:textSize="16dp"
+                    android:textStyle="italic" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:orientation="horizontal">
+
 
                     <TextView
                         android:id="@+id/lblWeight"
@@ -289,7 +297,27 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/lblTitleconsulta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:text="Consulta de peso"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="#fff"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/chartContainer"
                     android:layout_width="match_parent"
@@ -301,6 +329,7 @@
                         android:id="@+id/lineChart"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
+                        android:background="@color/white"
                         android:layout_weight="1" />
 
 

@@ -110,6 +110,15 @@
         app:srcCompat="@drawable/botondigital"
         />
 
+        <TextView
+            android:id="@+id/recuperar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Olvidaste tu contraseña? presiona aquí"
+            android:clickable="true"
+            android:onClick="goToLoginActivity"/>
+
 
 </LinearLayout>
     </ScrollView>
