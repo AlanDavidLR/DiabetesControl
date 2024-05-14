@@ -18,8 +18,17 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import java.lang.ref.WeakReference;
-
+import android.widget.ImageView;
+import android.content.SharedPreferences;
+import java.net.URL;
+import java.net.HttpURLConnection;
+import java.net.URLEncoder;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import androidx.fragment.app.Fragment;
+import android.content.Context;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -33,17 +42,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+
 public class RegistroGlucosa extends Fragment {
 
     private EditText horaControl;
     private EditText diaControl;
     private Spinner spinnerType;
-    private LineChart lineChart;
+    private EditText glucosa;
+    private SharedPreferences sharedPreferences;
+    private ImageView imageView2;
+    private Button buttonShowImage;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
 
     public RegistroGlucosa() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -55,13 +68,18 @@ public class RegistroGlucosa extends Fragment {
         horaControl = root.findViewById(R.id.horaControl);
         diaControl = root.findViewById(R.id.diaControl);
         spinnerType = root.findViewById(R.id.spinnerType);
-        lineChart = root.findViewById(R.id.lineChart);
+        glucosa = root.findViewById(R.id.glucosa);
+        imageView2 = root.findViewById(R.id.imageView2);
+        buttonShowImage = root.findViewById(R.id.buttonShowImage);
 
         // Configurar Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
                 R.array.tipos_toma_glucosa, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerType.setAdapter(adapter);
+
+        // Obtener referencia a SharedPreferences
+        sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
 
         // Configurar clic en EditText para seleccionar hora
         horaControl.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +116,9 @@ public class RegistroGlucosa extends Fragment {
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                diaControl.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                // Formatear la fecha como "YYYY-MM-DD"
+                                String formattedDate = String.format("%04d-%02d-%02d", year, monthOfYear + 1, dayOfMonth);
+                                diaControl.setText(formattedDate);
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
@@ -106,7 +126,7 @@ public class RegistroGlucosa extends Fragment {
         });
 
         // Configurar clic en botón Guardar
-        Button btnGuardar = root.findViewById(R.id.modificarControl);
+        Button btnGuardar = root.findViewById(R.id.guardargluco);
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,109 +134,115 @@ public class RegistroGlucosa extends Fragment {
             }
         });
 
-        // Configurar clic en botón Cancelar
-        Button btnCancelar = root.findViewById(R.id.cancelarGuardarControl);
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
+        // Configurar clic en botón "Saber más"
+        buttonShowImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cancelarGuardarControl();
+                if (imageView2.getVisibility() == View.VISIBLE) {
+                    imageView2.setVisibility(View.GONE);
+                } else {
+                    imageView2.setVisibility(View.VISIBLE);
+                }
             }
         });
-
-        // Iniciar la tarea asíncrona para obtener los datos de la gráfica
-        new ObtenerDatosGraficaTask(this).execute();
 
         return root;
     }
 
     private void guardarControl() {
-        // Aquí puedes implementar la lógica para guardar el registro de glucosa
-        Toast.makeText(requireContext(), "Registro guardado", Toast.LENGTH_SHORT).show();
+        String hora = horaControl.getText().toString();
+        String fecha = diaControl.getText().toString();
+        String tipoToma = spinnerType.getSelectedItem().toString();
+        long idUsuario = sharedPreferences.getLong("idUsuario", -1);
+        String nivelGlucosa = glucosa.getText().toString();
+
+        if (!hora.isEmpty() && !fecha.isEmpty() && !tipoToma.isEmpty() && idUsuario != -1) {
+            new InsertarRegistroGlucosaTask(requireContext()).execute(hora, fecha, tipoToma, String.valueOf(idUsuario),nivelGlucosa);
+        } else {
+            Toast.makeText(requireContext(), "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private void cancelarGuardarControl() {
-        // Aquí puedes implementar la lógica para cancelar el registro de glucosa
-        Toast.makeText(requireContext(), "Registro cancelado", Toast.LENGTH_SHORT).show();
-    }
+    private static class InsertarRegistroGlucosaTask extends AsyncTask<String, Void, String> {
+        private WeakReference<Context> contextRef;
 
-    private static class ObtenerDatosGraficaTask extends AsyncTask<Void, Void, List<Pair<Float, Float>>> {
-
-        private WeakReference<RegistroGlucosa> registroGlucosaWeakReference;
-
-        ObtenerDatosGraficaTask(RegistroGlucosa registroGlucosa) {
-            registroGlucosaWeakReference = new WeakReference<>(registroGlucosa);
+        InsertarRegistroGlucosaTask(Context context) {
+            contextRef = new WeakReference<>(context);
         }
 
         @Override
-        protected List<Pair<Float, Float>> doInBackground(Void... voids) {
-            // Aquí puedes implementar la lógica para obtener los datos de la gráfica
-            // por ejemplo, hacer una petición HTTP a tu servidor o base de datos
-            // y parsear la respuesta para obtener los datos necesarios
-            // Por ahora, devolvemos datos de ejemplo
-            List<Pair<Float, Float>> datos = new ArrayList<>();
-            // Agrega datos de ejemplo
-            datos.add(new Pair<>(1f, 80f)); // Fecha y nivel de glucosa
-            datos.add(new Pair<>(2f, 85f));
-            datos.add(new Pair<>(3f, 90f));
-            return datos;
+        protected String doInBackground(String... params) {
+            String hora = params[0];
+            String fecha = params[1];
+            String tipoToma = params[2];
+            String pacienteID = params[3];
+            String nivelGlucosa = params[4];
+
+            // URL del archivo PHP en tu servidor para insertar registros de glucosa
+            String urlServidor = "http://10.0.2.2:8080/conexiondevelop/registroglucosa.php";
+
+            try {
+                // Crea la conexión HTTP
+                URL url = new URL(urlServidor);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+                // Configura la conexión
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+
+                // Parámetros que enviarás al servidor PHP
+                String parametros = "hora=" + URLEncoder.encode(hora, "UTF-8") +
+                        "&fecha=" + URLEncoder.encode(fecha, "UTF-8") +
+                        "&tipoToma=" + URLEncoder.encode(tipoToma, "UTF-8") +
+                        "&pacienteID=" + pacienteID +
+                        "&nivelGlucosa=" + nivelGlucosa; // Incluye el nivel de glucosa
+
+                // Envía los datos al servidor
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(parametros.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                // Lee la respuesta del servidor
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    response.append(line);
+                }
+                bufferedReader.close();
+
+                // Cierra la conexión
+                connection.disconnect();
+
+                return response.toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
 
+
         @Override
-        protected void onPostExecute(List<Pair<Float, Float>> data) {
-            super.onPostExecute(data);
-            RegistroGlucosa registroGlucosa = registroGlucosaWeakReference.get();
-            if (registroGlucosa != null) {
-                registroGlucosa.configurarGrafica(data);
+        protected void onPostExecute(String response) {
+            super.onPostExecute(response);
+            Context context = contextRef.get();
+            if (context != null) {
+                if (response != null) {
+                    // Muestra un mensaje dependiendo de la respuesta del servidor
+                    if (response.equals("Success")) {
+                        Toast.makeText(context, "Registro de glucosa guardado exitosamente", Toast.LENGTH_SHORT).show();
+                        // Aquí puedes realizar cualquier otra acción necesaria después de guardar el registro de glucosa
+                    } else {
+                        Toast.makeText(context, "Error al guardar el registro de glucosa", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(context, "Error al guardar el registro de glucosa", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
 
-    private void configurarGrafica(List<Pair<Float, Float>> data) {
-        // Configuración de la gráfica
-        lineChart.getDescription().setEnabled(false);
-        lineChart.setTouchEnabled(true);
-        lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(true);
-        lineChart.setPinchZoom(true);
-        lineChart.setDrawGridBackground(false);
-        lineChart.setBackgroundColor(Color.WHITE);
 
-        // Crear una lista de entradas para el gráfico
-        List<Entry> entries = new ArrayList<>();
-        for (Pair<Float, Float> pair : data) {
-            entries.add(new Entry(pair.first, pair.second));
-        }
 
-        // Crear un conjunto de datos y asignarle las entradas
-        LineDataSet dataSet = new LineDataSet(entries, "Nivel de Glucosa");
-
-        // Personalizar el conjunto de datos si es necesario
-        dataSet.setColor(Color.BLUE);
-        dataSet.setCircleColor(Color.BLUE);
-        dataSet.setLineWidth(2f);
-        dataSet.setCircleRadius(4f);
-        dataSet.setValueTextColor(Color.BLACK);
-        dataSet.setValueTextSize(10f);
-
-        // Crear una lista de conjuntos de datos y agregar el conjunto de datos
-        List<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(dataSet);
-
-        // Crear un objeto de tipo LineData y asignarle la lista de conjuntos de datos
-        LineData lineData = new LineData(dataSets);
-
-        // Configurar la gráfica con los datos
-        lineChart.setData(lineData);
-
-        // Configurar los ejes
-        XAxis xAxis = lineChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setDrawGridLines(false);
-
-        YAxis leftAxis = lineChart.getAxisLeft();
-        leftAxis.setDrawGridLines(true);
-
-        // Actualizar la gráfica
-        lineChart.invalidate();
-    }
 }

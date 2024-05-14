@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.TextView;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import androidx.annotation.Nullable;
@@ -83,9 +85,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // TextView Recuperar
+        TextView textViewRecuperar = findViewById(R.id.recuperar);
+        textViewRecuperar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirRecuperacionActivity();
+            }
+        });
+
+
         String saludo = getGreeting();
         Toast.makeText(this, saludo, Toast.LENGTH_SHORT).show();
     }
+
+
 
     private String getGreeting() {
         Calendar fecha = Calendar.getInstance();
@@ -303,5 +317,9 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void abrirRecuperacionActivity() {
+        Intent intent = new Intent(this, Recuperacion.class);
+        startActivity(intent);
+    }
 
 }

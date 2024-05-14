@@ -77,6 +77,7 @@ public class RegistroPeso extends Fragment {
                 guardarRegistroPeso();
             }
         });
+
         Button consultaButton = view.findViewById(R.id.btnConsulta);
         consultaButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,9 +85,7 @@ public class RegistroPeso extends Fragment {
                 // Obtener el ID del usuario
                 long idUsuario = sharedPreferences.getLong("idUsuario", -1);
 
-                if (idUsuario != -1){
-
-
+                if (idUsuario != -1) {
                     // Obtener las fechas de inicio y fin
                     String fechaInicio = fechaini.getText().toString();
                     String fechaFin = fechafin.getText().toString();
@@ -98,7 +97,6 @@ public class RegistroPeso extends Fragment {
                 }
             }
         });
-
 
         // Obtener referencia a SharedPreferences
         sharedPreferences = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
@@ -227,8 +225,6 @@ public class RegistroPeso extends Fragment {
                         "&fecha=" + URLEncoder.encode(fecha, "UTF-8") +
                         "&pacienteID=" + pacienteID;
 
-
-
                 // Envía los datos al servidor
                 OutputStream outputStream = connection.getOutputStream();
                 outputStream.write(parametros.getBytes("UTF-8"));
@@ -261,7 +257,6 @@ public class RegistroPeso extends Fragment {
                 // Muestra un mensaje dependiendo de la respuesta del servidor
                 if (response.equals("Success")) {
                     Toast.makeText(getActivity(), "Registro de peso guardado exitosamente", Toast.LENGTH_SHORT).show();
-                    // Aquí puedes realizar cualquier otra acción necesaria después de guardar el registro de peso
                 } else {
                     Toast.makeText(getActivity(), "Error al guardar el registro de peso", Toast.LENGTH_SHORT).show();
                 }
@@ -361,17 +356,14 @@ public class RegistroPeso extends Fragment {
             }
         }
 
-
-
-
-
         @Override
         protected void onPostExecute(String response) {
             super.onPostExecute(response);
             // Aquí procesas la respuesta y actualizas la gráfica con los datos recibidos
             if (response != null) {
                 ArrayList<Entry> entries = RegistroPeso.parsearDatos(response);
-                setupChart(entries);
+                ArrayList<String> fechas = RegistroPeso.parsearFechas(response);
+                setupChart(entries, fechas);
             } else {
                 Toast.makeText(getActivity(), "Error al consultar los registros de peso", Toast.LENGTH_SHORT).show();
             }
@@ -395,7 +387,22 @@ public class RegistroPeso extends Fragment {
         return entries;
     }
 
-    private void setupChart(ArrayList<Entry> entries) {
+    private static ArrayList<String> parsearFechas(String response) {
+        ArrayList<String> fechas = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(response);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String fechaString = jsonObject.getString("fecha");
+                fechas.add(fechaString);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return fechas;
+    }
+
+    private void setupChart(ArrayList<Entry> entries, ArrayList<String> fechas) {
         if (lineChart != null) {
             LineDataSet dataSet = new LineDataSet(entries, "Peso");
             dataSet.setColor(Color.BLUE);
@@ -408,6 +415,10 @@ public class RegistroPeso extends Fragment {
 
             XAxis xAxis = lineChart.getXAxis();
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+            xAxis.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(fechas));
+            xAxis.setGranularity(1f); // only intervals of 1 day
+            xAxis.setLabelRotationAngle(-45);
 
             YAxis leftAxis = lineChart.getAxisLeft();
             leftAxis.setTextColor(Color.BLACK);
@@ -423,8 +434,6 @@ public class RegistroPeso extends Fragment {
             Log.e("RegistroPeso", "LineChart es nulo. No se puede configurar el gráfico.");
         }
     }
-
-
 }
 
 

@@ -337,7 +337,7 @@
                         android:id="@+id/textistr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Selecciona el rago de fechas para consultar tus tomas de glucosa"
+                        android:text="Selecciona el rago de fechas para consultar tu peso y saber tu progreso"
                         android:textColor="?android:attr/textColorLinkInverse"
                         android:textSize="16dp"
                         android:textStyle="italic" />

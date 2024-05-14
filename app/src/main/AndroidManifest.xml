@@ -5,9 +5,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="tu.paquete.PERMISO_CUSTOM" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -15,47 +17,43 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_logos"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logos_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DiabetesControl"
-        android:enableOnBackInvokedCallback="true"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
-
+        <activity
+            android:name=".Recuperacion"
+            android:exported="false" />
         <!-- Activar el BroadcastReceiver después de un reinicio -->
         <receiver
-            android:name="com.example.diabetescontrol.ui.gallery.MyRebootReceiver"
+            android:name=".ui.gallery.MyRebootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-        </receiver>
-
-        <!-- Declarar el servicio RebootServiceClass -->
+        </receiver> <!-- Declarar el servicio RebootServiceClass -->
         <service
-            android:name="com.example.diabetescontrol.ui.gallery.RebootServiceClass"
+            android:name=".ui.gallery.RebootServiceClass"
             android:enabled="true"
-            android:exported="true" />
-
-        <!-- Declarar el BroadcastReceiver AlarmReceiver -->
+            android:exported="true" /> <!-- Declarar el BroadcastReceiver AlarmReceiver -->
         <receiver
-            android:name="com.example.diabetescontrol.ui.gallery.AlarmReceiver"
+            android:name=".ui.gallery.AlarmReceiver"
             android:enabled="true"
-            android:exported="true" />
-
-        <!-- Declarar el servicio NotificationService -->
+            android:exported="true" /> <!-- Declarar el servicio NotificationService -->
         <service
-            android:name="com.example.diabetescontrol.ui.gallery.NotificationService"
+            android:name=".ui.gallery.NotificationService"
             android:enabled="true"
             android:exported="true" />
 
@@ -75,12 +73,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-       </application>
+    </application>
 
 </manifest>
-

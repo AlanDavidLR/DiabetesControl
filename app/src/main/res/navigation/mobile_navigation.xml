@@ -14,23 +14,23 @@
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.diabetescontrol.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:label="Recordatorio de Citas Medicas"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.diabetescontrol.ui.historialglucosa.HistorialGlucosaFragment"
-        android:label="@string/menu_slideshow"
+        android:label="Historial de tomas de Glucosa"
         tools:layout="@layout/fragment_historial_glucosa" />
     <fragment
         android:id="@+id/registroGlucosa"
         android:name="com.example.diabetescontrol.RegistroGlucosa"
-        android:label="fragment_registro_glucosa"
+        android:label="Registro de Toma de Glucosa"
         tools:layout="@layout/fragment_registro_glucosa" />
     <fragment
         android:id="@+id/registroPeso2"
         android:name="com.example.diabetescontrol.RegistroPeso"
-        android:label="fragment_registro_peso"
+        android:label="Registro de Peso"
         tools:layout="@layout/fragment_registro_peso" />
     <fragment
         android:id="@+id/settingsFragment2"
@@ -40,6 +40,6 @@
     <fragment
         android:id="@+id/registroTomaMedicamentos"
         android:name="com.example.diabetescontrol.RegistroTomaMedicamentos"
-        android:label="fragment_registro_toma_medicamentos"
+        android:label="Recordatorio de Toma de Medicamentos"
         tools:layout="@layout/fragment_registro_toma_medicamentos" />
 </navigation>

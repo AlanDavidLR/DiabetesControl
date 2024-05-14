@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_gravity="center"
-                    android:text="Noticias reelevantes relacinadas a la diabetes"
+                    android:text="Noticias reelevantes relacionadas a la diabetes"
                     android:textSize="18sp"
                     android:typeface="serif"
                     android:textColor="#95CC55"
