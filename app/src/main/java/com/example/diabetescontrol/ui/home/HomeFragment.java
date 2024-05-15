@@ -92,9 +92,9 @@ public class HomeFragment extends Fragment {
         viewPager = root.findViewById(R.id.viewPager);
         List<ImageSlide> imageSlides = new ArrayList<>();
         // Agregar tus imágenes y descripciones aquí
-        imageSlides.add(new ImageSlide(R.drawable.alimetos, "Cuida tu alimentacion, evita los alimentos altos en azucares, presiona sobre", "https://tu-url-1.com"));
-        imageSlides.add(new ImageSlide(R.drawable.ejercicio, "Conoce la  actividad fisica que puedes practicar, adecuada para personas con Diabetes", "https://tu-url-2.com"));
-        imageSlides.add(new ImageSlide(R.drawable.pie, "Mejora el cuidado de tu pies, presiona sobre la imgagen para mayor infomración", "https://tu-url-2.com"));
+        imageSlides.add(new ImageSlide(R.drawable.alimetos, "Cuida tu alimentacion, evita los alimentos altos en azucares, presiona sobre", "https://www.imss.gob.mx/sites/all/statics/salud/guias_salud/cartera-alimentacion.pdf"));
+        imageSlides.add(new ImageSlide(R.drawable.ejercicio, "Conoce la  actividad fisica que puedes practicar, adecuada para personas con Diabetes", "https://www.imss.gob.mx/salud-en-linea/actividad-fisica"));
+        imageSlides.add(new ImageSlide(R.drawable.pie, "Mejora el cuidado de tu pies, presiona sobre la imgagen para mayor información", "http://www.imss.gob.mx/salud-en-linea/pie-diabetico"));
         ImageSliderAdapter adapter = new ImageSliderAdapter(requireContext(), imageSlides);
         viewPager.setAdapter(adapter);
 

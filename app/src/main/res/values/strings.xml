@@ -96,4 +96,6 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="bienvenido">Bienvenido</string>
     <string name="conoce_las_mejores_maneras_de_cuidarte_con_estas_recomendaciones">Conoce las mejores maneras de cuidarte con estas recomendaciones</string>
+    <string name="ingresa_los_datos_de_tu_cuenta">Ingresa los datos de tu cuenta.</string>
+    <string name="inicio_de_sesion">Inicio de sesión</string>
 </resources>

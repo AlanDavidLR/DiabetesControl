@@ -314,7 +314,6 @@ public class RegistroPeso extends Fragment {
             String fechaInicio = params[1];
             String fechaFin = params[2];
 
-            // URL del archivo PHP en tu servidor para consultar los registros de peso
             String urlServidor = "http://10.0.2.2:8080/conexiondevelop/consulta_registro_peso.php";
 
             try {
@@ -323,7 +322,7 @@ public class RegistroPeso extends Fragment {
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
 
-                // Parámetros que enviarás al servidor PHP
+                // Parámetros que enviará al servidor PHP
                 String parametros = "idUsuario=" + URLEncoder.encode(idUsuario, "UTF-8") +
                         "&fechaInicio=" + URLEncoder.encode(fechaInicio, "UTF-8") +
                         "&fechaFin=" + URLEncoder.encode(fechaFin, "UTF-8");
@@ -359,7 +358,7 @@ public class RegistroPeso extends Fragment {
         @Override
         protected void onPostExecute(String response) {
             super.onPostExecute(response);
-            // Aquí procesas la respuesta y actualizas la gráfica con los datos recibidos
+            // Aquí procesa la respuesta y actualiza la gráfica con los datos recibidos
             if (response != null) {
                 ArrayList<Entry> entries = RegistroPeso.parsearDatos(response);
                 ArrayList<String> fechas = RegistroPeso.parsearFechas(response);

@@ -19,7 +19,7 @@
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inicio de sesión"
+        android:text="@string/inicio_de_sesion"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Ingresa los datos de tu cuenta."
+        android:text="@string/ingresa_los_datos_de_tu_cuenta"
         android:textAlignment="center" />
 
     <ImageView

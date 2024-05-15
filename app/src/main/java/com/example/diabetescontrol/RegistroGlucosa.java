@@ -178,7 +178,6 @@ public class RegistroGlucosa extends Fragment {
             String pacienteID = params[3];
             String nivelGlucosa = params[4];
 
-            // URL del archivo PHP en tu servidor para insertar registros de glucosa
             String urlServidor = "http://10.0.2.2:8080/conexiondevelop/registroglucosa.php";
 
             try {
@@ -232,7 +231,6 @@ public class RegistroGlucosa extends Fragment {
                     // Muestra un mensaje dependiendo de la respuesta del servidor
                     if (response.equals("Success")) {
                         Toast.makeText(context, "Registro de glucosa guardado exitosamente", Toast.LENGTH_SHORT).show();
-                        // Aquí puedes realizar cualquier otra acción necesaria después de guardar el registro de glucosa
                     } else {
                         Toast.makeText(context, "Error al guardar el registro de glucosa", Toast.LENGTH_SHORT).show();
                     }
