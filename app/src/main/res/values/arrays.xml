@@ -9,20 +9,21 @@
         <item>reply_all</item>
     </string-array>
     <array name="medications_shape_array">
-        <item>pomada</item>
-        <item>capsula(s)</item>
-        <item>unguento(s)</item>
-        <item>crema(s)</item>
-        <item>emulsion</item>
-        <item>gel</item>
+        <item>Selecciona una Opción</item>
+        <item>Pomada</item>
+        <item>Capsula(s)</item>
+        <item>Unguento(s)</item>
+        <item>Crema(s)</item>
+        <item>Emulsion</item>
+        <item>Gel</item>
         <item>Isulina</item>
-        <item>inhalado</item>
-        <item>taleta(s)</item>
+        <item>Inhalado</item>
+        <item>Taleta(s)</item>
         <item>Inyectado intramuscular</item>
         <item>unit(s)</item>
-        <item>solucion</item>
-        <item>spray(s)</item>
-        <item>suspension</item>
+        <item>Solucion</item>
+        <item>Spray(s)</item>
+        <item>Suspension</item>
         <item>Supositorio</item>
     </array>
     <array name="tipos_toma_glucosa">

@@ -1,36 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="8dp">
 
     <TextView
         android:id="@+id/textViewFecha"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Fecha"
         android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewHora"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Hora"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/textViewGlucosa"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Glucosa"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/textViewTipoToma"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Tipo de Toma"
         android:textSize="14sp" />
 </LinearLayout>

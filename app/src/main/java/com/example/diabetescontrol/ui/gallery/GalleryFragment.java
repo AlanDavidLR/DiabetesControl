@@ -12,13 +12,15 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.diabetescontrol.AlarmReceiver;
+import com.example.diabetescontrol.R;
 import com.example.diabetescontrol.databinding.FragmentGalleryBinding;
 
 import java.util.Calendar;
@@ -27,16 +29,19 @@ import java.util.Locale;
 public class GalleryFragment extends Fragment {
 
     private FragmentGalleryBinding binding;
-    private AlarmManager alarmManager;
-    private static final int REQUEST_CODE = 1;
+    private Spinner spinnerType;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        spinnerType = root.findViewById(R.id.spinnerType);
 
-        // Obtener el servicio de alarma
-        alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
+        // Configurar Spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
+                R.array.medications_shape_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerType.setAdapter(adapter);
 
         // Manejar la selección de fecha
         binding.textFieldFecha.getEditText().setOnClickListener(v -> mostrarSelectorFecha());
@@ -64,8 +69,8 @@ public class GalleryFragment extends Fragment {
             }
         });
 
-        // Manejar clic en el botón de crear alarma
-        binding.buttonCrearAlarma.setOnClickListener(v -> crearAlarmaYRecordatorio());
+        // Crear la alarma cuando se presiona el botón
+        binding.buttonCrearAlarma.setOnClickListener(v -> crearAlarma());
 
         return root;
     }
@@ -107,45 +112,49 @@ public class GalleryFragment extends Fragment {
         timePickerDialog.show();
     }
 
-    // Método para configurar la alarma y la notificación
-    private void crearAlarmaYRecordatorio() {
+    // Método para crear la alarma
+    private void crearAlarma() {
+        String tipoConsulta = spinnerType.getSelectedItem().toString();
         String fecha = binding.textFieldFecha.getEditText().getText().toString();
         String hora = binding.textFieldHora.getEditText().getText().toString();
         String nota = binding.textFieldNota.getEditText().getText().toString();
 
-        // Verificar si la fecha y la hora están ingresadas
-        if (fecha.isEmpty() || hora.isEmpty()) {
-            Toast.makeText(requireContext(), "Por favor ingrese la fecha y la hora", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        // Crear el título de la alarma
+        String titulo = "Cita con: " + tipoConsulta;
 
-        // Obtener el año, mes y día de la fecha seleccionada
-        String[] partesFecha = fecha.split("-");
-        int year = Integer.parseInt(partesFecha[0]);
-        int month = Integer.parseInt(partesFecha[1]) - 1;
-        int dayOfMonth = Integer.parseInt(partesFecha[2]);
-
-        // Obtener la hora y el minuto de la hora seleccionada
-        String[] partesHora = hora.split(":");
-        int hourOfDay = Integer.parseInt(partesHora[0]);
-        int minute = Integer.parseInt(partesHora[1]);
-
-        // Crear un Calendar con la fecha y la hora seleccionadas
+        // Convertir la fecha y la hora en milisegundos
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, dayOfMonth, hourOfDay, minute);
+        // Asume que la fecha está en el formato "yyyy-MM-dd"
+        String[] fechaParts = fecha.split("-");
+        int year = Integer.parseInt(fechaParts[0]);
+        int month = Integer.parseInt(fechaParts[1]) - 1; // Calendar.MONTH es 0-based
+        int day = Integer.parseInt(fechaParts[2]);
+        // Asume que la hora está en el formato "HH:mm"
+        String[] horaParts = hora.split(":");
+        int hour = Integer.parseInt(horaParts[0]);
+        int minute = Integer.parseInt(horaParts[1]);
+
+        calendar.set(year, month, day, hour, minute, 0);
+
+        // Crear el Intent para la alarma
+        Intent intent = new Intent(requireContext(), AlarmReceiver.class);
+        intent.putExtra("titulo", titulo);
+        intent.putExtra("nota", nota);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                requireContext(),
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE // Añade FLAG_IMMUTABLE aquí
+        );
 
         // Configurar la alarma
-        configurarAlarma(calendar.getTimeInMillis());
-    }
-
-    // Método para configurar la alarma
-    private void configurarAlarma(long tiempoAlarma) {
-        // Crear un PendingIntent para la alarma
-        Intent intent = new Intent(requireContext(), AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), REQUEST_CODE, intent, PendingIntent.FLAG_IMMUTABLE);
-        // Configurar la alarma con el tiempo especificado
-        alarmManager.set(AlarmManager.RTC_WAKEUP, tiempoAlarma, pendingIntent);
+        AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+            Toast.makeText(requireContext(), "Alarma creada", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(requireContext(), "No se pudo crear la alarma", Toast.LENGTH_SHORT).show();
+        }
     }
 }
-
 

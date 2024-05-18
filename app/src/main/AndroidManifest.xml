@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="tu.paquete.PERMISO_CUSTOM" />
@@ -10,15 +14,21 @@
         android:maxSdkVersion="32" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
         android:allowBackup="true"
@@ -31,31 +41,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DiabetesControl"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="tiramisu">
         <activity
             android:name=".Recuperacion"
             android:exported="false" />
-        <!-- Activar el BroadcastReceiver después de un reinicio -->
-        <receiver
-            android:name=".ui.gallery.MyRebootReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver> <!-- Declarar el servicio RebootServiceClass -->
-        <service
-            android:name=".ui.gallery.RebootServiceClass"
-            android:enabled="true"
-            android:exported="true" /> <!-- Declarar el BroadcastReceiver AlarmReceiver -->
-        <receiver
-            android:name=".ui.gallery.AlarmReceiver"
-            android:enabled="true"
-            android:exported="true" /> <!-- Declarar el servicio NotificationService -->
+
         <service
             android:name=".ui.gallery.NotificationService"
             android:enabled="true"
             android:exported="true" />
+
+
+
+        <receiver android:name=".ui.gallery.AlarmReceiver" />
+
 
         <activity
             android:name=".Navegacion"

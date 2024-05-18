@@ -237,14 +237,14 @@
 
 
                 <LinearLayout
-                    android:id="@+id/chartContainerg"
+                    android:id="@+id/chartContainergucosa"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:orientation="vertical">
 
 
                     <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/lineChartg"
+                        android:id="@+id/lineChartglucosa"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
                         android:background="@color/white"
@@ -277,7 +277,8 @@
                         android:ems="10"
                         android:hint="Selecciona fecha inicial"
                         android:inputType="none"
-                        android:textColorHint="#E4EF7C" />
+                        android:textColorHint="#E4EF7C"
+                         />
 
                     <ImageButton
                         android:id="@+id/eliminargi"
@@ -317,7 +318,8 @@
                         android:ems="10"
                         android:hint="Selecciona fecha final"
                         android:inputType="none"
-                        android:textColorHint="#E4EF7C" />
+                        android:textColorHint="#E4EF7C"
+                         />
 
 
                     <ImageButton
