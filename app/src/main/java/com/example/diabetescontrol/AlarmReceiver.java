@@ -7,17 +7,20 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "diabetes_control_channel";
+    private static final String TAG = "AlarmReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         String title = intent.getStringExtra("titulo");
         String note = intent.getStringExtra("nota");
+        Log.d(TAG, "onReceive: Alarm received. Title: " + title + ", Note: " + note);
 
         // Create notification
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

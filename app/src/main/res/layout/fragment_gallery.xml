@@ -148,7 +148,18 @@
                     android:background="@color/white"
                     android:inputType="text" />
 
+
             </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:textColor="#F6F6F6"
+                android:layout_height="wrap_content"
+                android:text="Programa tu recordaorio al menos 1 hora antes de tu cita" />
+
             <Button
                 android:id="@+id/buttonCrearAlarma"
                 android:layout_width="match_parent"
@@ -159,6 +170,14 @@
                 android:textSize="16sp"
                 android:padding="16dp"
                 android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Si no recuerdas tus citas puedes consultarlas aqui" />
+
             <LinearLayout
                 android:id="@+id/linearLayoutHistoricControl"
                 android:layout_width="200dp"

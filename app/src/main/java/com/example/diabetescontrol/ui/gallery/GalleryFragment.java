@@ -24,7 +24,9 @@ import org.json.JSONException;
 import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONArray;
 import java.util.ArrayList;
-
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -220,13 +222,6 @@ public class GalleryFragment extends Fragment {
         String nota = binding.textFieldNota.getEditText().getText().toString();
         long idUsuario = sharedPreferences.getLong("idUsuario", -1);
 
-        Log.d("GalleryFragment", "Datos para guardar cita:");
-        Log.d("GalleryFragment", "Tipo Consulta: " + tipoConsulta);
-        Log.d("GalleryFragment", "Fecha: " + fecha);
-        Log.d("GalleryFragment", "Hora: " + hora);
-        Log.d("GalleryFragment", "Nota: " + nota);
-        Log.d("GalleryFragment", "ID Usuario: " + idUsuario);
-
         if (!tipoConsulta.isEmpty() && !fecha.isEmpty() && !hora.isEmpty() && idUsuario != -1) {
             new InsertarRegistroCitaTask(requireContext()).execute(tipoConsulta, fecha, hora, String.valueOf(idUsuario), nota);
         } else {
@@ -250,12 +245,6 @@ public class GalleryFragment extends Fragment {
             String pacienteID = params[3];
             String nota = params[4];
 
-            Log.d("InsertarRegistroCitaTask", "Datos enviados al servidor:");
-            Log.d("InsertarRegistroCitaTask", "Tipo Consulta: " + tipoConsulta);
-            Log.d("InsertarRegistroCitaTask", "Fecha: " + fecha);
-            Log.d("InsertarRegistroCitaTask", "Hora: " + hora);
-            Log.d("InsertarRegistroCitaTask", "PacienteID: " + pacienteID);
-            Log.d("InsertarRegistroCitaTask", "Nota: " + nota);
 
             String urlServidor = "http://10.0.2.2:8080/conexiondevelop/registrocitas.php";
 
@@ -306,7 +295,6 @@ public class GalleryFragment extends Fragment {
             super.onPostExecute(response);
             Context context = contextRef.get();
             if (context != null) {
-                Log.d("InsertarRegistroCitaTask", "Respuesta del servidor: " + response);
                 if (response != null) {
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
@@ -347,8 +335,11 @@ public class GalleryFragment extends Fragment {
 
         // Verificar si se pudo obtener el ID de usuario
         if (idUsuario != -1) {
-            // Obtener la fecha de consulta (puedes obtenerla de un DatePicker o DatePickerDialog)
-            String fechaConsulta = "2024-05-20"; // Aquí deberías obtener la fecha seleccionada
+            // Obtener la fecha actual del sistema
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            String fechaConsulta = dateFormat.format(calendar.getTime());
+
             // Configurar el LayoutManager (puedes usar LinearLayoutManager u otro que desees)
             LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
             binding.recyclerViewcita.setLayoutManager(layoutManager);
