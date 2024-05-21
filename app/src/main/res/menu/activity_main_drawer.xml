@@ -11,7 +11,7 @@
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/reloj"
-            android:title="Recordatorio Citas Meddicas" />
+            android:title="Recordatorio Citas Medicas" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/historial"

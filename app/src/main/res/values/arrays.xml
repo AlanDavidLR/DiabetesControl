@@ -27,10 +27,18 @@
         <item>Supositorio</item>
     </array>
     <array name="tipos_toma_glucosa">
+        <item>Selecciona una Opción</item>
         <item>Ayunas</item>
         <item>Después del desayuno</item>
         <item>Después de la comida</item>
         <item>Después de la cena</item>
+    </array>
+    <array name="citas_medicas">
+        <item>Selecciona una Opción</item>
+        <item>Medico</item>
+        <item>Medico Especialista</item>
+        <item>Nutriologo</item>
+        <item>Labortorios</item>
     </array>
 
 </resources>
