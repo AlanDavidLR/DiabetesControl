@@ -14,11 +14,13 @@ import android.content.Intent;
 import android.provider.AlarmClock;
 import android.widget.Button;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import java.util.Calendar;
 import android.widget.EditText;
 import android.widget.CheckBox;
 import android.util.Log;
 import java.util.ArrayList;
+import android.widget.Spinner;
 
 public class RegistroTomaMedicamentos extends Fragment {
 
@@ -28,8 +30,10 @@ public class RegistroTomaMedicamentos extends Fragment {
     private int minute;
     private TextView textViewMedicineTime;
     private EditText editTextMedName;
+    private TextView textViewDoseQuantity;
+    private Spinner spinnerDoseUnits;
     private CheckBox checkBoxSunday, checkBoxMonday, checkBoxTuesday, checkBoxWednesday,
-            checkBoxThursday, checkBoxFriday, checkBoxSaturday;
+            checkBoxThursday, checkBoxFriday, checkBoxSaturday, checkBoxEveryDay;
 
     public RegistroTomaMedicamentos() {
         // Required empty public constructor
@@ -42,6 +46,8 @@ public class RegistroTomaMedicamentos extends Fragment {
 
         textViewMedicineTime = view.findViewById(R.id.tv_medicine_time);
         editTextMedName = view.findViewById(R.id.edit_med_name);
+        textViewDoseQuantity = view.findViewById(R.id.tv_dose_quantity);
+        spinnerDoseUnits = view.findViewById(R.id.spinner_dose_units);
         checkBoxSunday = view.findViewById(R.id.dv_sunday);
         checkBoxMonday = view.findViewById(R.id.dv_monday);
         checkBoxTuesday = view.findViewById(R.id.dv_tuesday);
@@ -49,6 +55,7 @@ public class RegistroTomaMedicamentos extends Fragment {
         checkBoxThursday = view.findViewById(R.id.dv_thursday);
         checkBoxFriday = view.findViewById(R.id.dv_friday);
         checkBoxSaturday = view.findViewById(R.id.dv_saturday);
+        checkBoxEveryDay = view.findViewById(R.id.every_day);
 
         textViewMedicineTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,8 +101,11 @@ public class RegistroTomaMedicamentos extends Fragment {
 
     private void createAlarm() {
         String medicamento = editTextMedName.getText().toString();
-        if (medicamento.isEmpty()) {
-            Log.e(TAG, "createAlarm: Medicamento name is empty");
+        String dosis = textViewDoseQuantity.getText().toString();
+        String tipoDosis = spinnerDoseUnits.getSelectedItem().toString();
+
+        if (medicamento.isEmpty() || dosis.isEmpty() || tipoDosis.isEmpty()) {
+            Toast.makeText(getContext(), "Ninguna casilla puede estar vacía", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -110,19 +120,29 @@ public class RegistroTomaMedicamentos extends Fragment {
         };
 
         ArrayList<Integer> dias = new ArrayList<>();
-        if (diasSeleccionados[0]) dias.add(Calendar.SUNDAY);
-        if (diasSeleccionados[1]) dias.add(Calendar.MONDAY);
-        if (diasSeleccionados[2]) dias.add(Calendar.TUESDAY);
-        if (diasSeleccionados[3]) dias.add(Calendar.WEDNESDAY);
-        if (diasSeleccionados[4]) dias.add(Calendar.THURSDAY);
-        if (diasSeleccionados[5]) dias.add(Calendar.FRIDAY);
-        if (diasSeleccionados[6]) dias.add(Calendar.SATURDAY);
+        boolean todosLosDias = checkBoxEveryDay.isChecked();
+        if (todosLosDias) {
+            // Si se marca "Todos los días", establecer todos los días de la semana
+            for (int i = Calendar.SUNDAY; i <= Calendar.SATURDAY; i++) {
+                dias.add(i);
+            }
+        } else {
+            // Establecer solo los días seleccionados
+            for (int i = 0; i < diasSeleccionados.length; i++) {
+                if (diasSeleccionados[i]) {
+                    dias.add(i + 1); // Ajustar a los valores de Calendar
+                }
+            }
+        }
+
+        String mensajeAlarma = "Hora de tomar tu medicamento: " + medicamento;
+        String mensajeNotificacion = mensajeAlarma + ". La dosis es: " + dosis + ". Tipo de medicamento: " + tipoDosis;
 
         // Crear la alarma del sistema
         Intent alarmIntent = new Intent(AlarmClock.ACTION_SET_ALARM)
                 .putExtra(AlarmClock.EXTRA_HOUR, hour)
                 .putExtra(AlarmClock.EXTRA_MINUTES, minute)
-                .putExtra(AlarmClock.EXTRA_MESSAGE, "Hora de tomar tu medicamento: " + medicamento)
+                .putExtra(AlarmClock.EXTRA_MESSAGE, mensajeAlarma)
                 .putExtra(AlarmClock.EXTRA_DAYS, dias)
                 .putExtra(AlarmClock.EXTRA_SKIP_UI, true);
 
@@ -135,9 +155,9 @@ public class RegistroTomaMedicamentos extends Fragment {
         // Configurar la notificación
         Intent notificationIntent = new Intent(requireContext(), AlarmReceiver.class);
         notificationIntent.putExtra("titulo", "Hora de tomar tu medicamento");
-        notificationIntent.putExtra("nota", medicamento);
+        notificationIntent.putExtra("nota", mensajeNotificacion);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
 

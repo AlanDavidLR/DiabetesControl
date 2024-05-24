@@ -2,6 +2,7 @@ package com.example.diabetescontrol.ui.home;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -50,28 +51,14 @@ public class HomeFragment extends Fragment {
         // Inicializar el WebView
         webView = root.findViewById(R.id.webView);
 
-        // Habilitar JavaScript (opcional)
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-
-        // Configurar para que el contenido se ajuste a la pantalla
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setUseWideViewPort(true);
-
-        // Cargar la URL en el WebView
-        webView.loadUrl("https://www.gob.mx/promosalud/acciones-y-programas/diabetes-en-mexico-284509");
-
-        // Establecer un WebViewClient para que la navegación se maneje dentro del WebView
-        webView.setWebViewClient(new WebViewClient());
+        // Cargar la URL en el WebView en un hilo separado
+        new LoadWebViewTask().execute("https://www.gob.mx/promosalud/acciones-y-programas/diabetes-en-mexico-284509");
 
         // Inicializar el VideoView
         VideoView videoView = root.findViewById(R.id.videoView);
 
-        // Configurar la ruta del video
-        String videoPath = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.diabetestipo2v;
-
-        // Establecer la ruta del video en el VideoView
-        videoView.setVideoPath(videoPath);
+        // Configurar la ruta del video en un hilo separado
+        new LoadVideoViewTask(videoView).execute("android.resource://" + requireActivity().getPackageName() + "/" + R.raw.diabetestipo2v);
 
         // Obtener el nombre del usuario de las SharedPreferences
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
@@ -129,7 +116,46 @@ public class HomeFragment extends Fragment {
         // Detener el cambio automático de diapositivas al destruir la vista
         sliderHandler.removeCallbacks(sliderRunnable);
     }
+
+    private class LoadWebViewTask extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... urls) {
+            // No hacer nada en el background para WebView
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            String url = "https://www.gob.mx/promosalud/acciones-y-programas/diabetes-en-mexico-284509";
+            WebSettings webSettings = webView.getSettings();
+            webSettings.setJavaScriptEnabled(true);
+            webSettings.setLoadWithOverviewMode(true);
+            webSettings.setUseWideViewPort(true);
+            webView.setWebViewClient(new WebViewClient());
+            webView.loadUrl(url);
+        }
+    }
+
+    private class LoadVideoViewTask extends AsyncTask<String, Void, String> {
+        private VideoView videoView;
+
+        LoadVideoViewTask(VideoView videoView) {
+            this.videoView = videoView;
+        }
+
+        @Override
+        protected String doInBackground(String... paths) {
+            return paths[0];
+        }
+
+        @Override
+        protected void onPostExecute(String videoPath) {
+            videoView.setVideoPath(videoPath);
+        }
+    }
 }
+
+
 
 
 

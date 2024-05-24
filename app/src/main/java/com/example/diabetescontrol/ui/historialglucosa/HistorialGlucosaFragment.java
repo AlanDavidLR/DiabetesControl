@@ -62,10 +62,11 @@ public class HistorialGlucosaFragment extends Fragment {
         sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
         long idUsuario = sharedPreferences.getLong("idUsuario", -1);
 
+        adapter = new GlucosaAdapter(glucosaList); // Instanciar y asignar el adaptador antes de configurar el RecyclerView
         recyclerView = root.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new GlucosaAdapter(glucosaList);
         recyclerView.setAdapter(adapter);
+
 
         Button consultaButton = root.findViewById(R.id.cosulaglucosa);
         consultaButton.setOnClickListener(new View.OnClickListener() {
