@@ -125,7 +125,7 @@ public class HistorialGlucosaFragment extends Fragment {
             String fechaInicio = params[1];
             String fechaFin = params[2];
 
-            String urlServidor = "http://10.0.2.2:8080/conexiondevelop/consulta_registro_glucosa.php";
+            String urlServidor = "http://glucocontrol.atwebpages.com/consulta_registro_glucosa.php";
 
             try {
                 URL url = new URL(urlServidor);

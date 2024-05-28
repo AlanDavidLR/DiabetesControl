@@ -246,7 +246,7 @@ public class GalleryFragment extends Fragment {
             String nota = params[4];
 
 
-            String urlServidor = "http://10.0.2.2:8080/conexiondevelop/registrocitas.php";
+            String urlServidor = "http://glucocontrol.atwebpages.com/registrocitas.php";
 
             try {
                 // Crea la conexión HTTP
@@ -301,7 +301,7 @@ public class GalleryFragment extends Fragment {
                         boolean success = jsonResponse.getBoolean("success");
                         String message = jsonResponse.getString("message");
 
-                        if (success && "Success".equals(message)) { // Verifica si el mensaje es "Success"
+                        if (success) {
                             Toast.makeText(context, "Cita guardada exitosamente", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(context, "Error al guardar la cita: " + message, Toast.LENGTH_SHORT).show();
@@ -364,7 +364,7 @@ public class GalleryFragment extends Fragment {
             String idUsuario = params[0];
             String fechaConsulta = params[1];
 
-            String urlServidor = "http://10.0.2.2:8080/conexiondevelop/consultarcitas.php";
+            String urlServidor = "http://glucocontrol.atwebpages.com/consultarcitas.php";
 
             try {
                 URL url = new URL(urlServidor);

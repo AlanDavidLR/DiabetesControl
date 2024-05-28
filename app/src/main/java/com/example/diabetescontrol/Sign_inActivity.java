@@ -164,7 +164,7 @@ public class Sign_inActivity extends AppCompatActivity {
             String contrasena = params[4];
 
             // URL del archivo PHP en tu servidor
-            String urlServidor = "http://10.0.2.2:8080/conexiondevelop/registro.php";
+            String urlServidor = "http://glucocontrol.atwebpages.com/registro.php";
 
             try {
                 // Crea la conexión HTTP

@@ -82,7 +82,7 @@ public class Recuperacion extends AppCompatActivity {
             String email = params[0];
             String subject = params[1];
             String message = params[2];
-            String urlServidor = "http://10.0.2.2:8080/conexiondevelop/recuperacion.php";
+            String urlServidor = "http://glucocontrol.atwebpages.com/recuperacion.php";
 
             try {
                 URL url = new URL(urlServidor);

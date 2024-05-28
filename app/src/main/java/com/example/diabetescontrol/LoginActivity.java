@@ -222,7 +222,7 @@ public class LoginActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             String email = params[0];
             String password = params[1];
-            String urlServidor = "http://10.0.2.2:8080/conexiondevelop/login.php";
+            String urlServidor = "http://glucocontrol.atwebpages.com/login.php";
             try {
                 Log.d("LoginActivity", "Email: " + email);
                 Log.d("LoginActivity", "Contraseña: " + password);

@@ -179,7 +179,6 @@ public class RegistroGlucosa extends Fragment {
         return root;
     }
 
-
     // Función para mostrar el selector de fecha
     public void showDatePicker(final EditText editText) { // Pasa el EditText como parámetro
         final Calendar c = Calendar.getInstance();
@@ -225,7 +224,6 @@ public class RegistroGlucosa extends Fragment {
         }
     }
 
-
     private static class InsertarRegistroGlucosaTask extends AsyncTask<String, Void, String> {
         private WeakReference<Context> contextRef;
 
@@ -241,7 +239,7 @@ public class RegistroGlucosa extends Fragment {
             String pacienteID = params[3];
             String nivelGlucosa =  params[4];
 
-            String urlServidor = "http://10.0.2.2:8080/conexiondevelop/registroglucosa.php";
+            String urlServidor = "http://glucocontrol.atwebpages.com/registroglucosa.php";
 
             try {
                 // Crea la conexión HTTP
@@ -252,12 +250,12 @@ public class RegistroGlucosa extends Fragment {
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
 
-                // Parámetros que enviarás al servidor PHP
+                // Parámetros que se nviarán al servidor PHP
                 String parametros = "hora=" + URLEncoder.encode(hora, "UTF-8") +
                         "&fecha=" + URLEncoder.encode(fecha, "UTF-8") +
                         "&tipoToma=" + URLEncoder.encode(tipoToma, "UTF-8") +
                         "&pacienteID=" + pacienteID +
-                        "&nivelGlucosa=" + nivelGlucosa; // Incluye el nivel de glucosa
+                        "&nivelGlucosa=" + nivelGlucosa;
 
                 // Envía los datos al servidor
                 OutputStream outputStream = connection.getOutputStream();
@@ -273,7 +271,7 @@ public class RegistroGlucosa extends Fragment {
                     response.append(line);
                 }
                 bufferedReader.close();
-
+                Log.d("InsertarRegistroGlucosa", "Respuesta del servidor: " + response.toString());
                 // Cierra la conexión
                 connection.disconnect();
 
@@ -290,11 +288,17 @@ public class RegistroGlucosa extends Fragment {
             Context context = contextRef.get();
             if (context != null) {
                 if (response != null) {
-                    // Muestra un mensaje dependiendo de la respuesta del servidor
-                    if (response.equals("Success")) {
-                        Toast.makeText(context, "Registro de glucosa guardado exitosamente", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(context, "Error al guardar el registro de glucosa", Toast.LENGTH_SHORT).show();
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String status = jsonObject.getString("status");
+                        if (status.equals("Success")) {
+                            Toast.makeText(context, "Registro de glucosa guardado exitosamente", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Error al guardar el registro de glucosa", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(context, "Error al parsear la respuesta del servidor", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(context, "Error al guardar el registro de glucosa", Toast.LENGTH_SHORT).show();
@@ -302,8 +306,6 @@ public class RegistroGlucosa extends Fragment {
             }
         }
     }
-
-
 
     private static class ConsultarRegistroGlucosaTask extends AsyncTask<String, Void, String> {
         private WeakReference<Context> contextRef;
@@ -320,7 +322,7 @@ public class RegistroGlucosa extends Fragment {
             String fechaInicio = params[1];
             String fechaFin = params[2];
 
-            String urlServidor = "http://10.0.2.2:8080/conexiondevelop/graficaglucosa.php";
+            String urlServidor = "http://glucocontrol.atwebpages.com/graficaglucosa.php";
 
             try {
                 URL url = new URL(urlServidor);

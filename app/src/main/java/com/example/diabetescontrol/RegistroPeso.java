@@ -209,7 +209,7 @@ public class RegistroPeso extends Fragment {
             String pacienteID = params[2];
 
             // URL del archivo PHP en tu servidor para insertar registros de peso
-            String urlServidor = "http://10.0.2.2:8080/conexiondevelop/registropeso.php";
+            String urlServidor = "http://glucocontrol.atwebpages.com/registropeso.php";
 
             try {
                 // Crea la conexión HTTP
@@ -251,18 +251,43 @@ public class RegistroPeso extends Fragment {
         }
 
         @Override
+
         protected void onPostExecute(String response) {
+
             super.onPostExecute(response);
+
             if (response != null) {
-                // Muestra un mensaje dependiendo de la respuesta del servidor
-                if (response.equals("Success")) {
-                    Toast.makeText(getActivity(), "Registro de peso guardado exitosamente", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Error al guardar el registro de peso", Toast.LENGTH_SHORT).show();
+
+                try {
+
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String status = jsonObject.getString("status");
+
+                    if (status.equals("Success")) {
+
+                        Toast.makeText(getActivity(), "Registro de peso guardado exitosamente", Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+                        Toast.makeText(getActivity(), "Error al guardar el registro de peso", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+
+                    Toast.makeText(getActivity(), "Error al parsear la respuesta del servidor", Toast.LENGTH_SHORT).show();
+
                 }
+
             } else {
+
                 Toast.makeText(getActivity(), "Error al guardar el registro de peso", Toast.LENGTH_SHORT).show();
+
             }
+
         }
     }
 
@@ -314,7 +339,7 @@ public class RegistroPeso extends Fragment {
             String fechaInicio = params[1];
             String fechaFin = params[2];
 
-            String urlServidor = "http://10.0.2.2:8080/conexiondevelop/consulta_registro_peso.php";
+            String urlServidor = "http://glucocontrol.atwebpages.com/consulta_registro_peso.php";
 
             try {
                 URL url = new URL(urlServidor);
