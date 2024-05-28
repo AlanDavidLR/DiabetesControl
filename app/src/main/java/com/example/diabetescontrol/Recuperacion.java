@@ -27,7 +27,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import android.widget.ImageButton;
 import android.content.Intent;
+import org.json.JSONObject;
 
+import org.json.JSONException;
 
 public class Recuperacion extends AppCompatActivity {
 
@@ -122,13 +124,27 @@ public class Recuperacion extends AppCompatActivity {
         @Override
         protected void onPostExecute(String response) {
             super.onPostExecute(response);
-            if (response.equals("existe")) {
-                String email = textFieldEmailR.getEditText().getText().toString().trim();
-                String subject = "Recuperación de contraseña";
-                String message = "Para recuperar tu contraseña da click en el siguiente enlace.";
-                enviarCorreo(email, subject, message);
-            } else if (response.equals("no_existe")) {
-                Toast.makeText(Recuperacion.this, "Ese correo no está registrado", Toast.LENGTH_SHORT).show();
+            Log.d("RESPONSE", "Response from server: " + response);
+            if (response!= null) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    String status = jsonResponse.getString("status");
+                    String message = jsonResponse.getString("message");
+
+                    if (status.equals("success") && message.equals("existe")) {
+                        String email = textFieldEmailR.getEditText().getText().toString().trim();
+                        String subject = "Recuperación de contraseña";
+                        String emailMessage = "Para recuperar tu contraseña da click en el siguiente enlace.";
+                        enviarCorreo(email, subject, emailMessage);
+                    } else if (status.equals("fail") && message.equals("no_existe")) {
+                        Toast.makeText(Recuperacion.this, "Ese correo no está registrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Recuperacion.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(Recuperacion.this, "Error al procesar la respuesta del servidor", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(Recuperacion.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
             }

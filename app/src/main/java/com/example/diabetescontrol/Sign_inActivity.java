@@ -20,7 +20,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.regex.Pattern;
+import org.json.JSONObject;
 
+import org.json.JSONException;
 public class Sign_inActivity extends AppCompatActivity {
 
     private static final String TAG = "Sign_inActivity";
@@ -212,17 +214,23 @@ public class Sign_inActivity extends AppCompatActivity {
         protected void onPostExecute(String response) {
             super.onPostExecute(response);
             if (response != null) {
-                // Muestra un mensaje dependiendo de la respuesta del servidor
-                if (response.equals("Success")) {
-                    Toast.makeText(Sign_inActivity.this, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show();
-                    // Redirige al usuario a LoginActivity
-                    Intent intent = new Intent(Sign_inActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish(); // Termina la actividad actual para que el usuario no pueda volver atrás
-                } else {
-                    Toast.makeText(Sign_inActivity.this, "Error al crear la cuenta", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    String status = jsonResponse.getString("status");
+                    String message = jsonResponse.getString("message");
 
-
+                    if (status.equals("success")) {
+                        Toast.makeText(Sign_inActivity.this, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show();
+                        // Redirige al usuario a LoginActivity
+                        Intent intent = new Intent(Sign_inActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish(); // Termina la actividad actual para que el usuario no pueda volver atrás
+                    } else {
+                        Toast.makeText(Sign_inActivity.this, "Error al crear la cuenta: " + message, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(Sign_inActivity.this, "Error al procesar la respuesta del servidor", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(Sign_inActivity.this, "Error al crear la cuenta", Toast.LENGTH_SHORT).show();

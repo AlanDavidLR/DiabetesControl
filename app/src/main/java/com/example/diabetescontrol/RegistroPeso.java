@@ -251,43 +251,27 @@ public class RegistroPeso extends Fragment {
         }
 
         @Override
-
         protected void onPostExecute(String response) {
-
             super.onPostExecute(response);
-
-            if (response != null) {
-
+            if (response!= null) {
+                Log.d("RESPONSE", response); // Agrega este log para verificar el contenido de la respuesta
                 try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    String status = jsonResponse.getString("status");
+                    String message = jsonResponse.getString("message");
 
-                    JSONObject jsonObject = new JSONObject(response);
-
-                    String status = jsonObject.getString("status");
-
-                    if (status.equals("Success")) {
-
+                    if (status.equals("success")) {
                         Toast.makeText(getActivity(), "Registro de peso guardado exitosamente", Toast.LENGTH_SHORT).show();
-
                     } else {
-
-                        Toast.makeText(getActivity(), "Error al guardar el registro de peso", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getActivity(), "Error al guardar el registro de peso: " + message, Toast.LENGTH_SHORT).show();
                     }
-
                 } catch (JSONException e) {
-
                     e.printStackTrace();
-
-                    Toast.makeText(getActivity(), "Error al parsear la respuesta del servidor", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(getActivity(), "Error al procesar la respuesta del servidor", Toast.LENGTH_SHORT).show();
                 }
-
             } else {
-
                 Toast.makeText(getActivity(), "Error al guardar el registro de peso", Toast.LENGTH_SHORT).show();
-
             }
-
         }
     }
 
