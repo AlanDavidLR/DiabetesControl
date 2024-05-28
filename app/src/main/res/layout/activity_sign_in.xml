@@ -135,7 +135,7 @@
             app:endIconMode="password_toggle"
             app:errorEnabled="true"
             app:errorIconDrawable="@null"
-            app:helperText="*La contraseña debe contener al menos una mayúscula, una minúscula, un número, un carácter especial y tener al menos 4 caracteres."
+            app:helperText="*La contraseña debe contener al menos una mayúscula, una minúscula, un número, un carácter especial y tener al menos 8 caracteres."
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText

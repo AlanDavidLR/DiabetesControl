@@ -46,6 +46,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.github.mikephil.charting.components.Description;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class RegistroGlucosa extends Fragment {
 
@@ -381,14 +386,46 @@ public class RegistroGlucosa extends Fragment {
 
         private static ArrayList<Entry> parsearDatos(String response) {
             ArrayList<Entry> entries = new ArrayList<>();
+            ArrayList<String> fechas = new ArrayList<>();
             try {
                 JSONArray jsonArray = new JSONArray(response);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String glucosaString = jsonObject.getString("glucosa");
                     float glucosaFloat = Float.parseFloat(glucosaString);
+                    String fechaString = jsonObject.getString("fecha");
                     entries.add(new Entry(i, glucosaFloat));
+                    fechas.add(fechaString);
                 }
+                // Ordenar los datos por fecha
+                Collections.sort(fechas, new Comparator<String>() {
+                    @Override
+                    public int compare(String s1, String s2) {
+                        try {
+                            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(s1);
+                            Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(s2);
+                            return date1.compareTo(date2);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                            return 0;
+                        }
+                    }
+                });
+                // Reordenar los entries según la orden de las fechas
+                ArrayList<Entry> entriesOrdered = new ArrayList<>();
+                for (String fecha : fechas) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String fechaString = jsonObject.getString("fecha");
+                        if (fechaString.equals(fecha)) {
+                            String glucosaString = jsonObject.getString("glucosa");
+                            float glucosaFloat = Float.parseFloat(glucosaString);
+                            entriesOrdered.add(new Entry(entriesOrdered.size(), glucosaFloat));
+                            break;
+                        }
+                    }
+                }
+                return entriesOrdered;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -404,6 +441,20 @@ public class RegistroGlucosa extends Fragment {
                     String fechaString = jsonObject.getString("fecha");
                     fechas.add(fechaString);
                 }
+                // Ordenar las fechas
+                Collections.sort(fechas, new Comparator<String>() {
+                    @Override
+                    public int compare(String s1, String s2) {
+                        try {
+                            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(s1);
+                            Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(s2);
+                            return date1.compareTo(date2);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                            return 0;
+                        }
+                    }
+                });
             } catch (JSONException e) {
                 e.printStackTrace();
             }

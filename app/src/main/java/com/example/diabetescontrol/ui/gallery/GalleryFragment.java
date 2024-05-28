@@ -49,7 +49,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 public class GalleryFragment extends Fragment {
 
     private FragmentGalleryBinding binding;
@@ -416,7 +420,21 @@ public class GalleryFragment extends Fragment {
                             // Agregar los datos de la cita a la lista
                             citasList.add(new Cita(fecha, hora, tipoConsulta, nota));
                         }
-                        // Configurar el adaptador con la lista de citas
+                        // Ordenar la lista de citas por fecha
+                        Collections.sort(citasList, new Comparator<Cita>() {
+                            @Override
+                            public int compare(Cita c1, Cita c2) {
+                                try {
+                                    Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(c1.getFecha());
+                                    Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(c2.getFecha());
+                                    return date1.compareTo(date2);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                    return 0;
+                                }
+                            }
+                        });
+                        // Configurar el adaptador con la lista de citas ordenada
                         CitaAdapter adapter = new CitaAdapter(citasList);
                         recyclerView.setAdapter(adapter);
                     } catch (JSONException e) {

@@ -37,7 +37,11 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 public class HistorialGlucosaFragment extends Fragment {
 
     private FragmentHistorialGlucosaBinding binding;
@@ -185,6 +189,20 @@ public class HistorialGlucosaFragment extends Fragment {
                 String tipoToma = jsonObject.getString("tipoToma");
                 glucosaList.add(new Glucosa(fecha, hora, nivelGlucosa, tipoToma));
             }
+            // Ordenar la lista de glucosas por fecha
+            Collections.sort(glucosaList, new Comparator<Glucosa>() {
+                @Override
+                public int compare(Glucosa g1, Glucosa g2) {
+                    try {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(g1.getFecha());
+                        Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(g2.getFecha());
+                        return date1.compareTo(date2);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return 0;
+                    }
+                }
+            });
             adapter.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();

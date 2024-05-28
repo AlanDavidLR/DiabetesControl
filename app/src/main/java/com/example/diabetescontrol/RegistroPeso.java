@@ -35,7 +35,11 @@ import com.github.mikephil.charting.components.Description;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
-
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class RegistroPeso extends Fragment {
 
@@ -381,14 +385,45 @@ public class RegistroPeso extends Fragment {
 
     private static ArrayList<Entry> parsearDatos(String response) {
         ArrayList<Entry> entries = new ArrayList<>();
+        ArrayList<String> fechas = new ArrayList<>();
         try {
             JSONArray jsonArray = new JSONArray(response);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String pesoString = jsonObject.getString("peso");
                 float pesoFloat = Float.parseFloat(pesoString);
+                String fechaString = jsonObject.getString("fecha");
                 entries.add(new Entry(i, pesoFloat));
+                fechas.add(fechaString);
             }
+            // Ordenar las fechas y los entries
+            Collections.sort(fechas, new Comparator<String>() {
+                @Override
+                public int compare(String s1, String s2) {
+                    try {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(s1);
+                        Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(s2);
+                        return date1.compareTo(date2);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return 0;
+                    }
+                }
+            });
+            ArrayList<Entry> entriesOrdered = new ArrayList<>();
+            for (String fecha : fechas) {
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String fechaString = jsonObject.getString("fecha");
+                    if (fechaString.equals(fecha)) {
+                        String pesoString = jsonObject.getString("peso");
+                        float pesoFloat = Float.parseFloat(pesoString);
+                        entriesOrdered.add(new Entry(entriesOrdered.size(), pesoFloat));
+                        break;
+                    }
+                }
+            }
+            return entriesOrdered;
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -404,6 +439,20 @@ public class RegistroPeso extends Fragment {
                 String fechaString = jsonObject.getString("fecha");
                 fechas.add(fechaString);
             }
+            // Ordenar las fechas
+            Collections.sort(fechas, new Comparator<String>() {
+                @Override
+                public int compare(String s1, String s2) {
+                    try {
+                        Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(s1);
+                        Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(s2);
+                        return date1.compareTo(date2);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        return 0;
+                    }
+                }
+            });
         } catch (JSONException e) {
             e.printStackTrace();
         }
