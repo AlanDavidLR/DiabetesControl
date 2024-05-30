@@ -42,6 +42,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import android.widget.ImageButton;
+
 public class HistorialGlucosaFragment extends Fragment {
 
     private FragmentHistorialGlucosaBinding binding;
@@ -50,7 +52,8 @@ public class HistorialGlucosaFragment extends Fragment {
     private RecyclerView recyclerView;
     private GlucosaAdapter adapter;
     private List<Glucosa> glucosaList = new ArrayList<>();
-
+    private ImageButton eliminarFechasButton;
+    private Button borrarConsultaButton;
     private EditText fechiEditText;
     private EditText fechfEditText;
 
@@ -98,6 +101,26 @@ public class HistorialGlucosaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog(fechfEditText);
+            }
+        });
+
+        eliminarFechasButton = root.findViewById(R.id.eliminarFechas);
+        eliminarFechasButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fechiEditText.setText("");
+                fechfEditText.setText("");
+            }
+        });
+
+        // Inicializar y configurar el listener para borrarConsultaButton
+        borrarConsultaButton = root.findViewById(R.id.borrarconsulta);
+        borrarConsultaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Limpiar la lista de glucosa y notificar al adaptador
+                glucosaList.clear();
+                adapter.notifyDataSetChanged();
             }
         });
 

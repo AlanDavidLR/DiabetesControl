@@ -41,7 +41,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
+import android.widget.ImageButton;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,6 +65,7 @@ public class RegistroGlucosa extends Fragment {
     private Button buttonShowImage;
     private LineChart lineChart;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private ImageButton eliminargfButton;
 
     public RegistroGlucosa() {
         // Constructor vacío
@@ -181,6 +182,28 @@ public class RegistroGlucosa extends Fragment {
                 showDatePicker(fechafing); // Llama a la función showDatePicker pasando el EditText correspondiente
             }
         });
+
+        // Inicializar y configurar el listener para eliminargfButton
+        eliminargfButton = root.findViewById(R.id.eliminargf);
+        eliminargfButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Limpiar los EditText fechainig y fechafing
+                fechainig.setText("");
+                fechafing.setText("");
+            }
+        });
+
+        Button btnBorrarConsultar = root.findViewById(R.id.btnBorrarConsultag);
+        btnBorrarConsultar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lineChart.clear();
+                lineChart.invalidate();
+            }
+        });
+
+
         return root;
     }
 

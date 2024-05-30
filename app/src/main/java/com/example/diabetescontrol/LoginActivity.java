@@ -31,7 +31,6 @@ import androidx.annotation.NonNull;
 import android.content.SharedPreferences;
 import org.json.JSONObject;
 import org.json.JSONException;
-
 import java.util.Calendar;
 import java.util.regex.Pattern;
 
@@ -49,10 +48,8 @@ public class LoginActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        // Initialize SharedPreferences
+        //  SharedPreferences
         sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-
-        // Rest of your onCreate() method code...
 
         binding.btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -301,7 +298,7 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     } else {
                         // Mostrar mensaje de inicio de sesión fallido
-                        Toast.makeText(LoginActivity.this, "Inicio de sesión fallido. Por favor, verifica tus credenciales.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Correo o Contraseña incorrectos, por favor verifica tus datos.", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -64,7 +64,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginEnd="60dp"
                         android:layout_weight="5.2"
                         android:autofillHints=""
                         android:textColorHint="#E4EF7C"
@@ -72,15 +72,7 @@
                         android:hint="Selecciona fecha inicial"
                         android:inputType="none" />
 
-                    <ImageButton
-                        android:id="@+id/eliminar"
-                        android:layout_width="10dp"
-                        android:layout_height="35dp"
-                        android:layout_marginEnd="40dp"
-                        android:layout_weight="1"
-                        android:background="#2262"
-                        android:src="@drawable/ic_borrar"
-                        android:foreground="?android:attr/selectableItemBackground"/>
+
 
 
 
@@ -115,10 +107,10 @@
 
 
                     <ImageButton
-                        android:id="@+id/eliminarFiltro"
-                        android:layout_width="10dp"
-                        android:layout_height="35dp"
-                        android:layout_marginEnd="40dp"
+                        android:id="@+id/eliminarFechas"
+                        android:layout_width="15dp"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="2dp"
                         android:layout_weight="1"
                         android:background="#2262"
                         android:src="@drawable/ic_borrar"
@@ -131,7 +123,7 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayoutHistoricControl"
-                    android:layout_width="200dp"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_alignParentBottom="true">
@@ -139,18 +131,22 @@
 
                     <Button
                         android:id="@+id/cosulaglucosa"
-                        android:layout_width="5sp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
                         android:text="@string/cosultar"
                         app:backgroundTint="#569845" />
-
+                    <Button
+                        android:id="@+id/borrarconsulta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Borrar Consulta"
+                        app:backgroundTint="#569845" />
 
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-
+                    android:layout_marginTop="25dp"
                     >
 
                     <androidx.recyclerview.widget.RecyclerView
