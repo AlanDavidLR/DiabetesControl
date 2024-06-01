@@ -35,6 +35,7 @@ public class Ajustes extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 2;
     private SharedPreferences sharedPreferences;
     private Button guardarAvatarButton;
+    private Button regresarButton;
 
     private static final String TAG = "AjustesActivity";
 
@@ -45,6 +46,7 @@ public class Ajustes extends AppCompatActivity {
 
         perfilImageButton = findViewById(R.id.Perfil);
         guardarAvatarButton = findViewById(R.id.Guardaravatar);
+        regresarButton = findViewById(R.id.Regresarimg);
 
         // Obtener referencia a SharedPreferences
         sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
@@ -62,6 +64,15 @@ public class Ajustes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 guardarAvatar();
+            }
+        });
+
+        // Agregar OnClickListener para el botón de regresar
+        regresarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Ajustes.this, Navegacion.class);
+                startActivity(intent);
             }
         });
     }
@@ -205,6 +216,6 @@ public class Ajustes extends AppCompatActivity {
             }
         }
     }
-
 }
+
 
