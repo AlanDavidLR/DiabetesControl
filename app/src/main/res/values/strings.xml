@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">DiabetesControl</string>
-
+    <dimen name="avatar_icon_size">62dp</dimen>
     <string name="title_activity_principal_detail_host">principalDetailHostActivity</string>
     <string name="title_principal_list">Items</string>
     <string name="title_principal_detail">principal Detail</string>

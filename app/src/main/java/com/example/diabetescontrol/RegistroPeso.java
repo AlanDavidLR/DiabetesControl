@@ -40,7 +40,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import android.widget.ImageButton;
 public class RegistroPeso extends Fragment {
 
     private EditText weightInput, heightInput, fechaInput, weightInputPeso;
@@ -101,7 +101,21 @@ public class RegistroPeso extends Fragment {
                 }
             }
         });
-
+        ImageButton limpiarFiltroButton = view.findViewById(R.id.limpiarFiltro);
+        limpiarFiltroButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fechaini.setText("");
+                fechafin.setText("");
+            }
+        });
+        Button btnLimpiarConsulta = view.findViewById(R.id.btnlimpiarpConsulta);
+        btnLimpiarConsulta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limpiarChart();
+            }
+        });
         // Obtener referencia a SharedPreferences
         sharedPreferences = getActivity().getSharedPreferences("loginPrefs", getActivity().MODE_PRIVATE);
 
@@ -489,6 +503,15 @@ public class RegistroPeso extends Fragment {
             lineChart.invalidate();
         } else {
             Log.e("RegistroPeso", "LineChart es nulo. No se puede configurar el gráfico.");
+        }
+    }
+    private void limpiarChart() {
+        if (lineChart != null) {
+            lineChart.clear();
+            lineChart.invalidate();
+            Toast.makeText(getActivity(), "Gráfica limpiada", Toast.LENGTH_SHORT).show();
+        } else {
+            Log.e("RegistroPeso", "LineChart es nulo. No se puede limpiar el gráfico.");
         }
     }
 }

@@ -33,6 +33,13 @@ import org.json.JSONObject;
 import org.json.JSONException;
 import java.util.Calendar;
 import java.util.regex.Pattern;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.widget.Toast;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.ByteArrayOutputStream;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -268,6 +275,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String response) {
             super.onPostExecute(response);
             if (response != null) {
+                Log.d("LoginActivity", "Respuesta del servidor: " + response);
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
@@ -278,8 +286,16 @@ public class LoginActivity extends AppCompatActivity {
                         String apellidosUsuario = jsonResponse.getString("apellidos_usuario");
                         String numeroSeguroSocialUsuario = jsonResponse.getString("numeroSeguroSocial_usuario");
                         String emailUsuario = jsonResponse.getString("email_usuario");
+                        String avatarUsuario = jsonResponse.getString("avatar_usuario"); // Nuevo campo
 
-                        // Guardar los datos del usuario en SharedPreferences
+                        // Log para verificar la imagen del avatar
+                        Log.d("LoginActivity", "Avatar recibido: " + avatarUsuario);
+
+                        // Decodificar la imagen de base64 a Bitmap
+                        byte[] decodedString = Base64.decode(avatarUsuario, Base64.DEFAULT);
+                        Bitmap avatarBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+                        // Guardar los datos del usuario y la imagen en SharedPreferences
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("isLoggedIn", true);
                         editor.putLong("idUsuario", idUsuario);
@@ -287,6 +303,13 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("apellidosUsuario", apellidosUsuario);
                         editor.putString("numeroSeguroSocialUsuario", numeroSeguroSocialUsuario);
                         editor.putString("emailUsuario", emailUsuario);
+
+                        // Convertir la imagen Bitmap a un array de bytes para guardarlo en SharedPreferences
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        avatarBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                        byte[] avatarByteArray = baos.toByteArray();
+                        String avatarString = Base64.encodeToString(avatarByteArray, Base64.DEFAULT);
+                        editor.putString("avatarUsuario", avatarString); // Guardar avatar como String
                         editor.apply();
 
                         // Mostrar mensaje de inicio de sesión exitoso
@@ -298,7 +321,8 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     } else {
                         // Mostrar mensaje de inicio de sesión fallido
-                        Toast.makeText(LoginActivity.this, "Correo o Contraseña incorrectos, por favor verifica tus datos.", Toast.LENGTH_SHORT).show();
+                        String errorMessage = jsonResponse.optString("message", "Correo o Contraseña incorrectos, por favor verifica tus datos.");
+                        Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -308,6 +332,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             } else {
                 // Mostrar mensaje de error al conectarse al servidor
+                Log.e("LoginActivity", "Error al conectarse al servidor: respuesta nula");
                 Toast.makeText(LoginActivity.this, "Error al conectarse al servidor", Toast.LENGTH_SHORT).show();
             }
         }
