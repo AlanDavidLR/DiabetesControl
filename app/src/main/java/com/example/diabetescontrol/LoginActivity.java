@@ -293,7 +293,11 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Decodificar la imagen de base64 a Bitmap
                         byte[] decodedString = Base64.decode(avatarUsuario, Base64.DEFAULT);
-                        Bitmap avatarBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        Bitmap avatarBitmap = null;
+                        if (avatarUsuario != null && !avatarUsuario.isEmpty()) {
+                            decodedString = Base64.decode(avatarUsuario, Base64.DEFAULT);
+                            avatarBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        }
 
                         // Guardar los datos del usuario y la imagen en SharedPreferences
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -304,12 +308,20 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("numeroSeguroSocialUsuario", numeroSeguroSocialUsuario);
                         editor.putString("emailUsuario", emailUsuario);
 
+                        if (avatarBitmap != null) {
                         // Convertir la imagen Bitmap a un array de bytes para guardarlo en SharedPreferences
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         avatarBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
                         byte[] avatarByteArray = baos.toByteArray();
                         String avatarString = Base64.encodeToString(avatarByteArray, Base64.DEFAULT);
                         editor.putString("avatarUsuario", avatarString); // Guardar avatar como String
+                        } else {
+                            // Si avatarUsuario es nulo o está vacío, no guardamos nada en SharedPreferences
+                            editor.remove("avatarUsuario");
+                        }
+
+
+
                         editor.apply();
 
                         // Mostrar mensaje de inicio de sesión exitoso
