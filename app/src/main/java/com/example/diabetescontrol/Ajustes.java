@@ -105,10 +105,15 @@ public class Ajustes extends AppCompatActivity {
         if (idUsuario != -1) {
             BitmapDrawable drawable = (BitmapDrawable) perfilImageButton.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
-            new GuardarAvatarTask(this, idUsuario, bitmap).execute();
+            Bitmap resizedBitmap = resizeBitmap(bitmap, 200, 200); // Redimensionar la imagen
+            new GuardarAvatarTask(this, idUsuario, resizedBitmap).execute();
         } else {
             Toast.makeText(this, "Error al obtener el ID del usuario", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private Bitmap resizeBitmap(Bitmap original, int width, int height) {
+        return Bitmap.createScaledBitmap(original, width, height, true);
     }
 
     private static class GuardarAvatarTask extends AsyncTask<Void, Void, String> {
@@ -127,7 +132,7 @@ public class Ajustes extends AppCompatActivity {
             String urlServidor = "http://glucocontrol.atwebpages.com/guardaravatar.php";
 
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream); // Cambia el 100 a 80 para reducir la calidad y el tamaño del archivo
             String imagenBase64 = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
 
             try {
@@ -188,7 +193,7 @@ public class Ajustes extends AppCompatActivity {
                     String status = jsonObject.optString("status", "error");
                     String message = jsonObject.optString("message", "Error desconocido");
                     if (status.equals("success")) {
-                        Toast.makeText(context, "Avatar guardado exitosamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Avatar guardado exitosamente, cambiara en su proximo inico de sesión", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "Error al guardar el avatar: " + message, Toast.LENGTH_SHORT).show();
                     }
@@ -202,3 +207,4 @@ public class Ajustes extends AppCompatActivity {
     }
 
 }
+

@@ -33,13 +33,13 @@
         android:label="Registro de Peso"
         tools:layout="@layout/fragment_registro_peso" />
     <fragment
-        android:id="@+id/settingsFragment2"
-        android:name="com.example.diabetescontrol.SettingsFragment2"
-        android:label="fragment_item_list"
-        tools:layout="@layout/fragment_item_list" />
-    <fragment
         android:id="@+id/registroTomaMedicamentos"
         android:name="com.example.diabetescontrol.RegistroTomaMedicamentos"
         android:label="Recordatorio de Toma de Medicamentos"
         tools:layout="@layout/fragment_registro_toma_medicamentos" />
+    <activity
+        android:id="@+id/ajustes"
+        android:name="com.example.diabetescontrol.Ajustes"
+        android:label="activity_ajustes"
+        tools:layout="@layout/activity_ajustes" />
 </navigation>

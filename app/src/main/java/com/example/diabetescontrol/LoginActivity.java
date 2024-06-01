@@ -36,9 +36,6 @@ import java.util.regex.Pattern;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
-import android.widget.Toast;
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 
 public class LoginActivity extends AppCompatActivity {
@@ -98,12 +95,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         String saludo = getGreeting();
         Toast.makeText(this, saludo, Toast.LENGTH_SHORT).show();
     }
-
-
 
     private String getGreeting() {
         Calendar fecha = Calendar.getInstance();
@@ -178,9 +172,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                         super.onAuthenticationSucceeded(result);
-                        Toast.makeText(LoginActivity.this, "Autenticación exitosa", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, Navegacion.class);
-                        startActivity(intent);
+                        handleBiometricSuccess();
                     }
 
                     @Override
@@ -207,6 +199,19 @@ public class LoginActivity extends AppCompatActivity {
             case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
                 Toast.makeText(LoginActivity.this, "No hay huellas dactilares registradas en el dispositivo", Toast.LENGTH_SHORT).show();
                 break;
+        }
+    }
+
+    private void handleBiometricSuccess() {
+        // Verificar si existen datos del usuario en SharedPreferences
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+        if (isLoggedIn) {
+            // Datos del usuario existentes, proceder a Navegacion
+            Intent intent = new Intent(LoginActivity.this, Navegacion.class);
+            startActivity(intent);
+        } else {
+            // No hay datos del usuario, mostrar mensaje y solicitar inicio de sesión con correo y contraseña
+            showAlertDialog("Advertencia", "No hay datos previos para iniciar sesión, por favor inicie sesión con su correo y contraseña para usar la función de acceso por huella digital posteriormente.");
         }
     }
 
@@ -309,18 +314,16 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("emailUsuario", emailUsuario);
 
                         if (avatarBitmap != null) {
-                        // Convertir la imagen Bitmap a un array de bytes para guardarlo en SharedPreferences
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        avatarBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                        byte[] avatarByteArray = baos.toByteArray();
-                        String avatarString = Base64.encodeToString(avatarByteArray, Base64.DEFAULT);
-                        editor.putString("avatarUsuario", avatarString); // Guardar avatar como String
+                            // Convertir la imagen Bitmap a un array de bytes para guardarlo en SharedPreferences
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            avatarBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                            byte[] avatarByteArray = baos.toByteArray();
+                            String avatarString = Base64.encodeToString(avatarByteArray, Base64.DEFAULT);
+                            editor.putString("avatarUsuario", avatarString); // Guardar avatar como String
                         } else {
                             // Si avatarUsuario es nulo o está vacío, no guardamos nada en SharedPreferences
                             editor.remove("avatarUsuario");
                         }
-
-
 
                         editor.apply();
 
@@ -357,3 +360,4 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 }
+
