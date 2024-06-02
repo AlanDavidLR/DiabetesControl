@@ -12,7 +12,7 @@
         <item>Selecciona una Opción</item>
         <item>Pomada</item>
         <item>Capsula(s)</item>
-        <item>Unguento(s)</item>
+        <item>Unguento</item>
         <item>Crema(s)</item>
         <item>Emulsion</item>
         <item>Gel</item>
@@ -20,9 +20,9 @@
         <item>Inhalado</item>
         <item>Taleta(s)</item>
         <item>Inyectado intramuscular</item>
-        <item>unit(s)</item>
+        <item>unidades</item>
         <item>Solucion</item>
-        <item>Spray(s)</item>
+        <item>Spray</item>
         <item>Suspension</item>
         <item>Supositorio</item>
     </array>
