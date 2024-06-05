@@ -1,4 +1,5 @@
 package com.example.diabetescontrol;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,27 +22,15 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.OutputStream;
 import java.io.IOException;
-import com.google.android.material.textfield.TextInputLayout;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import android.widget.ImageButton;
 import android.content.Intent;
 import org.json.JSONObject;
-import android.widget.ImageButton;
-
 import org.json.JSONException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Properties;
-
 import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+
 public class Recuperacion extends AppCompatActivity {
 
     private TextInputLayout textFieldEmailR;
@@ -55,7 +44,6 @@ public class Recuperacion extends AppCompatActivity {
         textFieldEmailR = findViewById(R.id.textFieldEmailR);
         Button btnEnviar = findViewById(R.id.btnEnviar);
         ImageButton btnRegresar = findViewById(R.id.btnRegresar);
-
 
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,17 +75,17 @@ public class Recuperacion extends AppCompatActivity {
     }
 
     private void enviarCorreo(String email, String subject, String message) {
-        final String username = "imssglucocontrol@hotmail.com"; // Tu dirección de correo electrónico de Microsoft
+        final String username = "imssglucocontrol@zohomail.com"; // Tu dirección de correo electrónico de Zoho Mail
         final String password = "Gluc0contrl75$4fY"; // Tu contraseña
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp-mail.outlook.com"); // Servidor SMTP de Microsoft
-        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.host", "smtp.zoho.com"); // Servidor SMTP de Zoho Mail
+        props.put("mail.smtp.port", "587"); // Puerto SMTP de Zoho Mail
 
         Session session = Session.getInstance(props,
-                new javax.mail.Authenticator() {
+                new Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, password);
                     }
@@ -138,34 +126,82 @@ public class Recuperacion extends AppCompatActivity {
         }
     }
 
-
-
     private class VerifyEmailTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
-            // Tu código para verificar el correo en la base de datos iría aquí
-            // Esto es solo un ejemplo
-            return "existe";
+            String email = params[0];
+            String subject = params[1];
+            String message = params[2];
+
+            HttpURLConnection connection = null;
+            try {
+                URL url = new URL("http://glucocontrol.atwebpages.com/recuperacion.php");
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                connection.setDoInput(true);
+
+                String postData = "email=" + URLEncoder.encode(email, "UTF-8");
+                OutputStream os = connection.getOutputStream();
+                os.write(postData.getBytes());
+                os.flush();
+                os.close();
+
+                int responseCode = connection.getResponseCode();
+                Log.d("VerifyEmailTask", "Response Code: " + responseCode);
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                Log.d("VerifyEmailTask", "Response: " + response.toString());
+                return response.toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e("VerifyEmailTask", "Error: " + e.getMessage());
+                return null;
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            }
         }
 
         @Override
         protected void onPostExecute(String response) {
             super.onPostExecute(response);
             if (response != null) {
-                if (response.equals("existe")) {
-                    String email = textFieldEmailR.getEditText().getText().toString().trim();
-                    String subject = "Recuperación de contraseña";
-                    String emailMessage = "Para recuperar tu contraseña da click en el siguiente enlace.";
-                    enviarCorreo(email, subject, emailMessage);
-                } else if (response.equals("no_existe")) {
-                    Toast.makeText(Recuperacion.this, "Ese correo no está registrado", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Recuperacion.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
+                Log.d("VerifyEmailTask", "Response not null");
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    String status = jsonResponse.optString("status");
+                    String message = jsonResponse.optString("message");
+                    if ("success".equals(status) && "existe".equals(message)) {
+                        String email = textFieldEmailR.getEditText().getText().toString().trim();
+                        String subject = "Recuperación de contraseña";
+                        String emailMessage = "Para recuperar tu contraseña da click en el siguiente enlace. http://glucocontrol.atwebpages.com/";
+                        enviarCorreo(email, subject, emailMessage);
+                    } else if ("fail".equals(status) && "no_existe".equals(message)) {
+                        Toast.makeText(Recuperacion.this, "Ese correo no está registrado", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Recuperacion.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(Recuperacion.this, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show();
                 }
             } else {
+                Log.e("VerifyEmailTask", "Response is null");
                 Toast.makeText(Recuperacion.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
 }
+

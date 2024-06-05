@@ -172,7 +172,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Crear cuenta" />
+            android:text="@string/crear_cuenta" />
 
 
         <TextView
@@ -180,7 +180,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Ya tienes cuenta? presiona aqui e Ingresa"
+            android:text="@string/ya_tienes_cuenta_presiona_aqui_e_ingresa"
             android:clickable="true"
             android:onClick="goToLoginActivity" />
 

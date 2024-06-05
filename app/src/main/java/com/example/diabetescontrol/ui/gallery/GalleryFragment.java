@@ -201,8 +201,8 @@ public class GalleryFragment extends Fragment {
                         // Para versiones anteriores a Android M, utiliza setExact
                         alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                     }
-                    Log.d("GalleryFragment", "Alarma creada para: " + calendar.getTime().toString());
-                    Toast.makeText(requireContext(), "Alarma creada", Toast.LENGTH_SHORT).show();
+                    Log.d("GalleryFragment", "Recordatorio creado para: " + calendar.getTime().toString());
+                    Toast.makeText(requireContext(), "Recordatorio creado", Toast.LENGTH_SHORT).show();
                 } else {
                     Log.e("GalleryFragment", "No se pudo obtener el servicio AlarmManager");
                     Toast.makeText(requireContext(), "No se pudo obtener el servicio AlarmManager", Toast.LENGTH_SHORT).show();

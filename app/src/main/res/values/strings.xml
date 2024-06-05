@@ -98,4 +98,17 @@
     <string name="conoce_las_mejores_maneras_de_cuidarte_con_estas_recomendaciones">Conoce las mejores maneras de cuidarte con estas recomendaciones</string>
     <string name="ingresa_los_datos_de_tu_cuenta">Ingresa los datos de tu cuenta.</string>
     <string name="inicio_de_sesion">Inicio de sesión</string>
+    <string name="regresar">Regresar</string>
+    <string name="user_profile">user_profile</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="registrar">Registrar</string>
+    <string name="ingresa_con_tu_hella_digital">Ingresa con tu hella digital.</string>
+    <string name="olvidaste_tu_contrase_a_presiona_aqu">Olvidaste tu contraseña? presiona aquí</string>
+    <string name="crear_cuenta">Crear cuenta</string>
+    <string name="ya_tienes_cuenta_presiona_aqui_e_ingresa">Ya tienes cuenta? presiona aqui e Ingresa</string>
+    <string name="escribe_una_nota_para_este_recordatorio">Escribe una nota para este recordatorio</string>
+    <string name="programa_tu_recordaorio_al_menos_1_hora_antes_de_tu_cita">Programa tu recordaorio al menos 1 hora antes de tu cita</string>
+    <string name="si_no_recuerdas_tus_citas_puedes_consultarlas_aqui">Si no recuerdas tus citas puedes consultarlas aqui</string>
+    <string name="consultar_citas">Consultar Citas</string>
+    <string name="crear_recordatorio">Crear Recordatorio</string>
 </resources>

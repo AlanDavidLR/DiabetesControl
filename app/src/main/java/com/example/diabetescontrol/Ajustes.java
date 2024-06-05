@@ -116,7 +116,7 @@ public class Ajustes extends AppCompatActivity {
         if (idUsuario != -1) {
             BitmapDrawable drawable = (BitmapDrawable) perfilImageButton.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
-            Bitmap resizedBitmap = resizeBitmap(bitmap, 200, 200); // Redimensionar la imagen
+            Bitmap resizedBitmap = resizeBitmap(bitmap, 400, 400); // Redimensionar la imagen
             new GuardarAvatarTask(this, idUsuario, resizedBitmap).execute();
         } else {
             Toast.makeText(this, "Error al obtener el ID del usuario", Toast.LENGTH_SHORT).show();

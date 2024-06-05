@@ -150,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
             showAlertDialog("Advertencia", "El campo Password no puede estar vacío. Ingrese contraseña.");
             return false;
         } else if (!passwordRegex.matcher(password).matches()) {
-            showAlertDialog("Advertencia", "La contraseña debe contener al menos una mayúscula, una minúscula, un número, un carácter especial y tener al menos 4 caracteres.");
+            showAlertDialog("Advertencia", "La contraseña debe contener al menos una mayúscula, una minúscula, un número, un carácter especial y tener al menos 8 caracteres.");
             return false;
         } else {
             binding.textFieldPassword.setError(null);

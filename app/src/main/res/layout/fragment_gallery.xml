@@ -139,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="Escribe una nota para este recordatorio"
+                android:hint="@string/escribe_una_nota_para_este_recordatorio"
                 android:textColorHint="@color/colorTextoHint">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -158,13 +158,13 @@
                 android:layout_width="match_parent"
                 android:textColor="#F6F6F6"
                 android:layout_height="wrap_content"
-                android:text="Programa tu recordaorio al menos 1 hora antes de tu cita" />
+                android:text="@string/programa_tu_recordaorio_al_menos_1_hora_antes_de_tu_cita" />
 
             <Button
                 android:id="@+id/buttonCrearAlarma"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Crear Recordatorio"
+                android:text="@string/crear_recordatorio"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:textSize="16sp"
@@ -176,7 +176,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="Si no recuerdas tus citas puedes consultarlas aqui" />
+                android:text="@string/si_no_recuerdas_tus_citas_puedes_consultarlas_aqui" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutHistoricControl"
@@ -191,7 +191,7 @@
                     android:layout_width="5sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Consultar Citas"
+                    android:text="@string/consultar_citas"
                     app:backgroundTint="#569845" />
 
 

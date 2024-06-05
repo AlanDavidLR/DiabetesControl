@@ -84,20 +84,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Ingresar" />
+        android:text="@string/ingresar" />
 
     <Button
         android:id="@+id/btnRegistrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Registrar" />
+        android:text="@string/registrar" />
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Ingresa con tu hella digital."
+            android:text="@string/ingresa_con_tu_hella_digital"
             android:textAlignment="center" />
     <ImageButton
         android:id="@+id/huella"
@@ -115,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Olvidaste tu contraseña? presiona aquí"
+            android:text="@string/olvidaste_tu_contrase_a_presiona_aqu"
             android:clickable="true"
             android:onClick="goToLoginActivity"/>
 
