@@ -87,8 +87,8 @@ public class Recuperacion extends AppCompatActivity {
     }
 
     private void enviarCorreo(String email, String subject, String message) {
-        final String username = "imssglucocontrol@hotmail.com"; // Tu dirección de correo electrónico de Microsoft
-        final String password = "Gluc0contrl75$4fY"; // Tu contraseña
+        final String username = ""; // Tu dirección de correo electrónico de Microsoft
+        final String password = ""; // Tu contraseña
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
