@@ -137,7 +137,16 @@ public class RegistroGlucosa extends Fragment {
                 datePickerDialog.show();
             }
         });
-
+        Button btnCancel = root.findViewById(R.id.cancelarGuardarControl);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                glucosa.setText(""); // Limpia el campo de texto de glucosa
+                spinnerType.setSelection(0); // Restablece la selección del spinner a la primera opción
+                diaControl.setText(""); // Limpia el campo de texto de fecha de control
+                horaControl.setText(""); // Limpia el campo de texto de hora de control
+            }
+        });
         // Configurar clic en botón Guardar
         Button btnGuardar = root.findViewById(R.id.guardargluco);
         btnGuardar.setOnClickListener(new View.OnClickListener() {
@@ -409,7 +418,8 @@ public class RegistroGlucosa extends Fragment {
 
         private static ArrayList<Entry> parsearDatos(String response) {
             ArrayList<Entry> entries = new ArrayList<>();
-            ArrayList<String> fechas = new ArrayList<>();
+            ArrayList<Pair<String, Float>> dataPairs = new ArrayList<>();
+
             try {
                 JSONArray jsonArray = new JSONArray(response);
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -417,16 +427,16 @@ public class RegistroGlucosa extends Fragment {
                     String glucosaString = jsonObject.getString("glucosa");
                     float glucosaFloat = Float.parseFloat(glucosaString);
                     String fechaString = jsonObject.getString("fecha");
-                    entries.add(new Entry(i, glucosaFloat));
-                    fechas.add(fechaString);
+                    dataPairs.add(new Pair<>(fechaString, glucosaFloat));
                 }
-                // Ordenar los datos por fecha
-                Collections.sort(fechas, new Comparator<String>() {
+
+                // Ordenar los datos por fecha y hora
+                Collections.sort(dataPairs, new Comparator<Pair<String, Float>>() {
                     @Override
-                    public int compare(String s1, String s2) {
+                    public int compare(Pair<String, Float> pair1, Pair<String, Float> pair2) {
                         try {
-                            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(s1);
-                            Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(s2);
+                            Date date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(pair1.first);
+                            Date date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(pair2.first);
                             return date1.compareTo(date2);
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -434,24 +444,16 @@ public class RegistroGlucosa extends Fragment {
                         }
                     }
                 });
-                // Reordenar los entries según la orden de las fechas
-                ArrayList<Entry> entriesOrdered = new ArrayList<>();
-                for (String fecha : fechas) {
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String fechaString = jsonObject.getString("fecha");
-                        if (fechaString.equals(fecha)) {
-                            String glucosaString = jsonObject.getString("glucosa");
-                            float glucosaFloat = Float.parseFloat(glucosaString);
-                            entriesOrdered.add(new Entry(entriesOrdered.size(), glucosaFloat));
-                            break;
-                        }
-                    }
+
+                // Crear las entradas del gráfico asegurando que cada una tenga un índice único
+                for (int i = 0; i < dataPairs.size(); i++) {
+                    entries.add(new Entry(i, dataPairs.get(i).second));
                 }
-                return entriesOrdered;
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             return entries;
         }
 
@@ -469,8 +471,8 @@ public class RegistroGlucosa extends Fragment {
                     @Override
                     public int compare(String s1, String s2) {
                         try {
-                            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(s1);
-                            Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(s2);
+                            Date date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(s1);
+                            Date date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(s2);
                             return date1.compareTo(date2);
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -519,5 +521,6 @@ public class RegistroGlucosa extends Fragment {
                 Log.e("RegistroGlucosa", "LineChart es nulo. No se puede configurar el gráfico.");
             }
         }
+
     }
 }

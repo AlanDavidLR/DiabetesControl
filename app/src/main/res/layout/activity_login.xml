@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/fondologin2"
+    android:background="@drawable/fondologin"
     android:orientation="vertical"
     android:padding="12dp"
     tools:context=".LoginActivity">

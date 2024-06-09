@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondologin2"
+    android:background="@drawable/fondologin"
     android:orientation="vertical"
     android:padding="12dp"
     tools:context=".LoginActivity">
@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Ingresa tus datos personales."
+
             android:textStyle="bold"
             />
 
@@ -62,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
+            android:textColorHint="#000000"
             android:hint="Ingresa tu Nombre">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -79,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:textColorHint="#000000"
             android:hint="Ingresa tus Apellidos">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -95,6 +98,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:hint="Ingresa tu Numero de Seguro Social"
+            app:helperTextTextColor="#000000"
+            app:helperTextTextAppearance="@style/CustomHelperTextStyle"
+            android:textColorHint="#000000"
             app:helperText="*Deben ser 11 digitos de tu NSS.">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -115,6 +121,9 @@
             app:counterEnabled="true"
             app:counterMaxLength="50"
             app:helperText="*Ejemplo: Usuario@dominio.com."
+            app:helperTextTextAppearance="@style/CustomHelperTextStyle"
+            app:helperTextTextColor="#000000"
+            android:textColorHint="#000000"
             app:startIconDrawable="@drawable/ic_email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -136,6 +145,9 @@
             app:errorEnabled="true"
             app:errorIconDrawable="@null"
             app:helperText="*La contraseña debe contener al menos una mayúscula, una minúscula, un número, un carácter especial y tener al menos 8 caracteres."
+            app:helperTextTextColor="#000000"
+            android:textColorHint="#000000"
+            app:helperTextTextAppearance="@style/CustomHelperTextStyle"
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -155,8 +167,11 @@
             android:hint="       Confirma Password"
             app:endIconMode="password_toggle"
             app:errorEnabled="true"
+            android:textColorHint="#000000"
             app:errorIconDrawable="@null"
             app:startIconDrawable="@drawable/ic_lock"
+            app:helperTextTextAppearance="@style/CustomHelperTextStyle"
+            app:helperTextTextColor="#000000"
             app:helperText="*Debe coincidir con el password del campo anterior.">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -172,6 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:backgroundTint="#7157C3"
             android:text="@string/crear_cuenta" />
 
 
@@ -180,6 +196,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:textColor="#000000"
             android:text="@string/ya_tienes_cuenta_presiona_aqui_e_ingresa"
             android:clickable="true"
             android:onClick="goToLoginActivity" />

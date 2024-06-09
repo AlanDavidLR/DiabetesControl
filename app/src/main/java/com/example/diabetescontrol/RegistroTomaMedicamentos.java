@@ -38,7 +38,25 @@ public class RegistroTomaMedicamentos extends Fragment {
     public RegistroTomaMedicamentos() {
         // Required empty public constructor
     }
+    private void clearFields() {
+        // Limpiar campos de texto
+        editTextMedName.setText("");
+        textViewDoseQuantity.setText("");
+        textViewMedicineTime.setText("");
 
+        // Deseleccionar checkboxes
+        checkBoxSunday.setChecked(false);
+        checkBoxMonday.setChecked(false);
+        checkBoxTuesday.setChecked(false);
+        checkBoxWednesday.setChecked(false);
+        checkBoxThursday.setChecked(false);
+        checkBoxFriday.setChecked(false);
+        checkBoxSaturday.setChecked(false);
+        checkBoxEveryDay.setChecked(false);
+
+        // Resetear el spinner a la primera opción (puedes ajustar esto si es necesario)
+        spinnerDoseUnits.setSelection(0);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,6 +82,14 @@ public class RegistroTomaMedicamentos extends Fragment {
             }
         });
 
+        // Configurar botón Borrar
+        Button btnBorrar = view.findViewById(R.id.btnBorrar);
+        btnBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearFields();
+            }
+        });
         Button btnCrearR = view.findViewById(R.id.btnCrearR);
         btnCrearR.setOnClickListener(new View.OnClickListener() {
             @Override
