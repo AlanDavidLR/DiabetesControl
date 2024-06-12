@@ -29,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:textSize="18sp"
         android:text="@string/ingresa_los_datos_de_tu_cuenta"
         android:textAlignment="center" />
 
@@ -49,6 +50,9 @@
         android:hint="      Ingresa Email"
         app:counterEnabled="true"
         app:counterMaxLength="50"
+        app:helperTextTextAppearance="@style/CustomHelperTextStyle"
+        android:textColorHint="#000000"
+        app:helperTextTextColor="#000000"
         app:helperText="*Requerido"
         app:startIconDrawable="@drawable/ic_email">
 
@@ -66,6 +70,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:hint="      Ingresa Password"
+        app:helperTextTextAppearance="@style/CustomHelperTextStyle"
+
+        android:textColorHint="#000000"
+        app:helperTextTextColor="#000000"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
         app:errorIconDrawable="@null"
@@ -99,6 +107,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/ingresa_con_tu_hella_digital"
             android:textAlignment="center" />
+
     <ImageButton
         android:id="@+id/huella"
         android:layout_marginTop="0dp"

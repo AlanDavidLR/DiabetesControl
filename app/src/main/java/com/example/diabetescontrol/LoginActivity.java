@@ -37,7 +37,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import java.io.ByteArrayOutputStream;
-
+import com.bumptech.glide.Glide;
+import android.widget.ImageView;
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
@@ -51,7 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
+        ImageView imageView = findViewById(R.id.imageView);
+        Glide.with(this).load(R.drawable.giphy) .centerCrop() .override(600, 400) .into(imageView);
         //  SharedPreferences
         sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
 

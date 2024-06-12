@@ -48,7 +48,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:spinnerMode="dialog"
-                android:textColor="#F6F6F6" />
+                android:background="@color/white"
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/textViewType"
@@ -72,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColorHint="@color/colorTextoHint"
+                android:textColorHint="#000000"
                 android:hint="@string/ingresa_la_fecha_de_tu_proxima_cita">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -107,7 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="@string/ingresa_la_hora_de_tu_proxima_cita"
-                android:textColorHint="@color/colorTextoHint">
+                android:textColorHint="#000000"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -140,7 +142,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="@string/escribe_una_nota_para_este_recordatorio"
-                android:textColorHint="@color/colorTextoHint">
+                android:textColorHint="#000000"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -199,14 +202,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-
                 >
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewcita"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"/>
+                    android:background="@color/colorDos"/>
             </LinearLayout>
         </LinearLayout>
 

@@ -180,28 +180,46 @@ public class RegistroTomaMedicamentos extends Fragment {
 
         // Configurar la notificación
         Intent notificationIntent = new Intent(requireContext(), AlarmReceiver.class);
+
         notificationIntent.putExtra("titulo", "Hora de tomar tu medicamento");
+
         notificationIntent.putExtra("nota", mensajeNotificacion);
+
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
+
         AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
 
+
         Calendar calendar = Calendar.getInstance();
+
         calendar.set(Calendar.HOUR_OF_DAY, hour);
+
         calendar.set(Calendar.MINUTE, minute);
+
         calendar.set(Calendar.SECOND, 0);
 
+
         for (int i = 0; i < diasSeleccionados.length; i++) {
+
             if (diasSeleccionados[i]) {
+
                 calendar.set(Calendar.DAY_OF_WEEK, i + 1);  // Days of week in Calendar class starts from 1 (Sunday)
+
                 long triggerTime = calendar.getTimeInMillis();
+
                 Log.d(TAG, "createAlarm: Setting alarm for day " + (i + 1) + " at " + hour + ":" + minute + " (triggerTime: " + triggerTime + ")");
+
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+
             }
+
         }
+
 
         Log.d(TAG, "createAlarm: Alarm set for medication: " + medicamento);
     }
 }
+
 
