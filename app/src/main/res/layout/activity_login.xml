@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:hint="      Ingresa Email"
+        android:hint=" Ingresa Email"
         app:counterEnabled="true"
         app:counterMaxLength="50"
         app:helperTextTextAppearance="@style/CustomHelperTextStyle"
@@ -69,7 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:hint="      Ingresa Password"
+        android:hint=" Ingresa Password"
         app:helperTextTextAppearance="@style/CustomHelperTextStyle"
 
         android:textColorHint="#000000"
