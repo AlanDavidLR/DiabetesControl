@@ -409,7 +409,11 @@ public class RegistroGlucosa extends Fragment {
                 if (response != null) {
                     ArrayList<Entry> entries = parsearDatos(response);
                     ArrayList<String> fechas = parsearFechas(response);
-                    setupChart(lineChart, entries, fechas);
+                    if (entries.isEmpty()) {
+                        Toast.makeText(context, "Usted aun no cuenta con registros de glucosa", Toast.LENGTH_SHORT).show();
+                    } else {
+                        setupChart(lineChart, entries, fechas);
+                    }
                 } else {
                     Toast.makeText(context, "Error al consultar los registros de glucosa", Toast.LENGTH_SHORT).show();
                 }

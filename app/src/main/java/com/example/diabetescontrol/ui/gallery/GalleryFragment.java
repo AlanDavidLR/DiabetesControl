@@ -420,6 +420,10 @@ public class GalleryFragment extends Fragment {
                             // Agregar los datos de la cita a la lista
                             citasList.add(new Cita(fecha, hora, tipoConsulta, nota));
                         }
+                        // Verificar si no se encontraron registros
+                        if (citasList.isEmpty()) {
+                            Toast.makeText(context, "Usted aún no cuenta con registros de citas", Toast.LENGTH_SHORT).show();
+                        } else {
                         // Ordenar la lista de citas por fecha
                         Collections.sort(citasList, new Comparator<Cita>() {
                             @Override
@@ -437,6 +441,7 @@ public class GalleryFragment extends Fragment {
                         // Configurar el adaptador con la lista de citas ordenada
                         CitaAdapter adapter = new CitaAdapter(citasList);
                         recyclerView.setAdapter(adapter);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(context, "Error al procesar los datos", Toast.LENGTH_SHORT).show();

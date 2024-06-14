@@ -41,9 +41,10 @@
                     android:id="@+id/textistr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:text="Selecciona el rago de fechas para consultar tus tomas de glucosa"
                     android:textColor="?android:attr/textColorLinkInverse"
-                    android:textSize="16dp"
+                    android:textSize="20dp"
                     android:textStyle="italic" />
 
                 <LinearLayout

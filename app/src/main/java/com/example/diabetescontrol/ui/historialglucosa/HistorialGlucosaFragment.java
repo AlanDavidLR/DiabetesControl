@@ -212,6 +212,10 @@ public class HistorialGlucosaFragment extends Fragment {
                 String tipoToma = jsonObject.getString("tipoToma");
                 glucosaList.add(new Glucosa(fecha, hora, nivelGlucosa, tipoToma));
             }
+            // Verificar si no se encontraron registros
+            if (glucosaList.isEmpty()) {
+                Toast.makeText(getActivity(), "Usted aun no cuenta con registros de glucosa", Toast.LENGTH_SHORT).show();
+            } else {
             // Ordenar la lista de glucosas por fecha
             Collections.sort(glucosaList, new Comparator<Glucosa>() {
                 @Override
@@ -227,6 +231,7 @@ public class HistorialGlucosaFragment extends Fragment {
                 }
             });
             adapter.notifyDataSetChanged();
+            }
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(getActivity(), "Error al procesar los datos", Toast.LENGTH_SHORT).show();

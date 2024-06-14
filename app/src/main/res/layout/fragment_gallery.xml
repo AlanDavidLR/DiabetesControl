@@ -160,6 +160,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:textColor="#F6F6F6"
+                android:textSize="16sp"
                 android:layout_height="wrap_content"
                 android:text="@string/programa_tu_recordaorio_al_menos_1_hora_antes_de_tu_cita" />
 
@@ -179,6 +180,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:textSize="16sp"
                 android:text="@string/si_no_recuerdas_tus_citas_puedes_consultarlas_aqui" />
 
             <LinearLayout

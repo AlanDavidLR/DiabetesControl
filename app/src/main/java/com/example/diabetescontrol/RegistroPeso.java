@@ -389,7 +389,11 @@ public class RegistroPeso extends Fragment {
             if (response != null) {
                 ArrayList<Entry> entries = RegistroPeso.parsearDatos(response);
                 ArrayList<String> fechas = RegistroPeso.parsearFechas(response);
-                setupChart(entries, fechas);
+                if (entries.isEmpty()) {
+                    Toast.makeText(getActivity(), "Usted aun no cuenta con registros de peso", Toast.LENGTH_SHORT).show();
+                } else {
+                    setupChart(entries, fechas);
+                }
             } else {
                 Toast.makeText(getActivity(), "Error al consultar los registros de peso", Toast.LENGTH_SHORT).show();
             }
