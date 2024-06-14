@@ -111,4 +111,11 @@
     <string name="si_no_recuerdas_tus_citas_puedes_consultarlas_aqui">Si no recuerdas tus citas puedes consultarlas aqui</string>
     <string name="consultar_citas">Consultar Citas</string>
     <string name="crear_recordatorio">Crear Recordatorio</string>
+    <string name="aqui_puedes_registrar_tus_cifras_de_glucosa_y_llevar_un_mejor_control_si_necesitas_ayuda_para_saber_como_se_toma_la_glucosa_presiona_el_boton_saber_mas">Aqui puedes registrar tus cifras de glucosa y llevar un mejor control, si necesitas ayuda para saber como se toma la glucosa presiona el boton: Saber mas.</string>
+    <string name="saber_mas">Saber mas</string>
+    <string name="hora_de_toma">Hora de toma</string>
+    <string name="selecciona_la_hora">selecciona la hora</string>
+    <string name="selecciona_la_fecha">selecciona la fecha</string>
+    <string name="_0">0</string>
+    <string name="mg_dl">Mg/dL</string>
 </resources>
