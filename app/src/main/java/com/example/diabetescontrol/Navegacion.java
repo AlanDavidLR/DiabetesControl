@@ -69,8 +69,7 @@ public class Navegacion extends AppCompatActivity {
         String userEmail = sharedPreferences.getString("emailUsuario", "");
         String avatarUrl = sharedPreferences.getString("avatarUsuario", "");
 
-        Log.d(TAG, "User email from SharedPreferences: " + userEmail); // Registro del email obtenido
-        Log.d(TAG, "Avatar URL from SharedPreferences: " + avatarUrl); // Registro de la URL de la imagen obtenida
+
 
         View headerView = navigationView.getHeaderView(0);
         TextView textViewEmail = headerView.findViewById(R.id.textView);

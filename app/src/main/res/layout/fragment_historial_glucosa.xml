@@ -59,7 +59,8 @@
                         android:textColor="@color/white"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.6"
-                        android:text="Fecha Iicio" />
+                        android:textSize="18sp"
+                        android:text="Fecha Inicio" />
 
                     <EditText
                         android:id="@+id/fechi"
@@ -94,6 +95,7 @@
                         android:textColor="@color/white"
                         android:layout_height="wrap_content"
                         android:layout_weight="2.6"
+                        android:textSize="18sp"
                         android:text="Fecha final" />
 
                     <EditText

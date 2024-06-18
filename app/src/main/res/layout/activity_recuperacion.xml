@@ -45,6 +45,7 @@
             app:helperTextTextAppearance="@style/CustomHelperTextStyle"
             app:helperTextTextColor="#000000"
             android:textColorHint="#000000"
+            app:errorTextAppearance="@style/CustomTextInputLayoutErrorTextAppearance"
             app:helperText="*Requerido"
             app:startIconDrawable="@drawable/ic_email">
 
@@ -52,6 +53,7 @@
                 android:id="@+id/textInputEditTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>

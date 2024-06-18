@@ -53,8 +53,8 @@ public class LoginActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         ImageView imageView = findViewById(R.id.imageView);
-        Glide.with(this).load(R.drawable.giphy) .centerCrop() .override(600, 400) .into(imageView);
-        //  SharedPreferences
+        Glide.with(this).load(R.drawable.giphy).centerCrop().override(600, 400).into(imageView);
+
         sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
 
         binding.btnIngresar.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // TextView Recuperar
         TextView textViewRecuperar = findViewById(R.id.recuperar);
         textViewRecuperar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,14 +204,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void handleBiometricSuccess() {
-        // Verificar si existen datos del usuario en SharedPreferences
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
         if (isLoggedIn) {
-            // Datos del usuario existentes, proceder a Navegacion
             Intent intent = new Intent(LoginActivity.this, Navegacion.class);
             startActivity(intent);
         } else {
-            // No hay datos del usuario, mostrar mensaje y solicitar inicio de sesión con correo y contraseña
             showAlertDialog("Advertencia", "No hay datos previos para iniciar sesión, por favor inicie sesión con su correo y contraseña para usar la función de acceso por huella digital posteriormente.");
         }
     }
@@ -228,7 +224,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private class LoginTask extends AsyncTask<String, Void, String> {
-
         @Override
         protected String doInBackground(String... params) {
             String email = params[0];
@@ -256,24 +251,12 @@ public class LoginActivity extends AppCompatActivity {
                 bufferedReader.close();
                 connection.disconnect();
 
-                // Log para verificar la respuesta del servidor
                 Log.d("LoginActivity", "Respuesta del servidor: " + response.toString());
-
-                // Log para mostrar la información recibida de los campos id, nombre, apellido y numerosegurosocial
-                String[] campos = response.toString().split(",");
-                if (campos.length >= 4) {
-                    Log.d("LoginActivity", "ID: " + campos[0]);
-                    Log.d("LoginActivity", "Nombre: " + campos[1]);
-                    Log.d("LoginActivity", "Apellido: " + campos[2]);
-                    Log.d("LoginActivity", "Número de Seguro Social: " + campos[3]);
-                } else {
-                    Log.d("LoginActivity", "La respuesta del servidor no tiene la estructura esperada.");
-                }
 
                 return response.toString();
             } catch (IOException e) {
                 e.printStackTrace();
-                Log.e("LoginActivity", "Error al conectarse al servidor: " + e.getMessage());
+                Log.e("LoginActivity", "Error de red: " + e.getMessage());
                 return null;
             }
         }
@@ -287,16 +270,14 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
                     if (success) {
-                        // Acceder a los datos del usuario del objeto JSON
                         long idUsuario = jsonResponse.getLong("id_usuario");
                         String nombreUsuario = jsonResponse.getString("nombre_usuario");
                         String apellidosUsuario = jsonResponse.getString("apellidos_usuario");
                         String numeroSeguroSocialUsuario = jsonResponse.getString("numeroSeguroSocial_usuario");
                         String emailUsuario = jsonResponse.getString("email_usuario");
-                        String avatarUsuario = jsonResponse.getString("avatar_usuario"); // Nuevo campo
+                        String avatarUsuario = jsonResponse.getString("avatar_usuario");
 
-                        // Log para verificar la imagen del avatar
-                        Log.d("LoginActivity", "Avatar recibido: " + avatarUsuario);
+
 
                         // Decodificar la imagen de base64 a Bitmap
                         byte[] decodedString = Base64.decode(avatarUsuario, Base64.DEFAULT);
@@ -306,7 +287,7 @@ public class LoginActivity extends AppCompatActivity {
                             avatarBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                         }
 
-                        // Guardar los datos del usuario y la imagen en SharedPreferences
+                        // Guardar los datos del usuario en SharedPreferences
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("isLoggedIn", true);
                         editor.putLong("idUsuario", idUsuario);
@@ -315,51 +296,63 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("numeroSeguroSocialUsuario", numeroSeguroSocialUsuario);
                         editor.putString("emailUsuario", emailUsuario);
 
-                        if (avatarBitmap != null) {
-                            // Convertir la imagen Bitmap a un array de bytes para guardarlo en SharedPreferences
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            avatarBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                            byte[] avatarByteArray = baos.toByteArray();
-                            String avatarString = Base64.encodeToString(avatarByteArray, Base64.DEFAULT);
-                            editor.putString("avatarUsuario", avatarString); // Guardar avatar como String
-                        } else {
-                            // Si avatarUsuario es nulo o está vacío, no guardamos nada en SharedPreferences
-                            editor.remove("avatarUsuario");
-                        }
-
                         editor.apply();
 
-                        // Mostrar mensaje de inicio de sesión exitoso
-                        Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-
-                        // Iniciar la actividad Navegacion
-                        Intent intent = new Intent(LoginActivity.this, Navegacion.class);
-                        startActivity(intent);
-                        finish();
+                        // Iniciar la compresión de la imagen en un AsyncTask separado
+                        if (avatarBitmap != null) {
+                            new CompressImageTask().execute(avatarBitmap);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, Navegacion.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     } else {
-                        // Mostrar mensaje de inicio de sesión fallido
                         String errorMessage = jsonResponse.optString("message", "Correo o Contraseña incorrectos, por favor verifica tus datos.");
                         Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("LoginActivity", "Error al procesar la respuesta del servidor: " + e.getMessage());
-                    // Mostrar mensaje de error al procesar la respuesta del servidor
                     Toast.makeText(LoginActivity.this, "Error al procesar la respuesta del servidor", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                // Mostrar mensaje de error al conectarse al servidor
                 Log.e("LoginActivity", "Error al conectarse al servidor: respuesta nula");
                 Toast.makeText(LoginActivity.this, "Error al conectarse al servidor", Toast.LENGTH_SHORT).show();
             }
         }
+    }
 
+    private class CompressImageTask extends AsyncTask<Bitmap, Void, String> {
+        @Override
+        protected String doInBackground(Bitmap... bitmaps) {
+            Bitmap avatarBitmap = bitmaps[0];
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            avatarBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] avatarByteArray = baos.toByteArray();
+            return Base64.encodeToString(avatarByteArray, Base64.DEFAULT);
+        }
+
+        @Override
+        protected void onPostExecute(String avatarString) {
+            // Guardar el avatar en SharedPreferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("avatarUsuario", avatarString);
+            editor.apply();
+
+            // Mostrar mensaje de inicio de sesión exitoso
+            Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+
+            // Iniciar la actividad Navegacion
+            Intent intent = new Intent(LoginActivity.this, Navegacion.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void abrirRecuperacionActivity() {
-        Intent intent = new Intent(this, Recuperacion.class);
+        Intent intent = new Intent(LoginActivity.this, Recuperacion.class);
         startActivity(intent);
     }
-
 }
 
