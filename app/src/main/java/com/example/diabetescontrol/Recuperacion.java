@@ -187,7 +187,7 @@ public class Recuperacion extends AppCompatActivity {
                     if (status.equals("success") && message.equals("existe")) {
                         String email = textFieldEmailR.getEditText().getText().toString().trim();
                         String subject = "Recuperación de contraseña";
-                        String emailMessage = "Para recuperar tu contraseña da click en el siguiente enlace.";
+                        String emailMessage = "Para recuperar tu contraseña da click en el siguiente enlace: http://glucocontrol.atwebpages.com/.";
                         enviarCorreo(email, subject, emailMessage);
                     } else if (message.equals("no_existe")) {
                         Toast.makeText(Recuperacion.this, "Ese correo no está registrado", Toast.LENGTH_SHORT).show();
