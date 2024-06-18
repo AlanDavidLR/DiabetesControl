@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:spinnerMode="dialog"
-                android:background="@color/white"
+                android:background="@drawable/rounded_edittext_background"
                 android:textColor="#000000" />
 
             <TextView
@@ -210,7 +210,7 @@
                     android:id="@+id/recyclerViewcita"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorDos"/>
+                    android:background="@color/colorUno"/>
             </LinearLayout>
         </LinearLayout>
 

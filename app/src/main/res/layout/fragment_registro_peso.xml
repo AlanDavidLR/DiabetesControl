@@ -71,6 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -94,8 +95,10 @@
                         android:hint="@string/in_kilograms"
                         android:importantForAutofill="no"
                         android:inputType="numberDecimal"
+                        android:background="@drawable/rounded_edittext_background"
+
                         android:minHeight="48dp"
-                        android:textColorHint="#E4EF7C"
+                        android:textColorHint="#000"
                         tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck" />
 
 
@@ -115,13 +118,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:hint="@string/fecha_de_peso"
-                    android:textColorHint="#E4EF7C">
+                    android:textColorHint="#000">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/fechaInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#C54D4D"
+                        android:background="@drawable/rounded_edittext_background"
+
                         android:focusable="false"
                         android:inputType="date" />
 
@@ -174,13 +178,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Consulta tu Indice de Masa Corporal para saber si estas en tu peso adecuado"
-                    android:textColor="?android:attr/textColorLinkInverse"
-                    android:textSize="16dp"
-                    android:textStyle="italic" />
+                    android:textColor="#AEEA00"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
 
@@ -206,7 +211,8 @@
                         android:importantForAutofill="no"
                         android:inputType="numberDecimal"
                         android:minHeight="48dp"
-                        android:textColorHint="#E4EF7C"
+                        android:background="@drawable/rounded_edittext_background"
+                        android:textColorHint="#000"
                         tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck" />
                 </LinearLayout>
 
@@ -236,7 +242,8 @@
                         android:hint="@string/in_meters"
                         android:importantForAutofill="no"
                         android:inputType="numberDecimal"
-                        android:textColorHint="#E4EF7C"
+                        android:background="@drawable/rounded_edittext_background"
+                        android:textColorHint="#000"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck" />
                 </LinearLayout>
 
@@ -252,6 +259,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:onClick="calcular"
+                        android:textSize="16sp"
                         android:text="@string/calculate_bmi" />
 
 
@@ -260,6 +268,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:onClick="limpiar"
                         android:text="@string/delete_data" />
                 </LinearLayout>
@@ -338,9 +347,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Selecciona el rago de fechas para consultar tu peso y saber tu progreso"
-                        android:textColor="?android:attr/textColorLinkInverse"
-                        android:textSize="16dp"
-                        android:textStyle="italic" />
+                        android:textColor="#AEEA00"
+                        android:textSize="19dp"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
@@ -348,6 +357,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -367,9 +377,10 @@
                         android:layout_weight="5.2"
                         android:autofillHints=""
                         android:ems="10"
+                        android:background="@drawable/rounded_edittext_background"
                         android:hint="Selecciona fecha inicial"
                         android:inputType="none"
-                        android:textColorHint="#E4EF7C" />
+                        android:textColorHint="#000" />
 
 
 
@@ -380,6 +391,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -400,15 +412,16 @@
                         android:autofillHints=""
                         android:ems="10"
                         android:hint="Selecciona fecha final"
+                        android:background="@drawable/rounded_edittext_background"
                         android:inputType="none"
-                        android:textColorHint="#E4EF7C" />
+                        android:textColorHint="#000" />
 
 
                     <ImageButton
                         android:id="@+id/limpiarFiltro"
                         android:layout_width="10dp"
                         android:layout_height="35dp"
-                        android:layout_marginEnd="40dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_weight="1"
                         android:background="#2262"
                         android:foreground="?android:attr/selectableItemBackground"

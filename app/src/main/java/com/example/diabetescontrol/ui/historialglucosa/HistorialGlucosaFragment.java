@@ -214,7 +214,7 @@ public class HistorialGlucosaFragment extends Fragment {
             }
             // Verificar si no se encontraron registros
             if (glucosaList.isEmpty()) {
-                Toast.makeText(getActivity(), "Usted aun no cuenta con registros de glucosa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Usted no cuenta con registros de glucosa", Toast.LENGTH_SHORT).show();
             } else {
             // Ordenar la lista de glucosas por fecha
             Collections.sort(glucosaList, new Comparator<Glucosa>() {

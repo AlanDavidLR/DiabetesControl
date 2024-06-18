@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondologin"
     android:orientation="vertical"
-    android:padding="12dp"
+    android:padding="10dp"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -63,14 +63,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
-
             android:textColorHint="#000000"
-            android:hint="Ingresa tu Nombre">
+            android:hint="Ingresa tu Nombre"
+            app:errorTextAppearance="@style/CustomTextInputLayoutErrorTextAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#C54D4D"
+                android:background="@color/white"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -83,11 +83,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:textColorHint="#000000"
-            android:hint="Ingresa tus Apellidos">
+            android:hint="Ingresa tus Apellidos"
+            app:errorTextAppearance="@style/CustomTextInputLayoutErrorTextAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -102,12 +104,14 @@
             app:helperTextTextColor="#000000"
             app:helperTextTextAppearance="@style/CustomHelperTextStyle"
             android:textColorHint="#000000"
-            app:helperText="*Deben ser 11 digitos de tu NSS.">
+            app:helperText="*Deben ser 11 digitos de tu NSS."
+            app:errorTextAppearance="@style/CustomTextInputLayoutErrorTextAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#C54D4D"
+                android:background="@color/white"
+
                 android:inputType="text"
                 />
 
@@ -125,11 +129,13 @@
             app:helperTextTextAppearance="@style/CustomHelperTextStyle"
             app:helperTextTextColor="#000000"
             android:textColorHint="#000000"
-            app:startIconDrawable="@drawable/ic_email">
+            app:startIconDrawable="@drawable/ic_email"
+            app:errorTextAppearance="@style/CustomTextInputLayoutErrorTextAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -149,11 +155,13 @@
             app:helperTextTextColor="#000000"
             android:textColorHint="#000000"
             app:helperTextTextAppearance="@style/CustomHelperTextStyle"
+            app:errorTextAppearance="@style/CustomTextInputLayoutErrorTextAppearance"
             app:startIconDrawable="@drawable/ic_lock">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -173,11 +181,13 @@
             app:startIconDrawable="@drawable/ic_lock"
             app:helperTextTextAppearance="@style/CustomHelperTextStyle"
             app:helperTextTextColor="#000000"
-            app:helperText="*Debe coincidir con el password del campo anterior.">
+            app:helperText="*Debe coincidir con el password del campo anterior."
+            app:errorTextAppearance="@style/CustomTextInputLayoutErrorTextAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -188,6 +198,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:textSize="18sp"
             android:backgroundTint="#7157C3"
             android:text="@string/crear_cuenta" />
 

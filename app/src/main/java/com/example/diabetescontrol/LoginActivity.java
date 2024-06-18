@@ -134,10 +134,10 @@ public class LoginActivity extends AppCompatActivity {
     private boolean validateEmail() {
         String email = binding.textFieldEmail.getEditText().getText().toString();
         if (email.isEmpty()) {
-            showAlertDialog("Advertencia", "El campo Email no puede estar vacío. Ingrese correo.");
+            binding.textFieldEmail.setError("El campo Email no puede estar vacío.");
             return false;
         } else if (!PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()) {
-            showAlertDialog("Advertencia", "Correo no válido, debe tener estructura de correo electrónico.");
+            binding.textFieldEmail.setError("Correo no válido, debe tener estructura de correo electrónico.");
             return false;
         } else {
             binding.textFieldEmail.setError(null);
@@ -149,10 +149,10 @@ public class LoginActivity extends AppCompatActivity {
         String password = binding.textFieldPassword.getEditText().getText().toString();
         Pattern passwordRegex = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&!_+*=])(?=\\S+$).{4,}$");
         if (password.isEmpty()) {
-            showAlertDialog("Advertencia", "El campo Password no puede estar vacío. Ingrese contraseña.");
+            binding.textFieldPassword.setError("El campo Password no puede estar vacío.");
             return false;
         } else if (!passwordRegex.matcher(password).matches()) {
-            showAlertDialog("Advertencia", "La contraseña debe contener al menos una mayúscula, una minúscula, un número, un carácter especial y tener al menos 8 caracteres.");
+            binding.textFieldPassword.setError("La contraseña debe contener al menos una mayúscula, una minúscula, un número, un carácter especial y tener al menos 8 caracteres.");
             return false;
         } else {
             binding.textFieldPassword.setError(null);

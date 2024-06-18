@@ -189,7 +189,7 @@ android:orientation="vertical"
             <com.example.diabetescontrol.views.RobotoLightTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Recordatorio"
+                android:text="Hora     Dosis          Tipo de Medicamento"
                 android:textColor="#4264BC"
                 android:textSize="@dimen/text_medium" />
 

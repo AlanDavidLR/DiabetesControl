@@ -66,7 +66,16 @@ public class Sign_inActivity extends AppCompatActivity {
 
     // Función para validar todos los campos antes de crear la cuenta
     private boolean validateFields() {
-        return validateNombre() && validateApellido() && validateNSS() && validateEmail() && validatePassword() && validateConfirmPassword();
+        boolean isValid = true;
+
+        if (!validateNombre()) isValid = false;
+        if (!validateApellido()) isValid = false;
+        if (!validateNSS()) isValid = false;
+        if (!validateEmail()) isValid = false;
+        if (!validatePassword()) isValid = false;
+        if (!validateConfirmPassword()) isValid = false;
+
+        return isValid;
     }
 
     // Función para validar el nombre
@@ -153,6 +162,7 @@ public class Sign_inActivity extends AppCompatActivity {
             return true;
         }
     }
+
 
     // AsyncTask para enviar los datos al servidor PHP en un hilo secundario
     private class InsertarDatosTask extends AsyncTask<String, Void, String> {

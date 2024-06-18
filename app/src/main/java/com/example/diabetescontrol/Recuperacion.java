@@ -144,8 +144,7 @@ public class Recuperacion extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            // Tu código para verificar el correo en la base de datos iría aquí
-            // Esto es solo un ejemplo
+
             return "existe";
         }
 

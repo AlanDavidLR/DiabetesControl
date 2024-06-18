@@ -37,10 +37,8 @@ public class HomeFragment extends Fragment {
     private Handler sliderHandler;
     private ViewPager2 viewPager;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -50,9 +48,40 @@ public class HomeFragment extends Fragment {
 
         // Inicializar el WebView
         webView = root.findViewById(R.id.webView);
+        // Configurar el WebView
+        String url = "http://www.imss.gob.mx/salud-en-linea/diabetes-mellitus";
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+        webView.setInitialScale(1);
+
+        // Ajustar el contenido al tamaño de la pantalla
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                webView.loadUrl("javascript:(function() { " +
+                        "var metas = document.getElementsByTagName('meta'); " +
+                        "for (var i = 0; i < metas.length; i++) { " +
+                        "if (metas[i].name.toLowerCase() === 'viewport') { " +
+                        "metas[i].parentNode.removeChild(metas[i]); " +
+                        "break; " +
+                        "} " +
+                        "} " +
+                        "var meta = document.createElement('meta'); " +
+                        "meta.name = 'viewport'; " +
+                        "meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'; " +
+                        "document.getElementsByTagName('head')[0].appendChild(meta); " +
+                        "})()");
+            }
+        });
+
+        webView.loadUrl(url);
 
         // Cargar la URL en el WebView en un hilo separado
-        new LoadWebViewTask().execute("https://www.gob.mx/promosalud/acciones-y-programas/diabetes-en-mexico-284509");
+        new LoadWebViewTask().execute(url);
 
         // Inicializar el VideoView
         VideoView videoView = root.findViewById(R.id.videoView);
@@ -79,7 +108,7 @@ public class HomeFragment extends Fragment {
         viewPager = root.findViewById(R.id.viewPager);
         List<ImageSlide> imageSlides = new ArrayList<>();
         // Agregar tus imágenes y descripciones aquí
-        imageSlides.add(new ImageSlide(R.drawable.alimetos, "Cuida tu alimentacion, evita los alimentos altos en azucares, presiona sobre", "https://www.imss.gob.mx/sites/all/statics/salud/guias_salud/cartera-alimentacion.pdf"));
+        imageSlides.add(new ImageSlide(R.drawable.alimetos, "Cuida tu alimentacion, evita los alimentos altos en azucares, presiona sobre la imagen para conocer como cuidarte", "https://www.imss.gob.mx/sites/all/statics/salud/guias_salud/cartera-alimentacion.pdf"));
         imageSlides.add(new ImageSlide(R.drawable.ejercicio, "Conoce la  actividad fisica que puedes practicar, adecuada para personas con Diabetes", "https://www.imss.gob.mx/salud-en-linea/actividad-fisica"));
         imageSlides.add(new ImageSlide(R.drawable.pie, "Mejora el cuidado de tu pies, presiona sobre la imgagen para mayor información", "http://www.imss.gob.mx/salud-en-linea/pie-diabetico"));
         ImageSliderAdapter adapter = new ImageSliderAdapter(requireContext(), imageSlides);
@@ -126,7 +155,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            String url = "https://www.gob.mx/promosalud/acciones-y-programas/diabetes-en-mexico-284509";
+            String url = "http://www.imss.gob.mx/salud-en-linea/diabetes-mellitus";
             WebSettings webSettings = webView.getSettings();
             webSettings.setJavaScriptEnabled(true);
             webSettings.setLoadWithOverviewMode(true);
@@ -154,8 +183,5 @@ public class HomeFragment extends Fragment {
         }
     }
 }
-
-
-
 
 

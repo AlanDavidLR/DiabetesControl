@@ -50,6 +50,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -67,8 +68,9 @@
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="60dp"
                         android:layout_weight="5.2"
+                        android:background="@drawable/rounded_edittext_background"
                         android:autofillHints=""
-                        android:textColorHint="#E4EF7C"
+                        android:textColorHint="#000"
                         android:ems="10"
                         android:hint="Selecciona fecha inicial"
                         android:inputType="none" />
@@ -83,6 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -101,7 +104,9 @@
                         android:layout_marginEnd="5dp"
                         android:layout_weight="5.2"
                         android:autofillHints=""
-                        android:textColorHint="#E4EF7C"
+                        android:background="@drawable/rounded_edittext_background"
+
+                        android:textColorHint="#000"
                         android:ems="10"
                         android:hint="Selecciona fecha final"
                         android:inputType="none" />
@@ -113,7 +118,7 @@
                         android:layout_height="45dp"
                         android:layout_marginEnd="2dp"
                         android:layout_weight="1"
-                        android:background="#2262"
+                        android:background="#7CFFFFFF"
                         android:src="@drawable/ic_borrar"
                         android:foreground="?android:attr/selectableItemBackground"/>
 
@@ -135,12 +140,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cosultar"
+                        android:textSize="16sp"
                         app:backgroundTint="#569845" />
                     <Button
                         android:id="@+id/borrarconsulta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Borrar Consulta"
+                        android:textSize="16sp"
                         app:backgroundTint="#569845" />
 
                 </LinearLayout>

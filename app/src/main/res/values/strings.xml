@@ -60,7 +60,7 @@
     <string name="channel_description">Descripción_del_canal</string>
 
 
-    <string name="delete_data">eliminar datos</string>
+    <string name="delete_data">Limpiar datos</string>
     <string name="bmi">IMC :</string>
     <string name="description">Descripción :</string>
     <string name="in_kilograms">En Kilogramos</string>
@@ -118,4 +118,5 @@
     <string name="selecciona_la_fecha">selecciona la fecha</string>
     <string name="_0">0</string>
     <string name="mg_dl">Mg/dL</string>
+
 </resources>
