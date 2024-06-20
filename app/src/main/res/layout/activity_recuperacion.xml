@@ -11,15 +11,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="-164dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/texttitR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
             android:text="Recupera tu contraseña"
             android:textAlignment="center"
-            android:layout_marginTop="80dp"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -28,10 +33,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textSize="20sp"
-            android:textColor="#000000"
             android:text="Para recuperar tu contraseña ingresa el email con el cual te registraste."
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldEmailR"
@@ -40,13 +45,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:hint="       Ingresa Email"
+            android:textColorHint="#000000"
             app:counterEnabled="true"
             app:counterMaxLength="50"
-            app:helperTextTextAppearance="@style/CustomHelperTextStyle"
-            app:helperTextTextColor="#000000"
-            android:textColorHint="#000000"
             app:errorTextAppearance="@style/CustomTextInputLayoutErrorTextAppearance"
             app:helperText="*Requerido"
+            app:helperTextTextAppearance="@style/CustomHelperTextStyle"
+            app:helperTextTextColor="#000000"
             app:startIconDrawable="@drawable/ic_email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -62,9 +67,9 @@
             android:id="@+id/btnEnviar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
             android:layout_marginTop="60dp"
-            android:text="Enviar" />
+            android:text="Enviar"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
@@ -76,6 +81,8 @@
         android:scaleType="fitXY"
         app:srcCompat="@drawable/regresar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

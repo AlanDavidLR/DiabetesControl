@@ -164,7 +164,7 @@ public class HistorialGlucosaFragment extends Fragment {
                         "&fechaInicio=" + URLEncoder.encode(fechaInicio, "UTF-8") +
                         "&fechaFin=" + URLEncoder.encode(fechaFin, "UTF-8");
 
-                Log.d("ConsultarRegistroGlucosa", "Parámetros enviados: " + parametros);
+
 
                 OutputStream outputStream = connection.getOutputStream();
                 outputStream.write(parametros.getBytes("UTF-8"));
@@ -179,7 +179,7 @@ public class HistorialGlucosaFragment extends Fragment {
                 }
                 bufferedReader.close();
 
-                Log.d("ConsultarRegistroGlucosa", "Respuesta del servidor: " + response.toString());
+
 
                 connection.disconnect();
 
