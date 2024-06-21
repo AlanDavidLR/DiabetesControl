@@ -261,6 +261,33 @@ android:orientation="vertical"
             android:onClick="clear"
             android:text="@string/delete_data" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:text="Consulta los Medicamentos que tomas" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        >
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/consulmed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="visible" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/consultamed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Colsulta de Medicamentos" />
+
+
 
 </LinearLayout>
 
