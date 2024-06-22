@@ -30,6 +30,7 @@ import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 
 import com.example.diabetescontrol.AlarmReceiver;
 import com.example.diabetescontrol.R;
@@ -59,7 +60,7 @@ public class GalleryFragment extends Fragment {
     private FragmentGalleryBinding binding;
     private Spinner spinnerType;
     private SharedPreferences sharedPreferences;
-
+    private RecyclerView recyclerView;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
@@ -345,7 +346,9 @@ public class GalleryFragment extends Fragment {
             String fechaConsulta = dateFormat.format(calendar.getTime());
 
             // Configurar el LayoutManager (puedes usar LinearLayoutManager u otro que desees)
+            RecyclerView recyclerView = binding.recyclerViewcita;
             LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+            recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
             binding.recyclerViewcita.setLayoutManager(layoutManager);
             // Realizar la consulta en segundo plano
             new ConsultarRegistroCitaTask(requireContext(), binding.recyclerViewcita).execute(String.valueOf(idUsuario), fechaConsulta);

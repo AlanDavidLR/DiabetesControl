@@ -25,7 +25,7 @@
             android:layout_marginTop="0dp"
             android:text="Recupera tu contraseña"
             android:textAlignment="center"
-            android:textSize="28sp"
+            android:textSize="32sp"
             android:textStyle="bold" />
 
         <TextView
@@ -35,6 +35,7 @@
             android:layout_marginTop="20dp"
             android:text="Para recuperar tu contraseña ingresa el email con el cual te registraste."
             android:textAlignment="center"
+            android:fontFamily="@font/montserrat"
             android:textColor="#000000"
             android:textSize="20sp" />
 

@@ -82,7 +82,7 @@
                         android:gravity="center"
                         android:text="@string/weight"
                         android:textAlignment="center"
-                        android:textColor="#1FE1C4"
+                        android:textColor="#ffffff"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -109,7 +109,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
                     android:text="@string/date"
-                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
                     android:textColor="#F6F6F6" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -171,7 +172,7 @@
                         android:textAllCaps="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="#fff"
-                        android:textSize="20sp"
+                        android:textSize="21sp"
                         android:textStyle="bold" />
                 </LinearLayout>
                 <TextView
@@ -180,7 +181,8 @@
                     android:layout_height="wrap_content"
                     android:text="Consulta tu Indice de Masa Corporal para saber si estas en tu peso adecuado."
                     android:textColor="#AEEA00"
-                    android:textSize="19dp"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="21dp"
                     android:textStyle="bold" />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -349,7 +351,7 @@
                         android:layout_height="wrap_content"
                         android:text="Selecciona el rago de fechas para consultar tu peso y saber tu progreso."
                         android:textColor="#AEEA00"
-                        android:textSize="19dp"
+                        android:textSize="21dp"
                         android:textStyle="bold" />
 
 

@@ -21,6 +21,8 @@
         android:layout_height="wrap_content"
         android:text="@string/inicio_de_sesion"
         android:textAlignment="center"
+        android:textColor="@color/black"
+        style="@style/SerifText"
         android:textSize="28sp"
         android:textStyle="bold" />
 
@@ -29,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/ubuntomonoregular"
         android:textColor="#000000"
         android:textSize="18sp"
         android:text="@string/ingresa_los_datos_de_tu_cuenta"

@@ -34,7 +34,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import java.net.URLEncoder;
 import org.json.JSONException;
-
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 public class RegistroTomaMedicamentos extends Fragment {
 
@@ -84,7 +87,7 @@ public class RegistroTomaMedicamentos extends Fragment {
         View view = inflater.inflate(R.layout.fragment_registro_toma_medicamentos, container, false);
 
         sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
-        textViewMedicineTime = view.findViewById(R.id.tv_medicine_time);
+        textViewMedicineTime = view.findViewById(R.id.textHoraCo);
         editTextMedName = view.findViewById(R.id.edit_med_name);
         textViewDoseQuantity = view.findViewById(R.id.tv_dose_quantity);
         spinnerDoseUnits = view.findViewById(R.id.spinner_dose_units);
@@ -97,6 +100,10 @@ public class RegistroTomaMedicamentos extends Fragment {
         checkBoxSaturday = view.findViewById(R.id.dv_saturday);
         checkBoxEveryDay = view.findViewById(R.id.every_day);
 
+        // Aplicar la animación al TextView
+        Animation fadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        textViewMedicineTime.startAnimation(fadeInAnimation);
+
         textViewMedicineTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +115,10 @@ public class RegistroTomaMedicamentos extends Fragment {
 
         medicamentosList = new ArrayList<>();
         adapter = new MedicamentoAdapter(medicamentosList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.HORIZONTAL));
+        recyclerView.setLayoutManager(layoutManager);;
         recyclerView.setAdapter(adapter);
 
         consultarMedicamentosButton.setOnClickListener(new View.OnClickListener() {
@@ -401,21 +411,24 @@ public class RegistroTomaMedicamentos extends Fragment {
             if (result!= null) {
                 try {
                     JSONArray jsonArray = new JSONArray(result);
+                    if (jsonArray.length() == 0) {
+                        Toast.makeText(getContext(), "Usted no cuenta con medicamentos registrados en este momento", Toast.LENGTH_SHORT).show();
+                    } else {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String nombreMedicamento = jsonObject.getString("nombreMedicamento");
+                            String diasToma = jsonObject.getString("diasToma");
+                            String hora = jsonObject.getString("hora");
+                            String dosis = jsonObject.getString("dosis");
+                            String tipoMedicamento = jsonObject.getString("tipoMedicamento");
 
-                        String nombreMedicamento = jsonObject.getString("nombreMedicamento");
-                        String diasToma = jsonObject.getString("diasToma");
-                        String hora = jsonObject.getString("hora");
-                        String dosis = jsonObject.getString("dosis");
-                        String tipoMedicamento = jsonObject.getString("tipoMedicamento");
+                            Medicamento medicamento = new Medicamento(nombreMedicamento, diasToma, hora, dosis, tipoMedicamento);
+                            medicamentosList.add(medicamento);
+                        }
 
-                        Medicamento medicamento = new Medicamento(nombreMedicamento, diasToma, hora, dosis, tipoMedicamento);
-                        medicamentosList.add(medicamento);
+                        adapter.notifyDataSetChanged();
                     }
-
-                    adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getContext(), "Error al procesar los datos del servidor", Toast.LENGTH_SHORT).show();
@@ -425,8 +438,6 @@ public class RegistroTomaMedicamentos extends Fragment {
             }
         }
     }
-
-
 }
 
 

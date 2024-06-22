@@ -55,4 +55,55 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/holo_red_dark</item>
     </style>
+
+    <style name="LoginTextStyle">
+
+        <item name="android:textSize">18sp</item>
+
+        <item name="android:textColor">#FFFFFF</item>
+
+        <item name="android:textStyle">bold</item>
+
+        <item name="android:textAlignment">center</item>
+
+    </style>
+    <style name="SansSerifText">
+
+        <item name="android:fontFamily">sans-serif</item>
+
+    </style>
+
+
+    <style name="SerifText">
+
+        <item name="android:fontFamily">serif</item>
+
+    </style>
+    <style name="OpenSansText">
+
+        <item name="android:fontFamily">@font/open_sans</item>
+
+    </style>
+
+
+    <style name="LatoText">
+
+        <item name="android:fontFamily">@font/lato</item>
+
+    </style>
+
+
+    <style name="MontserratText">
+
+        <item name="android:fontFamily">@font/montserrat</item>
+
+    </style>
+    <style name="PlayfairDisplayText">
+
+        <item name="android:fontFamily">@font/playfair_display</item>
+
+    </style>
+    <style name="CustomFont">
+        <item name="android:fontFamily">@font/blackregular</item>
+    </style>
 </resources>

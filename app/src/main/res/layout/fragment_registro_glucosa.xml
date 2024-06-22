@@ -34,9 +34,10 @@
                     android:id="@+id/textistr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
                     android:text="@string/aqui_puedes_registrar_tus_cifras_de_glucosa_y_llevar_un_mejor_control_si_necesitas_ayuda_para_saber_como_se_toma_la_glucosa_presiona_el_boton_saber_mas"
                     android:textColor="#AEEA00"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                  />
 
                 <Button

@@ -26,7 +26,7 @@ import com.example.diabetescontrol.databinding.FragmentHistorialGlucosaBinding;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import androidx.recyclerview.widget.DividerItemDecoration;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -71,6 +71,7 @@ public class HistorialGlucosaFragment extends Fragment {
 
         adapter = new GlucosaAdapter(glucosaList); // Instanciar y asignar el adaptador antes de configurar el RecyclerView
         recyclerView = root.findViewById(R.id.recyclerView);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
