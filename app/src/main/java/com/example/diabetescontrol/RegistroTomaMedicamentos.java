@@ -87,7 +87,7 @@ public class RegistroTomaMedicamentos extends Fragment {
         View view = inflater.inflate(R.layout.fragment_registro_toma_medicamentos, container, false);
 
         sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
-        textViewMedicineTime = view.findViewById(R.id.textHoraCo);
+        textViewMedicineTime = view.findViewById(R.id.tv_medicine_time);
         editTextMedName = view.findViewById(R.id.edit_med_name);
         textViewDoseQuantity = view.findViewById(R.id.tv_dose_quantity);
         spinnerDoseUnits = view.findViewById(R.id.spinner_dose_units);

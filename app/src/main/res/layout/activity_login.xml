@@ -33,7 +33,8 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/ubuntomonoregular"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textSize="20sp"
         android:text="@string/ingresa_los_datos_de_tu_cuenta"
         android:textAlignment="center" />
 

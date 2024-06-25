@@ -163,8 +163,9 @@
                 android:id="@+id/textView8"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:textColor="#F6F6F6"
-                android:textSize="18sp"
+                android:textColor="#AEEA00"
+                android:textSize="20sp"
+                android:fontFamily="@font/montserrat"
                 android:layout_height="wrap_content"
                 android:text="@string/programa_tu_recordaorio_al_menos_1_hora_antes_de_tu_cita" />
 
