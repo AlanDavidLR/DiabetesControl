@@ -118,6 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_marginTop="20dp"
             android:text="@string/ingresa_con_tu_hella_digital"
@@ -141,6 +142,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/olvidaste_tu_contrase_a_presiona_aqu"
             android:clickable="true"
+            android:textStyle="bold"
             android:textColor="#000000"
             android:textSize="20sp"
             android:onClick="goToLoginActivity"/>

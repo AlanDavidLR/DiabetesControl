@@ -53,6 +53,7 @@
             android:layout_marginTop="10dp"
             android:text="Ingresa tus datos personales."
             android:textSize="18sp"
+            android:textColor="@color/black"
             android:textStyle="bold"
             />
 
@@ -70,7 +71,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_edittext_background"                android:inputType="text" />
+                android:background="@drawable/rounded_edittext_background"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

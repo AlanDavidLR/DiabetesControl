@@ -29,7 +29,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import androidx.fragment.app.Fragment;
 import android.content.Context;
-
+import com.github.mikephil.charting.components.LimitLine;
+import java.text.SimpleDateFormat;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -37,7 +38,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-
+import java.util.Locale;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -51,6 +52,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import com.google.android.material.snackbar.Snackbar;
 
 public class RegistroGlucosa extends Fragment {
 
@@ -66,6 +68,7 @@ public class RegistroGlucosa extends Fragment {
     private LineChart lineChart;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private ImageButton eliminargfButton;
+
 
     public RegistroGlucosa() {
         // Constructor vacío
@@ -405,14 +408,33 @@ public class RegistroGlucosa extends Fragment {
             super.onPostExecute(response);
             Context context = contextRef.get();
             LineChart lineChart = chartRef.get();
-            if (context != null && lineChart != null) {
-                if (response != null) {
+            if (context!= null && lineChart!= null) {
+                if (response!= null) {
                     ArrayList<Entry> entries = parsearDatos(response);
                     ArrayList<String> fechas = parsearFechas(response);
                     if (entries.isEmpty()) {
                         Toast.makeText(context, "Usted aun no cuenta con registros de glucosa", Toast.LENGTH_SHORT).show();
                     } else {
                         setupChart(lineChart, entries, fechas);
+
+                        // Verificar si hay tres cifras de glucosa consecutivas que superen el valor de 110
+                        int contador = 0;
+                        for (int i = 0; i < entries.size(); i++) {
+                            float glucosaValue = entries.get(i).getY();
+                            if (glucosaValue > 110) {
+                                contador++;
+                                if (contador == 3) {
+                                    Snackbar snackbar = Snackbar.make(lineChart, "Sus cifras de glucosa han estado elevadas, consulte con su médico", Snackbar.LENGTH_INDEFINITE);
+
+                                    snackbar.setDuration(5000); // Duración de 5 segundos
+
+                                    snackbar.show();
+                                    break;
+                                }
+                            } else {
+                                contador = 0;
+                            }
+                        }
                     }
                 } else {
                     Toast.makeText(context, "Error al consultar los registros de glucosa", Toast.LENGTH_SHORT).show();
@@ -421,80 +443,163 @@ public class RegistroGlucosa extends Fragment {
         }
 
         private static ArrayList<Entry> parsearDatos(String response) {
+
             ArrayList<Entry> entries = new ArrayList<>();
+
             ArrayList<Pair<String, Float>> dataPairs = new ArrayList<>();
 
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()); // Agrega esta línea
+
+
             try {
+
                 JSONArray jsonArray = new JSONArray(response);
+
                 for (int i = 0; i < jsonArray.length(); i++) {
+
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
+
                     String glucosaString = jsonObject.getString("glucosa");
+
                     float glucosaFloat = Float.parseFloat(glucosaString);
-                    String fechaString = jsonObject.getString("fecha");
+
+                    String fechaString = jsonObject.getString("fecha") + " " + jsonObject.getString("hora"); // Agrega la hora a la fecha
+
                     dataPairs.add(new Pair<>(fechaString, glucosaFloat));
+
                 }
+
 
                 // Ordenar los datos por fecha y hora
+
                 Collections.sort(dataPairs, new Comparator<Pair<String, Float>>() {
+
                     @Override
+
                     public int compare(Pair<String, Float> pair1, Pair<String, Float> pair2) {
+
                         try {
-                            Date date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(pair1.first);
-                            Date date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(pair2.first);
+
+                            Date date1 = dateFormat.parse(pair1.first);
+
+                            Date date2 = dateFormat.parse(pair2.first);
+
                             return date1.compareTo(date2);
+
                         } catch (ParseException e) {
+
                             e.printStackTrace();
+
                             return 0;
+
                         }
+
                     }
+
                 });
+
 
                 // Crear las entradas del gráfico asegurando que cada una tenga un índice único
+
                 for (int i = 0; i < dataPairs.size(); i++) {
+
                     entries.add(new Entry(i, dataPairs.get(i).second));
+
                 }
 
+
             } catch (JSONException e) {
+
                 e.printStackTrace();
+
             }
+
 
             return entries;
+
         }
 
+
         private static ArrayList<String> parsearFechas(String response) {
+
             ArrayList<String> fechas = new ArrayList<>();
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()); // Agrega esta línea
+
+
             try {
+
                 JSONArray jsonArray = new JSONArray(response);
+
                 for (int i = 0; i < jsonArray.length(); i++) {
+
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String fechaString = jsonObject.getString("fecha");
+
+                    String fechaString = jsonObject.getString("fecha") + " " + jsonObject.getString("hora"); // Agrega la hora a la fecha
+
                     fechas.add(fechaString);
+
                 }
+
+
                 // Ordenar las fechas
+
                 Collections.sort(fechas, new Comparator<String>() {
+
                     @Override
+
                     public int compare(String s1, String s2) {
+
                         try {
-                            Date date1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(s1);
-                            Date date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(s2);
+
+                            Date date1 = dateFormat.parse(s1);
+
+                            Date date2 = dateFormat.parse(s2);
+
                             return date1.compareTo(date2);
+
                         } catch (ParseException e) {
+
                             e.printStackTrace();
+
                             return 0;
+
                         }
+
                     }
+
                 });
+
             } catch (JSONException e) {
+
                 e.printStackTrace();
+
             }
+
             return fechas;
+
         }
 
         private static void setupChart(LineChart lineChart, ArrayList<Entry> entries, ArrayList<String> fechas) {
             if (lineChart != null) {
-                LineDataSet dataSet = new LineDataSet(entries, "Glucosa");
+                // Create a LineDataSet with blue color
+                LineDataSet dataSet = new LineDataSet(entries, "Glucosa") {
+                    @Override
+                    public int getColor(int index) {
+                        // Get the corresponding glucose value for this entry
+                        float glucosaValue = getEntryForIndex(index).getY();
+
+                        // If the glucose value is outside the normal range (70-110), color it red
+                        if (glucosaValue < 70 || glucosaValue > 110) {
+                            return Color.RED;
+                        } else {
+                            return super.getColor(index);
+                        }
+                    }
+                };
+
                 dataSet.setColor(Color.BLUE);
-                dataSet.setValueTextColor(Color.RED);
+                dataSet.setValueTextColor(Color.BLACK);
 
                 ArrayList<ILineDataSet> dataSets = new ArrayList<>();
                 dataSets.add(dataSet);
@@ -503,7 +608,6 @@ public class RegistroGlucosa extends Fragment {
 
                 XAxis xAxis = lineChart.getXAxis();
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
                 xAxis.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(fechas));
                 xAxis.setGranularity(1f); // only intervals of 1 day
                 xAxis.setLabelRotationAngle(-45);
@@ -513,18 +617,35 @@ public class RegistroGlucosa extends Fragment {
                 leftAxis.setDrawGridLines(true);
 
                 YAxis rightAxis = lineChart.getAxisRight();
-                rightAxis.setEnabled(false); // Desactiva el eje derecho
+                rightAxis.setEnabled(false); // Disable the right axis
 
                 Description description = new Description();
                 description.setText("Fecha");
                 lineChart.setDescription(description);
 
+                // Add horizontal lines for the normal range limits (70 and 110)
+                LimitLine lowerLimit = new LimitLine(70f, "70");
+                lowerLimit.setLineColor(Color.GREEN);
+                lowerLimit.setLineWidth(2f);
+                lowerLimit.setTextColor(Color.GREEN);
+                lowerLimit.setTextSize(10f);
+
+                LimitLine upperLimit = new LimitLine(110f, "110");
+                upperLimit.setLineColor(Color.GREEN);
+                upperLimit.setLineWidth(2f);
+                upperLimit.setTextColor(Color.GREEN);
+                upperLimit.setTextSize(10f);
+
+                leftAxis.addLimitLine(lowerLimit);
+                leftAxis.addLimitLine(upperLimit);
+
                 lineChart.setData(lineData);
                 lineChart.invalidate();
             } else {
-                Log.e("RegistroGlucosa", "LineChart es nulo. No se puede configurar el gráfico.");
+                Log.e("RegistroGlucosa", "LineChart is null. Cannot set up the chart.");
             }
         }
+
 
     }
 }

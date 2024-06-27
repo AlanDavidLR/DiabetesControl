@@ -165,7 +165,7 @@
                 android:layout_width="match_parent"
                 android:textColor="#AEEA00"
                 android:textSize="20sp"
-                android:fontFamily="@font/montserrat"
+                android:fontFamily="@font/montserratalternatesbold"
                 android:layout_height="wrap_content"
                 android:text="@string/programa_tu_recordaorio_al_menos_1_hora_antes_de_tu_cita" />
 
@@ -185,7 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:text="@string/si_no_recuerdas_tus_citas_puedes_consultarlas_aqui" />
 
             <LinearLayout

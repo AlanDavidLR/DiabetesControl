@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/saber_mas"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:layout_marginTop="20dp"/>
 
                 <LinearLayout
@@ -130,9 +130,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    android:text="@string/tipo_de_toma_de_glucosa"
                     android:textColor="#E4EF7C"
-                    android:text="@string/tipo_de_toma_de_glucosa" />
+                    android:textSize="19sp" />
 
                 <Spinner
                     android:id="@+id/spinnerType"
@@ -251,14 +252,14 @@
                 <LinearLayout
                     android:id="@+id/chartContainergucosa"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="400dp"
                     android:orientation="vertical">
 
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/lineChartglucosa"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="400dp"
                         android:background="@color/white"
                         android:layout_weight="1" />
 
