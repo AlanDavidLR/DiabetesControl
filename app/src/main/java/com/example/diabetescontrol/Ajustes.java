@@ -204,7 +204,7 @@ public class Ajustes extends AppCompatActivity {
                     String status = jsonObject.optString("status", "error");
                     String message = jsonObject.optString("message", "Error desconocido");
                     if (status.equals("success")) {
-                        Toast.makeText(context, "Avatar guardado exitosamente, cambiara en su proximo inico de sesión", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Imagen de Perfil guardada exitosamente, cambiara en su proximo inico de sesión", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "Error al guardar el avatar: " + message, Toast.LENGTH_SHORT).show();
                     }
@@ -217,5 +217,6 @@ public class Ajustes extends AppCompatActivity {
         }
     }
 }
+
 
 
