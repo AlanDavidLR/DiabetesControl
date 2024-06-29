@@ -53,6 +53,11 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import com.google.android.material.snackbar.Snackbar;
+import android.widget.PopupMenu;
+import android.widget.TextView;
+import android.widget.PopupWindow;
+
+import android.view.ViewGroup;
 
 public class RegistroGlucosa extends Fragment {
 
@@ -212,6 +217,23 @@ public class RegistroGlucosa extends Fragment {
             public void onClick(View v) {
                 lineChart.clear();
                 lineChart.invalidate();
+            }
+        });
+        ImageButton ayudaButton = root.findViewById(R.id.ayuda);
+        ayudaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Inflate the custom layout for the PopupWindow
+                LayoutInflater inflater = (LayoutInflater) requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.popup_menu, null);
+
+                // Set the text for the TextView
+                TextView popupText = popupView.findViewById(R.id.popup_menu_text);
+                popupText.setText("El rango normal de glucosa es de 70 a 100 mg/dl, la gráfica muestra estos límites, si tus tomas de glucosa están fuera de este rango consulta a tu médico.");
+
+                // Create a PopupWindow and set the custom view
+                PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                popupWindow.showAsDropDown(v);
             }
         });
 

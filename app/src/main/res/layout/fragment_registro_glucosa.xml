@@ -62,7 +62,7 @@
                     android:visibility="gone"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/post_mimisqui_tips_gluco" />
+                    android:src="@drawable/monitoreo" />
             </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -294,7 +294,15 @@
                         android:inputType="none"
                         android:textColorHint="#181915"
                          />
-
+                    <ImageButton
+                        android:id="@+id/ayuda"
+                        android:layout_width="1dp"
+                        android:layout_height="35dp"
+                        android:layout_marginEnd="0dp"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:background="@drawable/fondoazul"
+                        android:src="@mipmap/ic_ayuda_round" />
 
 
                 </LinearLayout>

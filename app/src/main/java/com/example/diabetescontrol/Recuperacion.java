@@ -78,8 +78,8 @@ public class Recuperacion extends AppCompatActivity {
     }
 
     private void enviarCorreo(String email, String subject, String message) {
-        final String username = "";
-        final String password = "";
+        final String username = "imssglucocontrol@zohomail.com";
+        final String password = "Gluc0contrl75$4fY";
 
         Properties props = new Properties();
 
