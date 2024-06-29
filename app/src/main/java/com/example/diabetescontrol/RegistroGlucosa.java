@@ -398,7 +398,7 @@ public class RegistroGlucosa extends Fragment {
                         "&fechaFin=" + URLEncoder.encode(fechaFin, "UTF-8");
 
                 // Log de los parámetros enviados al servidor
-                Log.d("ConsultarRegistroGlucosa", "Parámetros enviados: " + parametros);
+                Log.d("ConsultarReg", "Parámetros enviados: " + parametros);
 
                 OutputStream outputStream = connection.getOutputStream();
                 outputStream.write(parametros.getBytes("UTF-8"));
@@ -414,7 +414,7 @@ public class RegistroGlucosa extends Fragment {
                 bufferedReader.close();
 
                 // Log de la respuesta obtenida del servidor
-                Log.d("ConsultarRegistroGlucosa", "Respuesta del servidor: " + response.toString());
+                Log.d("ConsultarReg", "Respuesta del servidor: " + response.toString());
 
                 connection.disconnect();
 
