@@ -6,20 +6,20 @@
 
     <TextView
         android:id="@+id/tipoConsulta"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="Tipo Consulta"
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/fecha"
-        android:layout_width="100dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:text="Fecha"/>
 
     <TextView
         android:id="@+id/hora"
-        android:layout_width="100dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:text="Hora"/>
 
