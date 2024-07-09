@@ -208,7 +208,7 @@ public class RegistroTomaMedicamentos extends Fragment {
             }
         }
 
-        String mensajeAlarma = "Hora de tomar tu medicamento: " + medicamento + " (" + dosis + " " + tipoDosis + ")";
+        String mensajeAlarma = "Toma tu medicamento: " + medicamento + " (" + dosis + " " + tipoDosis + ")";
         String mensajeNotificacion = mensajeAlarma + ". La dosis es: " + dosis + ". Tipo de medicamento: " + tipoDosis;
 
         // Crear la alarma del sistema
@@ -250,6 +250,7 @@ public class RegistroTomaMedicamentos extends Fragment {
 
         Log.d(TAG, "createAlarm: Alarm set for medication: " + medicamento);
     }
+
 
     private void saveDataToDatabase() {
         String medicamento = editTextMedName.getText().toString();
