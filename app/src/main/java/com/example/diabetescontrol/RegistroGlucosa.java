@@ -229,7 +229,7 @@ public class RegistroGlucosa extends Fragment {
 
                 // Set the text for the TextView
                 TextView popupText = popupView.findViewById(R.id.popup_menu_text);
-                popupText.setText("El rango normal de glucosa es de 70 a 100 mg/dl, la gráfica muestra estos límites, si tus tomas de glucosa están fuera de este rango consulta a tu médico.");
+                popupText.setText("El rango normal de glucosa es de 70 a 110 mg/dl, la gráfica muestra estos límites, si tus tomas de glucosa están fuera de este rango consulta a tu médico.");
 
                 // Create a PopupWindow and set the custom view
                 PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
@@ -474,26 +474,16 @@ public class RegistroGlucosa extends Fragment {
 
 
             try {
-
                 JSONArray jsonArray = new JSONArray(response);
-
                 for (int i = 0; i < jsonArray.length(); i++) {
-
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-
                     String glucosaString = jsonObject.getString("glucosa");
-
                     float glucosaFloat = Float.parseFloat(glucosaString);
-
                     String fechaString = jsonObject.getString("fecha") + " " + jsonObject.getString("hora"); // Agrega la hora a la fecha
-
                     dataPairs.add(new Pair<>(fechaString, glucosaFloat));
-
                 }
 
-
                 // Ordenar los datos por fecha y hora
-
                 Collections.sort(dataPairs, new Comparator<Pair<String, Float>>() {
 
                     @Override
@@ -509,97 +499,51 @@ public class RegistroGlucosa extends Fragment {
                             return date1.compareTo(date2);
 
                         } catch (ParseException e) {
-
                             e.printStackTrace();
-
                             return 0;
-
                         }
-
                     }
-
                 });
-
-
                 // Crear las entradas del gráfico asegurando que cada una tenga un índice único
-
                 for (int i = 0; i < dataPairs.size(); i++) {
-
                     entries.add(new Entry(i, dataPairs.get(i).second));
-
                 }
 
-
             } catch (JSONException e) {
-
                 e.printStackTrace();
-
             }
-
-
             return entries;
-
         }
 
-
         private static ArrayList<String> parsearFechas(String response) {
-
             ArrayList<String> fechas = new ArrayList<>();
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()); // Agrega esta línea
-
-
             try {
-
                 JSONArray jsonArray = new JSONArray(response);
-
                 for (int i = 0; i < jsonArray.length(); i++) {
-
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-
                     String fechaString = jsonObject.getString("fecha") + " " + jsonObject.getString("hora"); // Agrega la hora a la fecha
-
                     fechas.add(fechaString);
-
                 }
-
-
                 // Ordenar las fechas
-
                 Collections.sort(fechas, new Comparator<String>() {
-
                     @Override
-
                     public int compare(String s1, String s2) {
-
                         try {
-
                             Date date1 = dateFormat.parse(s1);
-
                             Date date2 = dateFormat.parse(s2);
-
                             return date1.compareTo(date2);
-
                         } catch (ParseException e) {
-
                             e.printStackTrace();
-
                             return 0;
-
                         }
-
                     }
-
                 });
-
             } catch (JSONException e) {
-
                 e.printStackTrace();
-
             }
-
             return fechas;
-
         }
 
         private static void setupChart(LineChart lineChart, ArrayList<Entry> entries, ArrayList<String> fechas) {
