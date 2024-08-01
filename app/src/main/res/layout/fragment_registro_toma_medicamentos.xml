@@ -1,296 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-xmlns:tools="http://schemas.android.com/tools"
-android:orientation="vertical"
-    android:background="@drawable/fondoazul"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#E8F5E9"
     tools:context=".RegistroTomaMedicamentos">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/eight_dp"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/textHoraCo"
-        android:layout_width="wrap_content"
-        android:layout_height="90dp"
-        android:text="Recordatorio de toma de Medicamentos"
-        android:textColor="@color/white"
-        android:textSize="35sp" />
-
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/four_dp"
-        android:layout_marginTop="20dp"
-        app:cardElevation="@dimen/two_dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="@dimen/sixteen_dp">
+        android:layout_margin="8dp"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textHoraCo"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:text="Recordatorio de toma de Medicamentos"
+            android:textColor="#2E7D32"
+            android:textSize="35sp" />
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.example.diabetescontrol.views.RobotoBoldTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nombre del Medicamento"
-                android:textColor="#4264BC"
-                android:textSize="@dimen/text_medium" />
-
-            <EditText
-                android:id="@+id/edit_med_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="#000000"
-                android:hint="Escriba el medicamento que toma" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/eight_dp"
-        app:cardCornerRadius="@dimen/four_dp"
-        app:cardElevation="@dimen/two_dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="@dimen/sixteen_dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <com.example.diabetescontrol.views.RobotoBoldTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Dias que toma el medicamento"
-                android:textColor="#4264BC"
-                android:textSize="@dimen/text_medium" />
-
-
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/every_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Todos los dias" />
-
-            <LinearLayout
-                android:id="@+id/checkbox_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="7">
-
-                <com.example.diabetescontrol.views.DayViewCheckBox
-                    android:id="@+id/dv_sunday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_day_view"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="D" />
-
-                <com.example.diabetescontrol.views.DayViewCheckBox
-                    android:id="@+id/dv_monday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_day_view"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="L" />
-
-
-                <com.example.diabetescontrol.views.DayViewCheckBox
-                    android:id="@+id/dv_tuesday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_day_view"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="M" />
-
-                <com.example.diabetescontrol.views.DayViewCheckBox
-                    android:id="@+id/dv_wednesday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_day_view"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="M" />
-
-                <com.example.diabetescontrol.views.DayViewCheckBox
-                    android:id="@+id/dv_thursday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_day_view"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="J" />
-
-                <com.example.diabetescontrol.views.DayViewCheckBox
-                    android:id="@+id/dv_friday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_day_view"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="V" />
-
-
-                <com.example.diabetescontrol.views.DayViewCheckBox
-                    android:id="@+id/dv_saturday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/background_day_view"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="S" />
-            </LinearLayout>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/eight_dp"
-        app:cardCornerRadius="@dimen/four_dp"
-        app:cardElevation="@dimen/two_dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="@dimen/sixteen_dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <com.example.diabetescontrol.views.RobotoLightTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hora     Dosis          Tipo de Medicamento"
-                android:textColor="#4264BC"
-                android:textSize="@dimen/text_medium" />
+            app:cardCornerRadius="4dp"
+            android:layout_marginTop="20dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <com.example.diabetescontrol.views.RobotoBoldTextView
-                    android:id="@+id/tv_medicine_time"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/drawable_underline"
-                    android:gravity="center"
-                    android:padding="@dimen/four_dp"
-                    android:textSize="@dimen/text_large"
-                    android:textStyle="bold"
-                    android:textColor="#4d4d4d"
-                    tools:text="00:00" />
+                    android:text="Nombre del Medicamento"
+                    android:textColor="#2E7D32"
+                    android:textSize="@dimen/text_medium" />
 
                 <EditText
-                    android:id="@+id/tv_dose_quantity"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/edit_med_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/drawable_underline"
-                    android:gravity="center"
-                    android:padding="@dimen/four_dp"
-                    android:text="1.0" />
+                    android:textColorHint="#000000"
+                    android:hint="Escriba el medicamento que toma" />
 
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_dose_units"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:entries="@array/medications_shape_array" />
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.example.diabetescontrol.views.RobotoBoldTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Días que toma el medicamento"
+                    android:textColor="#2E7D32"
+                    android:textSize="@dimen/text_medium" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/every_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Todos los días" />
+
+                <LinearLayout
+                    android:id="@+id/checkbox_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+
+                    <com.example.diabetescontrol.views.DayViewCheckBox
+                        android:id="@+id/dv_sunday"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_day_view"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="D" />
+
+                    <com.example.diabetescontrol.views.DayViewCheckBox
+                        android:id="@+id/dv_monday"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_day_view"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="L" />
+
+                    <com.example.diabetescontrol.views.DayViewCheckBox
+                        android:id="@+id/dv_tuesday"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_day_view"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="M" />
+
+                    <com.example.diabetescontrol.views.DayViewCheckBox
+                        android:id="@+id/dv_wednesday"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_day_view"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="M" />
+
+                    <com.example.diabetescontrol.views.DayViewCheckBox
+                        android:id="@+id/dv_thursday"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_day_view"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="J" />
+
+                    <com.example.diabetescontrol.views.DayViewCheckBox
+                        android:id="@+id/dv_friday"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_day_view"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="V" />
+
+                    <com.example.diabetescontrol.views.DayViewCheckBox
+                        android:id="@+id/dv_saturday"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_day_view"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="S" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.example.diabetescontrol.views.RobotoLightTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hora     Dosis          Tipo de Medicamento"
+                    android:textColor="#2E7D32"
+                    android:textSize="@dimen/text_medium" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.example.diabetescontrol.views.RobotoBoldTextView
+                        android:id="@+id/tv_medicine_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/drawable_underline"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:textSize="@dimen/text_large"
+                        android:textStyle="bold"
+                        android:textColor="#4CAF50"
+                        tools:text="00:00" />
+
+                    <EditText
+                        android:id="@+id/tv_dose_quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/drawable_underline"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="1.0" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinner_dose_units"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:entries="@array/medications_shape_array" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCrearR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#66BB6A"
+                android:textColor="#FFFFFF"
+                android:onClick="Recordatorio"
+                android:text="Crear Recordatorio" />
+
+            <Button
+                android:id="@+id/btnBorrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#66BB6A"
+                android:textColor="#FFFFFF"
+                android:onClick="clear"
+                android:text="@string/delete_data" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#2E7D32"
+            android:text="Consulta los Medicamentos que tomas" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/consulmed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_edittext_background"
+                android:visibility="visible" />
+        </LinearLayout>
 
         <Button
-            android:id="@+id/btnCrearR"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
+            android:id="@+id/consultamed"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="Recordatorio"
-            android:text="Crear Recordatorio" />
-
-        <Button
-            android:id="@+id/btnBorrar"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="clear"
-            android:text="@string/delete_data" />
+            android:backgroundTint="#66BB6A"
+            android:textColor="#FFFFFF"
+            android:text="Consulta de Medicamentos" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/montserrat"
-        android:textColor="@color/white"
-        android:text="Consulta los Medicamentos que tomas" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        >
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/consulmed"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/rounded_edittext_background"
-        android:visibility="visible" />
-    </LinearLayout>
-    <Button
-        android:id="@+id/consultamed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Colsulta de Medicamentos" />
-
-
-
-</LinearLayout>
-
 </androidx.core.widget.NestedScrollView>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondoazul"
+    android:background="#E8F5E9"
     tools:context=".Navegacion">
 
     <ScrollView
@@ -16,16 +16,18 @@
             style="@style/linear_layout_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/textViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recordatorio_de_citas_m_dicas"
-                android:textSize="29sp"
-                android:textColor="@color/white"
+                android:textSize="37sp"
+                android:textColor="#2E7D32"
+                android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="39dp" />
+                android:layout_marginBottom="36dp" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -34,12 +36,11 @@
                 android:contentDescription="@string/schedule_date"
                 app:srcCompat="@drawable/ic_agenda" />
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-50dp"
-                android:textColor="#F6F6F6"
+                android:textColor="#388E3C"
                 android:textSize="17sp"
                 android:text="@string/tipo_consulta" />
 
@@ -64,7 +65,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#F6F6F6"
+                android:textColor="#388E3C"
                 android:text="@string/date"
                 android:textSize="17sp"
                 android:layout_marginTop="10dp"/>
@@ -82,8 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_edittext_background"
-                    android:inputType="text"
-                    />
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/time"
                 android:textSize="17sp"
-                android:textColor="#F6F6F6"
+                android:textColor="#388E3C"
                 android:layout_marginTop="10dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -111,8 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="@string/ingresa_la_hora_de_tu_proxima_cita"
-                android:textColorHint="#000000"
-                >
+                android:textColorHint="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -136,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:text="Nota"
                 android:textSize="17sp"
-                android:textColor="#F6F6F6"
+                android:textColor="#388E3C"
                 android:layout_marginTop="10dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -146,8 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="@string/escribe_una_nota_para_este_recordatorio"
-                android:textColorHint="#000000"
-                >
+                android:textColorHint="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -155,17 +153,14 @@
                     android:background="@drawable/rounded_edittext_background"
                     android:inputType="text" />
 
-
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:textColor="#AEEA00"
+                android:textColor="#2E7D32"
                 android:textSize="20sp"
-                android:fontFamily="@font/montserratalternatesbold"
                 android:layout_height="wrap_content"
                 android:text="@string/programa_tu_recordaorio_al_menos_1_hora_antes_de_tu_cita" />
 
@@ -174,17 +169,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/crear_recordatorio"
-                android:textColor="@color/white"
+                android:textColor="#FFFFFF"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:padding="16dp"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#2E7D32" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="#2E7D32"
                 android:textSize="20sp"
                 android:text="@string/si_no_recuerdas_tus_citas_puedes_consultarlas_aqui" />
 
@@ -195,7 +191,6 @@
                 android:orientation="horizontal"
                 android:layout_alignParentBottom="true">
 
-
                 <Button
                     android:id="@+id/cosulacitas"
                     android:layout_width="5sp"
@@ -204,22 +199,18 @@
                     android:text="@string/consultar_citas"
                     app:backgroundTint="#569845" />
 
-
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                >
+                android:layout_height="300dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewcita"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/rounded_edittext_background"
-                    />
+                    android:background="@drawable/rounded_edittext_background" />
             </LinearLayout>
         </LinearLayout>
-
-
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,166 +11,153 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondoazul"
-        tools:context=".ui.fragments.HistorialGlucosaFragment">
+        android:background="#E8F5E9"
+    tools:context=".ui.fragments.HistorialGlucosaFragment">
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:id="@+id/layoutTitolsAlarmes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="12dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/titolTextHistorial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Historial Diabetes"
+                android:textColor="#2E7D32"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textistr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:text="Selecciona el rango de fechas para consultar tus tomas de glucosa"
+                android:textColor="#388E3C"
+            android:textSize="28dp" />
 
             <LinearLayout
-                android:id="@+id/layoutTitolsAlarmes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp">
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/titolTextHistorial"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/fechai"
+                    android:layout_width="0dp"
+                    android:textColor="#2E7D32"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.6"
+                android:textSize="18sp"
+                android:text="Fecha Inicio" />
+
+                <EditText
+                    android:id="@+id/fechi"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Historial Diabetes"
-                    android:textColor="@color/white"
-                    android:textSize="36dp"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:id="@+id/textistr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/montserratalternatesbold"
-                    android:text="Selecciona el rago de fechas para consultar tus tomas de glucosa"
-                    android:textColor="#AEEA00"
-                    android:textSize="25dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/fechai"
-                        android:layout_width="0dp"
-                        android:textColor="@color/white"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2.6"
-                        android:textSize="18sp"
-                        android:text="Fecha Inicio" />
-
-                    <EditText
-                        android:id="@+id/fechi"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="60dp"
-                        android:layout_weight="5.2"
-                        android:background="@drawable/rounded_edittext_background"
-                        android:autofillHints=""
-                        android:textColorHint="#000"
-                        android:ems="10"
-                        android:hint="Selecciona fecha inicial"
-                        android:inputType="none" />
-
-
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/fechaf"
-                        android:layout_width="0dp"
-                        android:textColor="@color/white"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2.6"
-                        android:textSize="18sp"
-                        android:text="Fecha final" />
-
-                    <EditText
-                        android:id="@+id/fechf"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_weight="5.2"
-                        android:autofillHints=""
-                        android:background="@drawable/rounded_edittext_background"
-
-                        android:textColorHint="#000"
-                        android:ems="10"
-                        android:hint="Selecciona fecha final"
-                        android:inputType="none" />
-
-
-                    <ImageButton
-                        android:id="@+id/eliminarFechas"
-                        android:layout_width="15dp"
-                        android:layout_height="45dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_weight="1"
-                        android:background="#7CFFFFFF"
-                        android:src="@drawable/ic_borrar"
-                        android:foreground="?android:attr/selectableItemBackground"/>
-
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/linearLayoutHistoricControl"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_alignParentBottom="true">
-
-
-                    <Button
-                        android:id="@+id/cosulaglucosa"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cosultar"
-                        android:textSize="16sp"
-                        app:backgroundTint="#569845" />
-                    <Button
-                        android:id="@+id/borrarconsulta"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Borrar Consulta"
-                        android:textSize="16sp"
-                        app:backgroundTint="#569845" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginTop="25dp"
-                    >
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/rounded_edittext_background"
-                        />
-                </LinearLayout>
-
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_weight="5.2"
+                    android:background="@drawable/rounded_edittext_background"
+                    android:autofillHints=""
+                    android:textColorHint="#000"
+                    android:ems="10"
+                    android:hint="Selecciona fecha inicial"
+                    android:inputType="none" />
 
             </LinearLayout>
 
-        </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
 
-    </FrameLayout>
-</layout>
+                <TextView
+                    android:id="@+id/fechaf"
+                    android:layout_width="0dp"
+                    android:textColor="#2E7D32"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.6"
+                android:textSize="18sp"
+                android:text="Fecha final" />
+
+                <EditText
+                    android:id="@+id/fechf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="5.2"
+                    android:autofillHints=""
+                    android:background="@drawable/rounded_edittext_background"
+                    android:textColorHint="#000"
+                    android:ems="10"
+                    android:hint="Selecciona fecha final"
+                    android:inputType="none" />
+
+                <ImageButton
+                    android:id="@+id/eliminarFechas"
+                    android:layout_width="15dp"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    android:background="#7CFFFFFF"
+                    android:src="@drawable/ic_borrar"
+                    android:foreground="?android:attr/selectableItemBackground"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutHistoricControl"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true">
+
+                <Button
+                    android:id="@+id/cosulaglucosa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cosultar"
+                    android:textSize="16sp"
+                    android:backgroundTint="#4CAF50"
+                android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/borrarconsulta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Borrar Consulta"
+                    android:textSize="16sp"
+                    android:backgroundTint="#66BB6A"
+                android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="25dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/rounded_edittext_background"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>
+    </layout>
+

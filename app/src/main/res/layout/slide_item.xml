@@ -14,7 +14,7 @@
         android:id="@+id/descriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="#388E3C"
         android:textSize="19dp"
         android:padding="8dp"/>
 </LinearLayout>

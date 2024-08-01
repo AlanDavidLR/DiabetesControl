@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/fondoazul">
+    android:background="#E8F5E9">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                         android:textAlignment="center"
                         android:textAllCaps="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textColor="#fff"
+                        android:textColor="#2E7D32"
                         android:textSize="30sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -66,7 +66,6 @@
                         tools:ignore="ImageContrastCheck" />
                 </LinearLayout>
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -82,7 +81,7 @@
                         android:gravity="center"
                         android:text="@string/weight"
                         android:textAlignment="center"
-                        android:textColor="#ffffff"
+                        android:textColor="#2E7D32"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -96,12 +95,9 @@
                         android:importantForAutofill="no"
                         android:inputType="numberDecimal"
                         android:background="@drawable/rounded_edittext_background"
-
                         android:minHeight="48dp"
                         android:textColorHint="#000"
                         tools:ignore="SpeakableTextPresentCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck" />
-
-
                 </LinearLayout>
 
                 <TextView
@@ -111,7 +107,7 @@
                     android:text="@string/date"
                     android:textStyle="bold"
                     android:textSize="24sp"
-                    android:textColor="#F6F6F6" />
+                    android:textColor="#2E7D32" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textFieldFecha"
@@ -127,12 +123,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rounded_edittext_background"
-
                         android:focusable="false"
                         android:inputType="date" />
-
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -142,17 +135,15 @@
 
                     <Button
                         android:id="@+id/btnGuardar"
-                        style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
                         android:onClick="guard"
+                        android:backgroundTint="#66BB6A"
+                        android:textColor="#FFFFFF"
                         android:text="@string/save_button" />
-
-
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -171,26 +162,27 @@
                         android:textAlignment="center"
                         android:textAllCaps="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textColor="#fff"
+                        android:textColor="#2E7D32"
                         android:textSize="21sp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/textimc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Consulta tu Indice de Masa Corporal para saber si estas en tu peso adecuado."
-                    android:textColor="#AEEA00"
+                    android:textColor="#388E3C"
                     android:fontFamily="@font/montserrat"
                     android:textSize="21dp"
                     android:textStyle="bold" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="15dp"
                     android:orientation="horizontal">
-
 
                     <TextView
                         android:id="@+id/lblWeight"
@@ -200,7 +192,7 @@
                         android:gravity="center"
                         android:text="@string/weight"
                         android:textAlignment="center"
-                        android:textColor="#1FE1C4"
+                        android:textColor="#2E7D32"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -232,7 +224,7 @@
                         android:layout_weight="1"
                         android:text="@string/height"
                         android:textAlignment="center"
-                        android:textColor="#1FE1C4"
+                        android:textColor="#2E7D32"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -263,8 +255,9 @@
                         android:layout_weight="1"
                         android:onClick="calcular"
                         android:textSize="16sp"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#66BB6A"
                         android:text="@string/calculate_bmi" />
-
 
                     <Button
                         android:id="@+id/btnClearData"
@@ -272,6 +265,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="16sp"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#66BB6A"
                         android:onClick="limpiar"
                         android:text="@string/delete_data" />
                 </LinearLayout>
@@ -290,7 +285,7 @@
                         android:text="@string/bmi"
                         android:textAlignment="center"
                         android:textAllCaps="true"
-                        android:textColor="#fff"
+                        android:textColor="#2E7D32"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -303,10 +298,9 @@
                         android:text="@string/description"
                         android:textAlignment="center"
                         android:textAllCaps="true"
-                        android:textColor="#fff"
+                        android:textColor="#2E7D32"
                         android:textSize="20sp"
                         android:textStyle="bold" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -326,35 +320,32 @@
                         android:textAlignment="center"
                         android:textAllCaps="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textColor="#fff"
+                        android:textColor="#2E7D32"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/chartContainer"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:orientation="vertical">
 
-
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/lineChart"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
-                        android:background="@color/white"
+                        android:background="#FFFFFF"
                         android:layout_weight="1" />
-
 
                     <TextView
                         android:id="@+id/textistr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Selecciona el rago de fechas para consultar tu peso y saber tu progreso."
-                        android:textColor="#AEEA00"
+                        android:text="Selecciona el rango de fechas para consultar tu peso y saber tu progreso."
+                        android:textColor="#388E3C"
                         android:textSize="21dp"
                         android:textStyle="bold" />
-
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -370,7 +361,7 @@
                         android:layout_weight="2.6"
                         android:textSize="17sp"
                         android:text="Fecha Inicio"
-                        android:textColor="@color/white" />
+                        android:textColor="#2E7D32" />
 
                     <EditText
                         android:id="@+id/fechaini"
@@ -385,9 +376,6 @@
                         android:hint="Selecciona fecha inicial"
                         android:inputType="none"
                         android:textColorHint="#000" />
-
-
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -404,7 +392,7 @@
                         android:layout_weight="2.6"
                         android:text="Fecha final"
                         android:textSize="17sp"
-                        android:textColor="@color/white" />
+                        android:textColor="#2E7D32" />
 
                     <EditText
                         android:id="@+id/fechafin"
@@ -420,7 +408,6 @@
                         android:inputType="none"
                         android:textColorHint="#000" />
 
-
                     <ImageButton
                         android:id="@+id/limpiarFiltro"
                         android:layout_width="10dp"
@@ -430,34 +417,36 @@
                         android:background="#7CFFFFFF"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:src="@drawable/ic_borrar" />
-
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                <Button
-                    android:id="@+id/btnConsulta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="consulta"
-                    android:text="Consulta tus rangos de peso" />
 
-                <Button
-                    android:id="@+id/btnlimpiarpConsulta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="consulta"
-                    android:text="Limpiar" />
-            </LinearLayout>
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/btnConsulta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="consulta"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#66BB6A"
+                        android:text="Consulta tus rangos de peso" />
 
+                    <Button
+                        android:id="@+id/btnlimpiarpConsulta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="consulta"
+                        android:textColor="#FFFFFF"
+                        android:backgroundTint="#66BB6A"
+                        android:text="Limpiar" />
+                </LinearLayout>
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
-
 </ScrollView>
+
+

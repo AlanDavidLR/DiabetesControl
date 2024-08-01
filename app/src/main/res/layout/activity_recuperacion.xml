@@ -5,85 +5,87 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondologin"
+    android:background="#E8F5E9"
     tools:context=".Recuperacion">
 
-    <LinearLayout
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginTop="-164dp"
+android:orientation="vertical"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toTopOf="parent">
+
+<TextView
+    android:id="@+id/texttitR"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="0dp"
+    android:text="Recupera tu contraseña"
+    style="@style/SerifText"
+    android:textAlignment="center"
+    android:textSize="32sp"
+    android:textStyle="bold"
+    android:textColor="#2E7D32" />
+
+<TextView
+    android:id="@+id/textView7"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:text="Para recuperar tu contraseña ingresa el email con el cual te registraste."
+    android:textAlignment="center"
+    style="@style/SerifText"
+    android:textColor="#388E3C"
+android:textSize="20sp" />
+
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/textFieldEmailR"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="30dp"
+    android:hint="       Ingresa Email"
+    android:textColorHint="#2E7D32"
+    app:counterEnabled="true"
+    app:counterMaxLength="50"
+    app:errorTextAppearance="@style/CustomTextInputLayoutErrorTextAppearance"
+    app:helperText="*Requerido"
+    app:helperTextTextAppearance="@style/CustomHelperTextStyle"
+    app:helperTextTextColor="#388E3C"
+    app:startIconDrawable="@drawable/ic_email">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputEditTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-164dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@drawable/rounded_edittext_background"
+        android:inputType="textEmailAddress" />
 
-        <TextView
-            android:id="@+id/texttitR"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:text="Recupera tu contraseña"
-            android:textAlignment="center"
-            android:textSize="32sp"
-            android:textStyle="bold" />
+</com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Para recuperar tu contraseña ingresa el email con el cual te registraste."
-            android:textAlignment="center"
-            android:fontFamily="@font/montserrat"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+<Button
+    android:id="@+id/btnEnviar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="60dp"
+    android:text="Enviar"
+    android:textSize="18dp"
+    android:backgroundTint="#4CAF50"
+android:textColor="#FFFFFF" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textFieldEmailR"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:hint="       Ingresa Email"
-            android:textColorHint="#000000"
-            app:counterEnabled="true"
-            app:counterMaxLength="50"
-            app:errorTextAppearance="@style/CustomTextInputLayoutErrorTextAppearance"
-            app:helperText="*Requerido"
-            app:helperTextTextAppearance="@style/CustomHelperTextStyle"
-            app:helperTextTextColor="#000000"
-            app:startIconDrawable="@drawable/ic_email">
+</LinearLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_edittext_background"
-                android:inputType="textEmailAddress" />
+<ImageButton
+android:id="@+id/btnRegresar"
+android:layout_width="50dp"
+android:layout_height="56dp"
+android:background="#E8F5E9"
+    android:scaleType="fitXY"
+    app:srcCompat="@drawable/regresar"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/btnEnviar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="Enviar"
-            android:textSize="18dp" />
-
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/btnRegresar"
-        android:layout_width="50dp"
-        android:layout_height="56dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/regresar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,78 +5,82 @@
     android:id="@+id/scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondoazul"
+    android:background="#E8F5E9"
     tools:context=".Ajustes">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+android:id="@+id/main"
+android:layout_width="match_parent"
+android:layout_height="0dp"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Administra tu foto de perfil"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:textSize="40sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+<TextView
+    android:id="@+id/textView2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Administra tu foto de perfil"
+    android:textColor="#2E7D32"
+android:textAlignment="center"
+android:textSize="40sp"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageButton
-            android:id="@+id/Perfil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="115dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="116dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/user_default"
-            android:contentDescription="@string/user_profile"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/textView10"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            tools:ignore="ContentDescription" />
+<ImageButton
+    android:id="@+id/Perfil"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="115dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="116dp"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/user_default"
+android:contentDescription="@string/user_profile"
+android:scaleType="centerCrop"
+app:layout_constraintBottom_toTopOf="@+id/textView10"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@+id/textView2"
+tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Presiona sobre la imagen para subir una foto de perfil"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/Perfil"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+<TextView
+    android:id="@+id/textView10"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Presiona sobre la imagen para subir una foto de perfil"
+    android:textColor="#388E3C"
+android:textSize="20sp"
+app:layout_constraintTop_toBottomOf="@id/Perfil"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
-            android:id="@+id/Regresarimg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/regresar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.922"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView10" />
+<Button
+    android:id="@+id/Regresarimg"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:text="@string/regresar"
+    android:backgroundTint="#4CAF50"
+android:textColor="#FFFFFF"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintHorizontal_bias="0.922"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@id/textView10" />
 
-        <Button
-            android:id="@+id/Guardaravatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Guardar imagen"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.061"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView10" />
+<Button
+    android:id="@+id/Guardaravatar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:text="Guardar imagen"
+    android:backgroundTint="#4CAF50"
+android:textColor="#FFFFFF"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintHorizontal_bias="0.061"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toBottomOf="@id/textView10" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>

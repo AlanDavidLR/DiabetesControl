@@ -10,7 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondoazul"
+        android:background="#E8F5E9"
         android:padding="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,16 +21,18 @@
             <LinearLayout
                 android:id="@+id/topSectionLayout"
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/logoImageView"
-                    android:layout_width="140dp"
-                    android:layout_height="83dp"
+                    android:layout_width="160dp"
+                    android:layout_height="103dp"
+                    android:background="@drawable/oval_background"
                     android:elevation="10dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/logon_removebg"
                     android:visibility="visible" />
 
@@ -41,7 +43,7 @@
                     android:layout_gravity="center"
                     android:typeface="monospace"
                     android:text="@string/bienvenido"
-                    android:textColor="@color/white"
+                    android:textColor="#2E7D32"
                     android:textSize="34sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -52,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Inicio de sesión correcto:"
-                android:textColor="#ffffff"
+                android:textColor="#2E7D32"
                 android:textSize="22sp"
                 android:textAlignment="center"
                 app:layout_constraintTop_toBottomOf="@id/topSectionLayout"
@@ -68,7 +70,7 @@
                 android:text="@string/conoce_las_mejores_maneras_de_cuidarte_con_estas_recomendaciones"
                 android:textSize="20sp"
                 android:typeface="serif"
-                android:textColor="#FFC107"
+                android:textColor="#388E3C"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/inicioSesionTextView"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,8 +91,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="370dp"
-                android:text="Aprende un poco más de la diabetes,da click en el siguiente video"
-                android:textColor="#AEEA00"
+                android:text="Aprende un poco más de la diabetes, da click en el siguiente video"
+                android:textColor="#2E7D32"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:typeface="serif"
@@ -124,10 +126,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_gravity="center"
-                    android:text="Noticias reelevantes relacionadas a la diabetes"
+                    android:text="Noticias relevantes relacionadas a la diabetes"
                     android:textSize="24sp"
                     android:typeface="serif"
-                    android:textColor="#AEEA00"
+                    android:textColor="#2E7D32"
                     android:textStyle="bold" />
 
                 <FrameLayout
@@ -145,5 +147,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
-
 
