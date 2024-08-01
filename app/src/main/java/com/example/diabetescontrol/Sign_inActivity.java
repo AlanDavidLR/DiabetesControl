@@ -236,7 +236,12 @@ public class Sign_inActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish(); // Termina la actividad actual para que el usuario no pueda volver atrás
                     } else {
-                        Toast.makeText(Sign_inActivity.this, "Error al crear la cuenta: " + message, Toast.LENGTH_SHORT).show();
+                        if (message.equals("El correo ya existe.")) {
+                            // Muestra un mensaje específico si el correo ya existe
+                            Toast.makeText(Sign_inActivity.this, "El correo ingresado ya existe, favor de cambiar o verificar el correo", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(Sign_inActivity.this, "Error al crear la cuenta: " + message, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -246,6 +251,7 @@ public class Sign_inActivity extends AppCompatActivity {
                 Toast.makeText(Sign_inActivity.this, "Error al crear la cuenta", Toast.LENGTH_SHORT).show();
             }
         }
+
     }
     public void goToLoginActivity(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
